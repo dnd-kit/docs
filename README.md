@@ -8,10 +8,10 @@ description: >-
 
 * **Built for React:** exposes hooks such as ****`useDraggable` and `useDroppable`, and  won't require you to re-architect your app or create additional wrapper DOM nodes.
 * **Feature packed:** customizable collision detection algorithms, multiple activators, draggable clone, drag handles, auto-scrolling, constraints, and so much more.
+* **Supports a wide range of use cases:** vertical lists, horizontal lists, grids, multiple containers, nested contexts, variable sized list and grids, transformed items, virtualized lists.
 * **Zero dependencies and modular:** the core of the library weighs only 10kb. It's built around built-in React state management and context, which keeps it lean.
 * **Built-in support for multiple input methods:** Mouse, touch and keyboard sensors.
 * **Fully customizable & extensible:** Customize every little detail, animations, transitions, behaviours, styles. Build your own sensors, collision detection algorithms, customize key bindings and so much more.
-* **Supports a wide range of use cases:** vertical lists, horizontal lists, grids, multiple containers, variable sized list and grids, transformed items, virtualized lists.
 * **Performance:** It was built with performance and silky smooth animations in mind.
 * **Accessibility:** keyboard support, sensible default aria attributes, customizable voiceover instructions and live regions built-in.
 * **Presets:** Need to build a sortable interface? Check out `@dnd-kit/sortable`, which is a thin layer built on top of `@dnd-kit/core`. Preset for multiple container sortable lists \(Kanban\) coming soon.
