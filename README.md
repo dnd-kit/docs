@@ -6,7 +6,7 @@ description: >-
 
 # Overview
 
-* **Built for React:** exposes hooks such as ****`useDraggable` and `useDroppable`
+* **Built for React:** exposes hooks such as ****`useDraggable` and `useDroppable`, and  won't require you to re-architect your app or create additional wrapper DOM nodes.
 * **Feature packed:** customizable collision detection algorithms, multiple activators, draggable clone, drag handles, auto-scrolling, constraints, and so much more.
 * **Zero dependencies and modular:** the core of the library weighs only 10kb. It's built around built-in React state management and context, which keeps it lean.
 * **Built-in support for multiple input methods:** Mouse, touch and keyboard sensors.
