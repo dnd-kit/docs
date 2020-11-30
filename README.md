@@ -12,8 +12,8 @@ description: >-
 * **Zero dependencies and modular:** the core of the library weighs only 10kb. It's built around built-in React state management and context, which keeps it lean.
 * **Built-in support for multiple input methods:** Mouse, touch and keyboard sensors.
 * **Fully customizable & extensible:** Customize every little detail, animations, transitions, behaviours, styles. Build your own sensors, collision detection algorithms, customize key bindings and so much more.
-* **Performance:** It was built with performance and silky smooth animations in mind.
 * **Accessibility:** keyboard support, sensible default aria attributes, customizable voiceover instructions and live regions built-in.
+* **Performance:** It was built with performance and silky smooth animations in mind.
 * **Presets:** Need to build a sortable interface? Check out `@dnd-kit/sortable`, which is a thin layer built on top of `@dnd-kit/core`. Preset for multiple container sortable lists \(Kanban\) coming soon.
 
 ### Powerfully simple
