@@ -1,7 +1,7 @@
 ---
 description: >-
-  dnd kit – A lightweight, performant, accessible and  extensible drag & drop
-  toolkit for React.
+  dnd kit – A lightweight, modular, performant, accessible and  extensible drag
+  & drop toolkit for React.
 ---
 
 # Overview
