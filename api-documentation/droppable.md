@@ -4,7 +4,11 @@
 
 Use the `useDroppable` hook to set up DOM nodes as droppable targets that draggable elements can be dropped over. 
 
-**dnd kit** isn't opinionated about how you should structure your app. At minimum though, you need to be able to pass a `ref` to the `setNodeRef` function that is returned by the `useDroppable` hook. Use whatever DOM element is most semantic in the context of your app.
+**dnd kit** isn't opinionated about how you should structure your app. At minimum though, you need to pass the `setNodeRef` function that is returned by the `useDroppable` hook to a DOM element so that **dnd kit** can access the underlying DOM node and keep track of it to detect collisions and intersections with other draggable elements. 
+
+{% hint style="info" %}
+ If the concept of `ref` is new to you, we recommend you first check out the [Refs and the DOM article](https://reactjs.org/docs/refs-and-the-dom.html#adding-a-ref-to-a-dom-element) on the React documentation website.
+{% endhint %}
 
 ```jsx
 import {useDroppable} from '@dnd-kit/core';

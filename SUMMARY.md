@@ -6,6 +6,7 @@
 
 * [Installation](guides/installation.md)
 * [Quick start](guides/getting-started.md)
+* [Accessibility](guides/accessibility.md)
 
 ## API Documentation
 
