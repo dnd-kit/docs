@@ -30,6 +30,8 @@ function App() {
 
 ### Droppable
 
+![](../.gitbook/assets/droppable-large.svg)
+
 Next, let's set up your first **Droppable** component.  To do so, we'll be using the `useDroppable` hook.  
   
 The `useDroppable` hook isn't opinionated about how your app should be structured. At minimum, they requires you pass a ref to the DOM element that you would like to become droppable. You'll also need to provide a unique `id` attribute to all your droppable components. 
@@ -60,6 +62,8 @@ function Draggable(props) {
 As you can see, it really only takes just a few lines to transform your existing components into droppable containers.
 
 ### Draggable
+
+![](../.gitbook/assets/draggable-large.svg)
 
 Finally, let's take a look at implementing our first **Draggable** component. To do so, we'll be using the `useDraggable` hook.
 
