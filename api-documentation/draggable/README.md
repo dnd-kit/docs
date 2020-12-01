@@ -32,7 +32,62 @@ function Draggable() {
 }
 ```
 
-### Transform 
+### Listeners
+
+If you've been paying close attention, you'll notice that unlike the [`useDroppable`](../droppable.md) hook,  the `useDraggable` hook also requires that you attach `listeners` to the DOM node that you would like to make draggable. 
+
+While we could have attached these listeners manually to the node  provided to `setNodeRef`, there are actually a number of key advantages to forcing the consumer to manually attach the listeners.
+
+#### Flexibility
+
+While many drag and drop libraries need to expose the concept of "drag handles", creating a drag handle with **dnd kit** is as simple as manually attaching the listeners to a different DOM element than the one that is set as the draggable source DOM node:
+
+```jsx
+import {useDraggable} from '@dnd-kit/core';
+
+
+function Draggable() {
+  const {attributes, listeners, setNodeRef} = useDraggable({
+    id: 'unique-id',
+  });
+  
+  return (
+    <div ref={setNodeRef}>
+      /* Some other content that does not activate dragging */
+      <button {...listeners} {...attributes}>Drag handle</button>
+    </div>
+  );
+}
+```
+
+You can even have multiple drag handles if that makes sense in the context of your application:
+
+```jsx
+import {useDraggable} from '@dnd-kit/core';
+
+
+function Draggable() {
+  const {attributes, listeners, setNodeRef} = useDraggable({
+    id: 'unique-id',
+  });
+  
+  return (
+    <div ref={setNodeRef}>
+      <button {...listeners} {...attributes}>Drag handle 1</button>
+      /* Some other content that does not activate dragging */
+      <button {...listeners} {...attributes}>Drag handle 2</button>
+    </div>
+  );
+}
+```
+
+#### Performance
+
+This strategy also means that we're able to use [React synthetic events](https://reactjs.org/docs/events.html), which ultimately leads to improved performance over manually adding event listeners to each individual node.  
+  
+Why? Because rather than having to attach individual event listeners for each draggable DOM node, React attaches a single event listener for every type of event we listen to on the `document`. Once click on one of the draggable nodes happens, React's listener on the document dispatches a SyntheticEvent back to the original handler. 
+
+### Transforms 
 
 In order to actually see your draggable items move on screen, you'll need to move the item using CSS. You can use inline styles, CSS variables, or even CSS-in-JS libraries to pass the `transform` property as CSS to your draggable element.
 
@@ -106,66 +161,11 @@ function App() {
 }
 ```
 
-In this example, whenever a draggable item is picked up, we will render a clone that can move freely outside of the `<ScrollableList>` and isn't constrained to it's overflow or stacking context.
+In this example, whenever a draggable item is picked up, we render a clone that can move freely outside of the `<ScrollableList>` and isn't constrained to it's overflow or stacking context.
 
 {% hint style="info" %}
 We hope this has given you a taste of what Draggable clones are used for. There's a lot more you can do with Draggable clones. We recommend you read about all of the possibilities that it provides in the in-depth guide on [Draggable clone](clone.md).
 {% endhint %}
-
-### Listeners
-
-If you've been paying close attention, you'll notice that unlike the [`useDroppable`](../droppable.md) hook,  the `useDraggable` hook also requires that you attach `listeners` to the DOM node that you would like to make draggable. 
-
-While we could have attached these listeners manually to the node  provided to `setNodeRef`, there are actually a number of key advantages to forcing the consumer to manually attach the listeners:
-
-#### Flexibility
-
-While many drag and drop libraries need to expose the concept of "drag handles", creating a drag handle with **dnd kit** is as simple as manually attaching the listeners to a different DOM element than the one that is set as the draggable source DOM node:
-
-```jsx
-import {useDraggable} from '@dnd-kit/core';
-
-
-function Draggable() {
-  const {attributes, listeners, setNodeRef} = useDraggable({
-    id: 'unique-id',
-  });
-  
-  return (
-    <div ref={setNodeRef}>
-      /* Some other content that does not activate dragging */
-      <button {...listeners} {...attributes}>Drag handle</button>
-    </div>
-  );
-}
-```
-
-You can even have multiple drag handles if that makes sense in the context of your application:
-
-```jsx
-import {useDraggable} from '@dnd-kit/core';
-
-
-function Draggable() {
-  const {attributes, listeners, setNodeRef} = useDraggable({
-    id: 'unique-id',
-  });
-  
-  return (
-    <div ref={setNodeRef}>
-      <button {...listeners} {...attributes}>Drag handle 1</button>
-      /* Some other content that does not activate dragging */
-      <button {...listeners} {...attributes}>Drag handle 2</button>
-    </div>
-  );
-}
-```
-
-#### Performance
-
-This strategy also means that we're able to use [React synthetic events](https://reactjs.org/docs/events.html), which ultimately leads to improved performance over manually adding event listeners to each individual node.  
-  
-Why? Because rather than having to attach individual event listeners for each draggable DOM node, React attaches a single event listener for every type of event we listen to on the `document`. Once click on one of the draggable nodes happens, React's listener on the document dispatches a SyntheticEvent back to the original handler. 
 
 ### Attributes
 
@@ -176,8 +176,6 @@ Why? Because rather than having to attach individual event listeners for each dr
 | `role` | `"button"` | If possible, we recommend you use a semantic `<button>` element for the DOM element you plan on attaching draggable listeners to. In case that's not possible, make sure you include the `role="button"`attribute, which is the default value. |
 | `aria-roledescription` | `"draggable"` | While `draggable` is a sensible default, we recommend you customize this value to something that is  |
 | `aria-describedby` | `"DndContext-[uniqueId]"` | Each draggable item is provided a unique `aria-describedby` ID that points to the voiceover instructions to be read out when a draggable item receives focus. |
-
-
 
 ## Hook API – `useDraggable`
 

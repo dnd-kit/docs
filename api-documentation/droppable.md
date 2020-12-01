@@ -27,6 +27,8 @@ function Droppable() {
 }
 ```
 
+You can set up as many droppable containers as you want, just make sure they all have a unique `id` so that they can be differentiated.
+
 ## Hook API – `useDraggable`
 
 ### Arguments
