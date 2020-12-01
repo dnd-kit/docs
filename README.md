@@ -18,7 +18,7 @@ description: >-
 
 ### Powerfully simple
 
-**dnd kit** is powerful and packed with features, and built with the hope of being the last drag and drop library you'll ever need, whether you're building a simple draggable interface element or a complex application built around drag and drop interactions .
+**dnd kit** is powerful and packed with features, and built with the hope of being the last drag and drop library you'll ever need, whether you're building a simple draggable element or a complex application built around drag and drop interactions .
 
  At its core, **dnd kit** exposes two main concepts: [Draggable](api-documentation/draggable/) items and [Droppable](api-documentation/droppable.md) containers. Augment your existing components using the `useDraggable` and `useDroppable` hooks, or combine both to create components that can both be dragged and dropped over.
 

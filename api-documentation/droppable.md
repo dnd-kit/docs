@@ -27,7 +27,61 @@ function Droppable() {
 }
 ```
 
-You can set up as many droppable containers as you want, just make sure they all have a unique `id` so that they can be differentiated.
+You can set up as many droppable containers as you want, just make sure they all have a unique `id` so that they can be differentiated. Each droppable needs to have its own unique node though, so make sure you don't try to connect a single droppable to multiple refs.
+
+To set up multiple droppable targets, simply use the `useDroppable` hook as many times as needed.
+
+```jsx
+function MultipleDroppables() {
+  const {setNodeRef: setFirstDroppableRef} = useDroppable({
+    id: 'droppable-1',
+  });
+  const {setNodeRef: setsecondDroppableRef} = useDroppable({
+    id: 'droppable-2',
+  });
+  
+  return (
+    <section>
+      <div ref={setFirstDroppableRef}>
+        /* Render whatever you like within */
+      </div>
+      <div ref={setsecondDroppableRef}>
+        /* Render whatever you like within */
+      </div>
+    </section>
+  );
+}
+```
+
+If you need to dynamically render a list of droppable containers, we recommend you create a re-usable Droppable component and render that component as many times as needed:
+
+```jsx
+function Droppable(props) {
+  const {setNodeRef} = useDroppable({
+    id: props.id,
+  });
+  
+  return (
+    <div ref={setNodeRef}>
+      {props.children}
+    </div>
+  );
+}
+
+function MultipleDroppables() {
+  const droppables = ['1', '2', '3', '4'];
+  
+  return (
+    <section>
+      {droppables.map((id) => (
+        <Droppable id={id} key={id}>
+          Droppable container id: ${id}
+        </Droppable>
+      ))}
+    </section>
+  );
+}
+```
 
 ## Hook API – `useDraggable`
 
