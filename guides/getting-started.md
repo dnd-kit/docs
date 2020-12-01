@@ -12,7 +12,7 @@ Before getting started, make sure you have followed the installation steps outli
 
 ### Context provider
 
-First, we'll set up the general structure of the app. In order for the [`useDraggable`](../api-documentation/draggable/usedraggable.md) and [`useDroppable`](../api-documentation/droppable/usedroppable.md) hooks to function correctly, you'll need to ensure that the components where they are used are wrapped within a [`<DndContext />`](../api-documentation/context-provider/) component:
+First, we'll set up the general structure of the app. In order for the [`useDraggable`](../api-documentation/draggable/usedraggable.md) and [`useDroppable`]() hooks to function correctly, you'll need to ensure that the components where they are used are wrapped within a [`<DndContext />`](../api-documentation/context-provider/) component:
 
 ```jsx
 import React from 'react';
@@ -42,7 +42,7 @@ When a **Draggable** item is over your droppable element, the `isOver` property 
 import React from 'react';
 import {useDroppable} from '@dnd-kit/core';
 
-function Draggable(props) {
+function Droppable(props) {
   const {isOver, setNodeRef} = useDroppable({
     id: 'my-droppable-container',
   });
@@ -146,7 +146,7 @@ function App() {
 }
 ```
 
-That's it! You've set up your first [**Droppable**](../api-documentation/droppable/) ****and [**Draggable**](../api-documentation/draggable/) components.
+That's it! You've set up your first [**Droppable**](../api-documentation/droppable.md) ****and [**Draggable**](../api-documentation/draggable/) components.
 
 ### Pushing things a bit further
 

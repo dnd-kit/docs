@@ -11,8 +11,7 @@
 
 * [DndContext](api-documentation/context-provider/README.md)
   * [useDndContext](api-documentation/context-provider/usedndcontext.md)
-* [Droppable](api-documentation/droppable/README.md)
-  * [useDroppable](api-documentation/droppable/usedroppable.md)
+* [Droppable](api-documentation/droppable.md)
 * [Draggable](api-documentation/draggable/README.md)
   * [useDraggable](api-documentation/draggable/usedraggable.md)
   * [DraggableClone](api-documentation/draggable/clone.md)

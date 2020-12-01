@@ -20,7 +20,7 @@ description: >-
 
 **dnd kit** is powerful and packed with features, and built with the hope of being the last drag and drop library you'll ever need, whether you're building a simple draggable interface element or a complex application built around drag and drop interactions .
 
- At its core, **dnd kit** exposes two main concepts: [Draggable](api-documentation/draggable/) items and [Droppable](api-documentation/droppable/) containers. Transform your existing components using the `useDraggable` and `useDroppable` hooks. Manage events and customize the behaviour of your application using the [`<DndContext>`](api-documentation/context-provider/)  provider. Check out our [quick start guide](guides/getting-started.md) to learn how get started with **dnd kit**.
+ At its core, **dnd kit** exposes two main concepts: [Draggable](api-documentation/draggable/) items and [Droppable](api-documentation/droppable.md) containers. Transform your existing components using the `useDraggable` and `useDroppable` hooks. Manage events and customize the behaviour of your application using the [`<DndContext>`](api-documentation/context-provider/)  provider. Check out our [quick start guide](guides/getting-started.md) to learn how get started with **dnd kit**.
 
 ![](.gitbook/assets/robot-illustration-concepts.svg)
 

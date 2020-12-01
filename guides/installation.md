@@ -23,7 +23,7 @@ In order to keep the core of the library small, **dnd kit** only ships with the 
 * [Context provider](../api-documentation/context-provider/)
 * Hooks for: 
   * [Draggable](../api-documentation/draggable/)
-  * [Droppable](../api-documentation/droppable/)
+  * [Droppable](../api-documentation/droppable.md)
 * Sensors for:
   *  [Mouse](../api-documentation/sensors/mouse.md)
   * [Touch](../api-documentation/sensors/touch.md)
