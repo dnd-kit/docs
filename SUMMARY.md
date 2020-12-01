@@ -14,7 +14,6 @@
   * [useDndContext](api-documentation/context-provider/usedndcontext.md)
 * [Droppable](api-documentation/droppable.md)
 * [Draggable](api-documentation/draggable/README.md)
-  * [useDraggable](api-documentation/draggable/usedraggable.md)
   * [DraggableClone](api-documentation/draggable/clone.md)
 * [Sensors](api-documentation/sensors/README.md)
   * [Mouse](api-documentation/sensors/mouse.md)

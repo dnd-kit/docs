@@ -39,33 +39,15 @@ The primary extension points of **dnd kit** are:
 
 ### Accessibility
 
-Building accessible drag and drop interfaces is hard; **dnd kit**  has a number of sensible defaults and starting points to help you make your drag and drop interface accessible. You know your application best though, so in most cases you'll want to customize and personalize these defaults so that they are tailored to the context of your application. 
+Building accessible drag and drop interfaces is hard; **dnd kit**  has a number of sensible defaults and starting points to help you make your drag and drop interface accessible: 
 
-#### Voiceover instructions for how to interact with draggable items
+* Customizable **screen reader instructions** for how to interact with draggable items
+* Customizable **live region updates** to provide screen reader announcements in real-time of what is currently happening with draggable and droppable elements.
+* Sensible defaults for **`aria` attributes** that should be passed to draggable items
 
-In order to let screen reader users know how to interact with draggable items using only the keyboard, it's important to provide clear instructions on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
-
-By default, each  [`<DndContext>`](api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used to provide these instructions to screen readers. The default instructions are:
-
-> To pick up a draggable item, press the space bar.   
-> While dragging, use the arrow keys to move the item around.  
-> Press space again to drop the item in its new position, or press escape to cancel.
-
-We recommend you customize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](api-documentation/context-provider/). 
-
-#### Live regions to provide screen reader announcements
-
-[Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) are used to notify screen readers of content changes. We use them in **dnd kit** to provide screen reader announcements in real-time of time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus .
-
-By default, each  [`<DndContext>`](api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used for live screen-reader announcements of events like when a drag operation has started, when a draggable item has been dragged over a droppable container, when a drag operation has ended, and when a drag operation has been cancelled.
-
-#### Aria attributes
-
-| Attribute | Default value | Description |
-| :--- | :--- | :--- |
-| `role` | `"button"` | If possible, we recommend you use a semantic `<button>` element for the DOM element you plan on attaching draggable listeners to. In case that's not possible, make sure you include the `role="button"`attribute, which is the default value. |
-| `aria-roledescription` | `"draggable"` | While `draggable` is a sensible default, we recommend you customize this value to something that is  |
-| `aria-describedby` | `"DndContext-[uniqueId]"` | Each draggable item is provided a unique `aria-describedby` ID that points to the voiceover instructions to be read out when a draggable item receives focus. |
+{% hint style="info" %}
+Check out our [Accessibility guide](guides/accessibility.md) to learn more about how you can help provide a better experience for screen readers.
+{% endhint %}
 
 ### Architecture
 
@@ -77,9 +59,15 @@ The main **tradeoff** with not using the HTML5 Drag and drop API is that you won
 
 ### Performance
 
+#### **Minimizing DOM mutations**
+
 **dnd kit** lets you build drag and drop interfaces without having to mutate the DOM every time an item needs to shift position. 
 
 This is possible because **dnd kit** lazily calculates and stores the initial positions and client rects of your droppable containers when a drag operation is initiated. These positions are passed down to your components that use `useDraggable` and `useDroppable` so that you can compute the new positions of your items while a drag operation is underway, and move them to their new positions using performant CSS properties that do not trigger a repaint such as `translate3d` and `scale`. For an example of how this can be achieved, check out the implementation of the sorting strategies that are exposed by the [`@dnd-kit/sortable`](presets/sortable.md) library.
 
 This isn't to say that you can't shift the position of the items in the DOM while dragging, this is something that **is supported** and sometimes inevitable. In some cases, it won't be possible to know in advance what the new position and layout of the item until you move it in the DOM. Just know that these kind of mutations to the DOM while dragging are much more expensive and will cause a repaint, so if possible, prefer computing the new positions using `translate3d` and `scale`.
+
+#### Synthetic events
+
+**dnd kit** also uses [SyntheticEvent listeners](https://reactjs.org/docs/events.html) for the activator events of all sensors, which leads to improved performance over manually adding event listeners to each individual draggable node.
 
