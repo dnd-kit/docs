@@ -12,7 +12,7 @@ Before getting started, make sure you have followed the installation steps outli
 
 ### Context provider
 
-First, we'll set up the general structure of the app. In order for the [`useDraggable`](../concepts/draggable/usedraggable.md) and [`useDroppable`](../concepts/droppable/usedroppable.md) hooks to function correctly, you'll need to ensure that the components where they are used are wrapped within a [`<DndContext />`](../concepts/context-provider.md) component:
+First, we'll set up the general structure of the app. In order for the [`useDraggable`](../api-documentation/draggable/usedraggable.md) and [`useDroppable`](../api-documentation/droppable/usedroppable.md) hooks to function correctly, you'll need to ensure that the components where they are used are wrapped within a [`<DndContext />`](../api-documentation/context-provider/) component:
 
 ```jsx
 import React from 'react';
@@ -95,7 +95,7 @@ As you can see from the example above, it really only takes just a few lines to 
 
 * For performance reasons, we recommend you use **`transform`** over other positional CSS properties to move the dragged element. 
 * You'll likely want to alter the **`z-index`** of your Draggable component to ensure it appears on top of other elements.
-* If your item needs to move from one container to another, we recommend you use the [`<DraggableClone>`](../concepts/draggable/clone.md) component so the item isn't constrained to its parent's stacking context and overflow constraints.
+* If your item needs to move from one container to another, we recommend you use the [`<DraggableClone>`](../api-documentation/draggable/clone.md) component so the item isn't constrained to its parent's stacking context and overflow constraints.
 {% endhint %}
 
 Converting the `transform` object to a string can feel tedious. Fear not, you can avoid having to do this by hand by importing the `CSS` utility from the `@dnd-kit/utilities` package: 
@@ -111,7 +111,7 @@ const style = {
 
 ### Assembling all the pieces
 
-Once you've set up your **Droppable** and **Draggable** components, you'll want to come back to where you set up your [`<DndContext>`](../concepts/context-provider.md) component so you can add event listeners to be able to respond to the different events that are fired.
+Once you've set up your **Droppable** and **Draggable** components, you'll want to come back to where you set up your [`<DndContext>`](../api-documentation/context-provider/) component so you can add event listeners to be able to respond to the different events that are fired.
 
 In this case, we'll assume you want to move your `<Draggable>` component from outside into your `<Droppable>` component. To do so, you'll want to listen to the `onDragEnd` event of  the `<DndContext>` to see if your draggable item was dropped over your droppable.
 
@@ -142,7 +142,7 @@ function App() {
 }
 ```
 
-That's it! You've set up your first [**Droppable**](../concepts/droppable/) ****and [**Draggable**](../concepts/draggable/) components.
+That's it! You've set up your first [**Droppable**](../api-documentation/droppable/) ****and [**Draggable**](../api-documentation/draggable/) components.
 
 ### Pushing things a bit further
 

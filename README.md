@@ -20,7 +20,7 @@ description: >-
 
 **dnd kit** is powerful and packed with features, and built with the hope of being the last drag and drop library you'll ever need, whether you're building a simple draggable interface element or a complex application built around drag and drop interactions .
 
- At its core, **dnd kit** exposes two main concepts: [Draggable](concepts/draggable/) items and [Droppable](concepts/droppable/) containers. Transform your existing components using the `useDraggable` and `useDroppable` hooks. Manage events and customize the behaviour of your application using the [`<DndContext>`](concepts/context-provider.md)  provider. Check out our [quick start guide](guides/getting-started.md) to learn how get started with **dnd kit**.
+ At its core, **dnd kit** exposes two main concepts: [Draggable](api-documentation/draggable/) items and [Droppable](api-documentation/droppable/) containers. Transform your existing components using the `useDraggable` and `useDroppable` hooks. Manage events and customize the behaviour of your application using the [`<DndContext>`](api-documentation/context-provider/)  provider. Check out our [quick start guide](guides/getting-started.md) to learn how get started with **dnd kit**.
 
 ![](.gitbook/assets/robot-illustration-concepts.svg)
 
@@ -32,7 +32,7 @@ A prime example of the level of extensibility of **dnd kit** is the[ Sortable pr
 
 The primary extension points of **dnd kit** are:
 
-* [Sensors](concepts/sensors/)
+* [Sensors](api-documentation/sensors/)
 * [Modifiers](api-documentation/modifiers.md)
 * [Constraints](api-documentation/constraints.md)
 * Custom collision detection algorithms
@@ -45,19 +45,19 @@ Building accessible drag and drop interfaces is hard; **dnd kit**  has a number 
 
 In order to let screen reader users know how to interact with draggable items using only the keyboard, it's important to provide clear instructions on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
 
-By default, each  [`<DndContext>`](concepts/context-provider.md) component renders a unique HTML element that is rendered off-screen to be used to provide these instructions to screen readers. The default instructions are:
+By default, each  [`<DndContext>`](api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used to provide these instructions to screen readers. The default instructions are:
 
 > To pick up a draggable item, press the space bar.   
 > While dragging, use the arrow keys to move the item around.  
 > Press space again to drop the item in its new position, or press escape to cancel.
 
-We recommend you customize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](concepts/context-provider.md). 
+We recommend you customize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](api-documentation/context-provider/). 
 
 #### Live regions to provide screen reader announcements
 
 [Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) are used to notify screen readers of content changes. We use them in **dnd kit** to provide screen reader announcements in real-time of time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus .
 
-By default, each  [`<DndContext>`](concepts/context-provider.md) component renders a unique HTML element that is rendered off-screen to be used for live screen-reader announcements of events like when a drag operation has started, when a draggable item has been dragged over a droppable container, when a drag operation has ended, and when a drag operation has been cancelled.
+By default, each  [`<DndContext>`](api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used for live screen-reader announcements of events like when a drag operation has started, when a draggable item has been dragged over a droppable container, when a drag operation has ended, and when a drag operation has been cancelled.
 
 #### Aria attributes
 

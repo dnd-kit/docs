@@ -20,14 +20,14 @@ npm install react react-dom
 
 In order to keep the core of the library small, **dnd kit** only ships with the core building blocks that the majority of users will need most of the time for building drag and drop experiences:
 
-* [Context provider](../concepts/context-provider.md)
+* [Context provider](../api-documentation/context-provider/)
 * Hooks for: 
-  * [Draggable](../concepts/draggable/)
-  * [Droppable](../concepts/droppable/)
+  * [Draggable](../api-documentation/draggable/)
+  * [Droppable](../api-documentation/droppable/)
 * Sensors for:
-  *  [Mouse](../concepts/sensors/mouse.md)
-  * [Touch](../concepts/sensors/touch.md)
-  * [Keyboard](../concepts/sensors/keyboard.md)
+  *  [Mouse](../api-documentation/sensors/mouse.md)
+  * [Touch](../api-documentation/sensors/touch.md)
+  * [Keyboard](../api-documentation/sensors/keyboard.md)
 * Accessibility features
 
 If you don't need any other features, you can skip right ahead to the [Quick start](getting-started.md) guide. 

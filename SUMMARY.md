@@ -7,21 +7,19 @@
 * [Installation](guides/installation.md)
 * [Quick start](guides/getting-started.md)
 
-## Core concepts <a id="concepts"></a>
-
-* [DndContext](concepts/context-provider.md)
-* [Droppable](concepts/droppable/README.md)
-  * [useDroppable](concepts/droppable/usedroppable.md)
-* [Draggable](concepts/draggable/README.md)
-  * [useDraggable](concepts/draggable/usedraggable.md)
-  * [DraggableClone](concepts/draggable/clone.md)
-* [Sensors](concepts/sensors/README.md)
-  * [Mouse](concepts/sensors/mouse.md)
-  * [Touch](concepts/sensors/touch.md)
-  * [Keyboard](concepts/sensors/keyboard.md)
-
 ## API Documentation
 
+* [DndContext](api-documentation/context-provider/README.md)
+  * [useDndContext](api-documentation/context-provider/usedndcontext.md)
+* [Droppable](api-documentation/droppable/README.md)
+  * [useDroppable](api-documentation/droppable/usedroppable.md)
+* [Draggable](api-documentation/draggable/README.md)
+  * [useDraggable](api-documentation/draggable/usedraggable.md)
+  * [DraggableClone](api-documentation/draggable/clone.md)
+* [Sensors](api-documentation/sensors/README.md)
+  * [Mouse](api-documentation/sensors/mouse.md)
+  * [Touch](api-documentation/sensors/touch.md)
+  * [Keyboard](api-documentation/sensors/keyboard.md)
 * [Constraints](api-documentation/constraints.md)
 * [Modifiers](api-documentation/modifiers.md)
 
