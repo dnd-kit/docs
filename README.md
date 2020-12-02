@@ -28,7 +28,7 @@ Manage events and customize the behaviour of your application using the [`<DndCo
 
 ### Extensibility
 
-Extensibility is at the core of **dnd kit**. It was built is built to be lean and extensible. It ships with the features we believe most people will want most of the time, and provides extension points to build the rest on top of `@dnd-kit/core`.
+Extensibility is at the core of **dnd kit**. It was built to be lean and extensible. It ships with the features we believe most people will want most of the time, and provides extension points to build the rest on top of `@dnd-kit/core`.
 
 A prime example of the level of extensibility of **dnd kit** is the[ Sortable preset](presets/sortable.md), which is built using the extension points that are exposed by `@dnd-kit/core`.
 
