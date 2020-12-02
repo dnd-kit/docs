@@ -99,6 +99,15 @@ Set the `disabled` argument to `true` if you'd like to temporarily disable a `dr
 
 The `data` argument is for advanced use-cases where you may need access to additional data about the droppable element in custom sensors or presets. For example, if you were building a sortable preset, you could use the `data` attribute to store the index of the droppable element within a sortable list.  
 
+```jsx
+  const {setNodeRef} = useDroppable<Data>({
+    id: props.id,
+    data: {
+      index: props.index,
+    }
+  });
+```
+
 ### Return value
 
 ```typescript

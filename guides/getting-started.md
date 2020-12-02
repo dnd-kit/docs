@@ -82,10 +82,10 @@ function Draggable(props) {
   const style = transform ? {
     transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
   } : undefined;
-  
+
   
   return (
-    <button ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
       {props.children}
     </button>
   );
@@ -167,13 +167,13 @@ function App() {
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      {parent === null ? item : null}
+      {parent === null ? draggableMarkup : null}
 
       {containers.map((id) => (
         // We updated the Droppable component so it would accept an `id`
         // prop and pass it to `useDroppable`
         <Droppable key={id} id={id}>
-          {parent === id ? item : 'Drop here'}
+          {parent === id ? draggableMarkup : 'Drop here'}
         </Droppable>
       ))}
     </DndContext>
