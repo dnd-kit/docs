@@ -83,7 +83,7 @@ function MultipleDroppables() {
 }
 ```
 
-## Hook API – `useDraggable`
+## Hook API – `useDroppable`
 
 ### Arguments
 
