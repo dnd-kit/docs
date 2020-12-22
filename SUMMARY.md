@@ -26,5 +26,6 @@
 ## Presets
 
 * [Sortable](presets/sortable/README.md)
+  * [Sortable Context](presets/sortable/sortable-context.md)
   * [useSortable](presets/sortable/usesortable.md)
 

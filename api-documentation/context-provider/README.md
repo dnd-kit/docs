@@ -63,3 +63,9 @@ The main events you can subscribe to are:
 * `onDragEnd`:  Fires after a draggable item is dropped. This event 
 * `onDragCancel`: Fires if a drag operation is cancelled, for example, if the user presses `escape` while dragging a draggable.
 
+### Collision detection strategies
+
+By default, `DndContext` uses the rectangle intersection collision detection strategy. This means that in order for a draggable item to be considered **over** a droppable area, there needs to be an intersection between both rectangles:
+
+![](../../.gitbook/assets/rect-intersection.png)
+
