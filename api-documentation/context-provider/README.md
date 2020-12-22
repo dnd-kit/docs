@@ -77,7 +77,7 @@ For some use cases, such as sortable lists, using a more forgiving collision det
 
 As its name suggests, the closest center strategy finds the droppable container who's center is closest to  the center of the bounding rectangle of the active draggable item.
 
-![](../../.gitbook/assets/closest-center-1-.png)
+![](../../.gitbook/assets/closest-center-2-.png)
 
 ### Closest corners
 
@@ -86,4 +86,6 @@ Similarly to the closest center algorithm, the closest corner algorithm doesn't 
 Rather, it measures the distance between all four corners of the active draggable item and the four corners of each droppable container to find the closest one. 
 
 The distance is measured from the top left corner of the draggable item to the top left corner of the droppable bounding rectangle, top right to top right, bottom left to bottom left, and bottom right to bottom right. 
+
+![](../../.gitbook/assets/closest-corners.png)
 

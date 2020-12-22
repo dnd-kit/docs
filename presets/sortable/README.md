@@ -229,6 +229,35 @@ The supported use cases of the Sortable preset include vertical lists, horizonta
 
 Make sure to use the sorting strategy that is the most adapted to the use case you are building for.
 
+### Collision detection algorithm
+
+The default collision detection algorithm of `DndContext` is the [rectangle intersection](../../api-documentation/context-provider/#rectangle-intersection) algorithm. While the rectangle intersection strategy is well suited for many use cases, it can be unforgiving, since it requires both the draggable and droppable bounding rectangles to come into direct contact and intersect.
+
+For sortable lists, we recommend using a more forgiving collision detection strategy such as the [closest center](../../api-documentation/context-provider/#closest-center) or [closest corner](../../api-documentation/context-provider/#closest-corners) algorithms. 
+
+In this example, we'll be using the closest center algorithm:
+
+```javascript
+import {
+  closestCenter,
+  SortableContext, 
+  useSortableSensors
+} from '@dnd-kit/sortable';
+
+function App() {
+  const [items] = useState(['1', '2', '3']);
+  const sensors = useSortableSensors();
+
+  return (
+    <DndContext sensors={sensors} collisionDetection={closestCenter}>
+      <SortableContext items={items}>
+        {/* ... */}
+      </SortableContext>
+    </DndContext>
+  );
+}
+```
+
 ## Connecting all the pieces
 
 First, let's go ahead and render all of our sortable items:

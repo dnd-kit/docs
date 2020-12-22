@@ -9,8 +9,6 @@ import {useDndContext} from '@dnd-kit/core`;
 
 function MyCustomPreset() {
   const dndContext = useDndContext();
-  
-  /* do stuff */
 }
 ```
 

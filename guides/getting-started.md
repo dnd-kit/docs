@@ -44,7 +44,7 @@ import {useDroppable} from '@dnd-kit/core';
 
 function Droppable(props) {
   const {isOver, setNodeRef} = useDroppable({
-    id: 'my-droppable-container',
+    id: 'droppable',
   });
   const style = {
     color: isOver ? 'green' : undefined,
@@ -77,7 +77,7 @@ import {useDraggable} from '@dnd-kit/core';
 
 function Draggable(props) {
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
-    id: 'my-draggable-item',
+    id: 'draggable',
   });
   const style = transform ? {
     transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
@@ -117,7 +117,11 @@ const style = {
 
 Once you've set up your **Droppable** and **Draggable** components, you'll want to come back to where you set up your [`<DndContext>`](../api-documentation/context-provider/) component so you can add event listeners to be able to respond to the different events that are fired.
 
-In this case, we'll assume you want to move your `<Draggable>` component from outside into your `<Droppable>` component. To do so, you'll want to listen to the `onDragEnd` event of  the `<DndContext>` to see if your draggable item was dropped over your droppable.
+In this example, we'll assume you want to move your `<Draggable>` component from outside into your `<Droppable>` component:
+
+![](../.gitbook/assets/example.png)
+
+To do so, you'll want to listen to the `onDragEnd` event of  the `<DndContext>` to see if your draggable item was dropped over your droppable:
 
 ```jsx
 import React from 'react';
@@ -139,7 +143,7 @@ function App() {
   );
   
   function handleDragEnd(event) {
-    if (event.over && event.over.id === 'my-droppable-container') {
+    if (event.over && event.over.id === 'droppable') {
       setIsDropped(true);
     }
   }
