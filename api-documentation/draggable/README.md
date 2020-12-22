@@ -99,19 +99,20 @@ After an item starts being dragged, the `transform` property will be populated w
 
 The `x` and `y` coordinates represent the delta from the point of origin of your draggable element since it started being dragged.
 
-The `scaleX` and `scaleY` properties represent the difference in scale between the item that is dragged and the droppable container it is dropped over. This is useful for building interfaces where the draggable item needs to adapt to the size of the droppable container it is currently over.
+The `scaleX` and `scaleY` properties represent the difference in scale between the item that is dragged and the droppable container it is currently over. This is useful for building interfaces where the draggable item needs to adapt to the size of the droppable container it is currently over.
 
-The `CSS` utility is entirely optional. It's a convenient helper for generating CSS transform strings, and is equivalent to:
+The `CSS` helper is entirely optional; it's a convenient helper for generating [CSS transform ](https://developer.mozilla.org/en-US/docs/Web/CSS/transform)strings, and is equivalent to manually constructing the string as such:
 
 ```javascript
-CSS.Translate.toString(transform) == `translate3d(${translate.x}, ${translate.y}, 0)
+CSS.Translate.toString(transform) ===
+`translate3d(${translate.x}, ${translate.y}, 0)`
 ```
 
 ### Draggable clone
 
 In most cases, you'll probably want to use a [Draggable clone ](clone.md)rather than transforming the original draggable source. This will largely depend on your use-case.
 
-If your item needs to move from one container to another, or if your draggable item is within a scrollable container, we recommend you use the [`<DraggableClone>`](clone.md) component so the item isn't constrained to its parent's stacking context and overflow constraints.
+If your item needs to move from one container to another, or if your draggable item is within a scrollable container, we recommend you use the [`<DraggableClone>`](clone.md) component so the item can move more freely from one container to another.
 
 ```jsx
 import React, {useState} from 'react';

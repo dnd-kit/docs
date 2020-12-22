@@ -16,6 +16,7 @@
 * [Draggable](api-documentation/draggable/README.md)
   * [DraggableClone](api-documentation/draggable/clone.md)
 * [Sensors](api-documentation/sensors/README.md)
+  * [Pointer](api-documentation/sensors/pointer.md)
   * [Mouse](api-documentation/sensors/mouse.md)
   * [Touch](api-documentation/sensors/touch.md)
   * [Keyboard](api-documentation/sensors/keyboard.md)
@@ -24,5 +25,6 @@
 
 ## Presets
 
-* [Sortable](presets/sortable.md)
+* [Sortable](presets/sortable/README.md)
+  * [useSortable](presets/sortable/usesortable.md)
 

@@ -32,7 +32,7 @@ In order to keep the core of the library small, **dnd kit** only ships with the 
 
 If you don't need any other features, you can skip right ahead to the [Quick start](getting-started.md) guide. 
 
-### [Sortable](../presets/sortable.md)
+### [Sortable](../presets/sortable/)
 
 The `@dnd-kit/core` package provides all the building blocks you would need to build a sortable interface from scratch should you choose to, but thankfully you don't need to. 
 
