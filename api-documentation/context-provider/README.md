@@ -60,9 +60,9 @@ interface Props {
   autoScroll?: boolean;
   children?: React.ReactNode;
   collisionDetection?: CollisionDetection;
+  modifiers?: Modifiers;
   screenReaderInstructions?: ScreenReaderInstructions;
   sensors?: SensorDescriptor<any>[];
-  translateModifiers?: Modifiers;
   onDragStart?(event: DragStartEvent): void;
   onDragMove?(event: DragMoveEvent): void;
   onDragOver?(event: DragOverEvent): void;
@@ -186,7 +186,18 @@ To learn how to customize sensors or how to pass different sensors to `DndContex
 
 {% page-ref page="../sensors/" %}
 
+### Modifiers
 
+Modifiers let you dynamically modify the movement coordinates that are detected by sensors. They can be used for a wide range of use cases, for example:
+
+* Restricting motion to a single axis
+* Restricting motion to the draggable node container's bounding rectangle 
+* Restricting motion to the draggable node's scroll container bounding rectangle
+* Applying resistance or clamping the motion
+
+To learn more about how to use Modifiers, read the Modifiers guide:
+
+{% page-ref page="../modifiers.md" %}
 
 
 
