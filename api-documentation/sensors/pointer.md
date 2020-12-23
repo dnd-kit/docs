@@ -16,7 +16,7 @@ For mouse there is only one pointer, so it will always be the primary pointer. F
 
 ### Activation constraints
 
-The Pointer sensor two activation constraints.
+The Pointer sensor has two activation constraints:
 
 * Distance constraint
 * Delay constraint
@@ -50,5 +50,5 @@ The `delay` property represents the duration, in _milliseconds_, that a draggabl
 
 The `tolerance` property represents the distance, in _pixels_, of motion that is tolerated before the drag operation is aborted. If the pointer is moved during the delay duration and the tolerance is set to zero, the drag operation will be immediately aborted. If a higher tolerance is set, for example, a tolerance of `5` pixels, the operation will only be aborted if the pointer is moved by more than 5 pixels during the delay.
 
-This property is particularly useful for touch input, where some tolerance should be accounted for when using a delay constraint.
+This property is particularly useful for touch input, where some tolerance should be accounted for when using a delay constraint, as touch input is less precise than mouse input.
 
