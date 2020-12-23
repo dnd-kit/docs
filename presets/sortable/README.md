@@ -89,7 +89,7 @@ function App() {
 ```
 
 {% hint style="warning" %}
-In order for the `SortableContext` component to function properly, make sure it is a descendant of a `DndContext` component. You may nest multiple `SortableContext` components within the same parent `DndContext`.
+In order for the `SortableContext` component to function properly, make sure it is a descendant of a `DndContext` provider. You may nest multiple `SortableContext` components within the same parent `DndContext`.
 {% endhint %}
 
 ### useSortable

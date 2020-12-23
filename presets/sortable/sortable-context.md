@@ -1,6 +1,60 @@
 # Sortable Context
 
+## Usage
+
 The `SortableContext` provides information via context that is consumed by the [`useSortable`](usesortable.md) hook.
+
+{% hint style="warning" %}
+In order for the `SortableContext` component to function properly, make sure it is a descendant of a `DndContext` provider. 
+{% endhint %}
+
+You may nest multiple `SortableContext` providers within the same parent `DndContext` provider.
+
+You may also nest `SortableContext` providers within other `SortableContext` providers, either all under the same `DndContext` provider or each with their own individual `DndContext` providers if you would like to configure them with different options:
+
+```jsx
+// Bad, missing parent <DndContext>
+<SortableContext>
+  {/* ... */}
+</SortableContext>
+
+// Good, basic setup
+<DndContext>
+  <SortableContext>
+    {/* ... */}
+  </SortableContext>
+</DndContext>
+
+// Good, multiple sibling Sortable contexts
+<DndContext>
+  <SortableContext>
+    {/* ... */}
+  </SortableContext>
+  <SortableContext>
+    {/* ... */}
+  </SortableContext>
+</DndContext>
+
+// Good, nested DndContexts
+<DndContext>
+  <SortableContext>
+    <DndContext>
+      <SortableContext>
+        {/* ... */}
+      </SortableContext>
+    </DndContext>
+  </SortableContext>
+</DndContext>
+
+// Good, nested Sortable contexts
+<DndContext>
+  <SortableContext>
+    <SortableContext>
+      {/* ... */}
+    </SortableContext>
+  </SortableContext>
+</DndContext>
+```
 
 ## Props
 
@@ -8,7 +62,7 @@ The `SortableContext` provides information via context that is consumed by the [
 
 It requires that you pass it a sorted array of the unique identifiers associated with the elements that use the `useSortable` hook within it.
 
-```javascript
+```jsx
 import React, {useState} from 'react';
 import {DndContext} from '@dnd-kit/core';
 import {SortableContext} from '@dnd-kit/sortable';
@@ -25,10 +79,6 @@ function App() {
   );
 }
 ```
-
-{% hint style="warning" %}
-In order for the `SortableContext` component to function properly, make sure it is a descendant of a `DndContext` component. You may nest multiple `SortableContext` components within the same parent `DndContext`.
-{% endhint %}
 
 ### Strategy
 
