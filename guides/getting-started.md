@@ -14,6 +14,8 @@ Before getting started, make sure you have followed the installation steps outli
 
 First, we'll set up the general structure of the app. In order for the [`useDraggable`]() and [`useDroppable`]() hooks to function correctly, you'll need to ensure that the components where they are used are wrapped within a [`<DndContext />`](../api-documentation/context-provider/) component:
 
+{% tabs %}
+{% tab title="App.jsx" %}
 ```jsx
 import React from 'react';
 import {DndContext} from '@dnd-kit/core';
@@ -27,6 +29,8 @@ function App() {
   )
 }
 ```
+{% endtab %}
+{% endtabs %}
 
 ### Droppable
 
@@ -38,6 +42,8 @@ The `useDroppable` hook isn't opinionated about how your app should be structure
 
 When a **Draggable** item is over your droppable element, the `isOver` property will become true.
 
+{% tabs %}
+{% tab title="Droppable.jsx" %}
 ```jsx
 import React from 'react';
 import {useDroppable} from '@dnd-kit/core';
@@ -58,6 +64,8 @@ function Droppable(props) {
   );
 }
 ```
+{% endtab %}
+{% endtabs %}
 
 As you can see, it really only takes just a few lines to transform your existing components into droppable containers.
 
@@ -71,6 +79,8 @@ The `useDraggable` ****hook isn't opinionated about how your app should be struc
 
 After an item starts being dragged, the `transform` property will be populated with the `translate` coordinates you'll need to move the item on the screen.  The `transform` object adheres to the following shape: `{x: number, y: number, scaleX: number, scaleY: number}`
 
+{% tabs %}
+{% tab title="Draggable.jsx" %}
 ```jsx
 import React from 'react';
 import {useDraggable} from '@dnd-kit/core';
@@ -91,6 +101,8 @@ function Draggable(props) {
   );
 }
 ```
+{% endtab %}
+{% endtabs %}
 
 As you can see from the example above, it really only takes just a few lines to transform your existing components into draggable components.
 
@@ -123,9 +135,14 @@ In this example, we'll assume you want to move your `<Draggable>` component from
 
 To do so, you'll want to listen to the `onDragEnd` event of  the `<DndContext>` to see if your draggable item was dropped over your droppable:
 
+{% tabs %}
+{% tab title="App.jsx" %}
 ```jsx
 import React from 'react';
 import {DndContext} from '@dnd-kit/core';
+
+import {Droppable} from './Droppable';
+import {Draggable} from './Draggable';
 
 function App() {
   const [isDropped, setIsDropped] = useState(false);
@@ -149,6 +166,53 @@ function App() {
   }
 }
 ```
+{% endtab %}
+
+{% tab title="Droppable.jsx" %}
+```jsx
+import {useDroppable} from '@dnd-kit/core';
+
+export function Droppable(props) {
+  const {isOver, setNodeRef} = useDroppable({
+    id: 'droppable',
+  });
+  const style = {
+    color: isOver ? 'green' : undefined,
+  };
+  
+  
+  return (
+    <div ref={setNodeRef} style={style}>
+      {props.children}
+    </div>
+  );
+}
+```
+{% endtab %}
+
+{% tab title="Draggable.jsx" %}
+```jsx
+import React from 'react';
+import {useDraggable} from '@dnd-kit/core';
+
+export function Draggable(props) {
+  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+    id: 'draggable',
+  });
+  const style = transform ? {
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+  } : undefined;
+
+  
+  return (
+    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
+      {props.children}
+    </button>
+  );
+}
+```
+{% endtab %}
+{% endtabs %}
 
 That's it! You've set up your first [**Droppable**](../api-documentation/droppable.md) ****and [**Draggable**](../api-documentation/draggable/) components.
 
