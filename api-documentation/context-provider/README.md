@@ -79,7 +79,7 @@ The main events you can listen to are:
 
 #### `onDragStart`
 
-Fires when a drag event that meets the [activation constraints](../sensors/#concepts) for that [sensor ](../sensors/)happens.
+Fires when a drag event that meets the [activation constraints](../sensors/#concepts) for that [sensor ](../sensors/)happens, along with the unique identifier of the draggable element that was picked up.
 
 #### `onDragMove`
 
