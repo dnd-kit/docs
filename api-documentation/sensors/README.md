@@ -30,7 +30,55 @@ The lifecycle of a sensor is as follows:
 
 ### useSensor
 
+By default, `DndContext` uses the [Pointer](pointer.md) and [Keyboard](keyboard.md) sensors.
 
+If you'd like to use other sensors, such as the Mouse and Touch sensors instead, initialize those sensors separately with the options you'd like to use using the `useSensor` hook
+
+```jsx
+import {MouseSensor, TouchSensor, useSensor} from '@dnd-kit/core';
+
+function App() {
+  const mouseSensor = useSensor(MouseSensor, {
+    // Require the mouse to move by 10 pixels before activating
+    activationConstraint: {
+      distance: 10,
+    },
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    // Press delay of 250ms, with tolerance of 5px of movement
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    },
+  });
+}
+```
 
 ### useCombineSensors
+
+When initializing sensors with `useSensor`, make sure you pass the sensors to `useCombineSensors` before passing them to `DndContext`:
+
+```jsx
+import {
+  DndContext,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+} from '@dnd-kit/core';
+
+function App() {
+  const mouseSensor = useSensor(MouseSensor);
+  const touchSensor = useSensor(TouchSensor);
+  const keyboardSensor = useSensor(KeyboardSensor);
+  
+  const sensors = useCombineSensors(mouseSensor, touchSensor, keyboardSensor);
+  
+  return (
+    <DndContext sensors={sensors}>
+      {/* ... */}
+    </DndContext>
+  )
+}
+```
 
