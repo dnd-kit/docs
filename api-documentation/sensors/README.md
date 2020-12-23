@@ -1,10 +1,16 @@
 # Sensors
 
+## Concepts
+
 Sensors are an abstraction to detect different input methods in order to initiate drag operations, respond to movement and end or cancel the operation. 
+
+### Activators
 
 Sensors may define one or multiple **activator events**. Activator events use React  [SyntheticEvent listeners](https://reactjs.org/docs/events.html), which leads to improved performance over manually adding event listeners to each individual draggable node.
 
 Sensors are initialized once one of the activator events is detected.
+
+### Built-in sensors
 
 The built-in sensors are:
 
@@ -12,6 +18,8 @@ The built-in sensors are:
 * [Mouse](mouse.md)
 * [Touch](touch.md)
 * [Keyboard](keyboard.md)
+
+### Custom sensors
 
 If necessary, you may also implement custom sensors to respond to other inputs or if the built-in sensors do not suit your needs. If you build a custom sensor and you think others could benefit, don't hesitate to open an RFC pull request.
 
@@ -25,6 +33,10 @@ The lifecycle of a sensor is as follows:
 * Sensor dispatches drag move events in response to input.
 * Sensor dispatches drag end or drag cancel event.
 * Sensor is torn down and cleans up manually attached event listeners.
+
+From an implementation perspective, Sensors are [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes). 
+
+They are class-based rather than hooks because they need to be instantiated synchronously to respond to user interactions immediately, and it must be possible for them to be  conditionally invoked.
 
 ## Hooks
 
@@ -72,7 +84,11 @@ function App() {
   const touchSensor = useSensor(TouchSensor);
   const keyboardSensor = useSensor(KeyboardSensor);
   
-  const sensors = useCombineSensors(mouseSensor, touchSensor, keyboardSensor);
+  const sensors = useCombineSensors(
+    mouseSensor,
+    touchSensor,
+    keyboardSensor,
+  );
   
   return (
     <DndContext sensors={sensors}>

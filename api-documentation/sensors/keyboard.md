@@ -51,7 +51,7 @@ This is an arbitrary sensible default that may or may not be suited to the use c
 The `getNextCoordinates` option can be used to define a custom coordinate getter function that is passed the latest keyboard `event` along with the current coordinates:
 
 ```javascript
-function defaultCoordinatesGetter(event, args) {
+function customCoordinatesGetter(event, args) {
   const {currentCoordinates} = args;
   const delta = 50;
   
