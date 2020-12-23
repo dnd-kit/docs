@@ -71,5 +71,5 @@ This isn't to say that you can't shift the position of the items in the DOM whil
 
 #### Synthetic events
 
-**dnd kit** also uses [SyntheticEvent listeners](https://reactjs.org/docs/events.html) for the activator events of all sensors, which leads to improved performance over manually adding event listeners to each individual draggable node.
+Sensors use [SyntheticEvent listeners](https://reactjs.org/docs/events.html) for the activator events of all sensors, which leads to improved performance over manually adding event listeners to each individual draggable node.
 

@@ -220,6 +220,10 @@ function App() {
 }
 ```
 
+To learn more about sensors, read the detailed documentation on sensors:
+
+{% page-ref page="../../api-documentation/sensors/" %}
+
 ### Sorting strategies
 
 The supported use cases of the Sortable preset include vertical lists, horizontal lists, grids, and virtualized lists. Because of the wide variety of use cases supported, it would be difficult to write a single strategy to cover all of these different use cases. Instead, the sortable preset exposes a number of different strategies you can use, that are tailored to these various use cases:
@@ -264,6 +268,8 @@ function App() {
 
 First, let's go ahead and render all of our sortable items:
 
+{% tabs %}
+{% tab title="App.jsx" %}
 ```jsx
 import {
   closestCenter,
@@ -271,7 +277,7 @@ import {
   useSortableSensors,
 } from '@dnd-kit/sortable';
 
-// See implementation above in `useSortable` section
+
 import {SortableItem} from './SortableItem.jsx';
 
 function App() {
@@ -287,6 +293,36 @@ function App() {
   );
 }
 ```
+{% endtab %}
+
+{% tab title="Sortable.jsx" %}
+```jsx
+import {useSortable} from '@dnd-kit/sortable';
+import {CSS} from '@dnd-kit/utilities';
+
+function SortableItem(props) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({id: props.id});
+  
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+  
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {/* ... */}
+    </div>
+  );
+}
+```
+{% endtab %}
+{% endtabs %}
 
 In this example, we'll be building a vertical sortable list, so we will be using the `verticalListSortingStrategy`. Make sure to pass the strategy both to `SortableContext` and to `useSortableSensors`:
 
