@@ -53,7 +53,7 @@ For additional details on the [`listeners`](../../api-documentation/draggable/#l
 
 ### Attributes
 
-**dnd kit** provides a set of sensible default attributes for draggable items. We recommend you attach these to your draggable elements, though nothing will break if you don't. 
+The `useSortable` hook provides a set of sensible default attributes for draggable items. We recommend you attach these to your draggable elements, though nothing will break if you don't. 
 
 For additional details on the [`attributes`](../../api-documentation/draggable/#attributes) property, refer to the [`useDraggable`](../../api-documentation/draggable/) documentation.
 

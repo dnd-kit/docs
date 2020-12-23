@@ -1,5 +1,7 @@
 # useDroppable
 
+![](../../.gitbook/assets/droppable-1-.png)
+
 ## Hook API
 
 ### Arguments
@@ -12,9 +14,21 @@ interface UseDroppableArguments {
 }
 ```
 
-Set the `disabled` argument to `true` if you'd like to temporarily disable a `droppable` 
+#### Identifier
 
-The `data` argument is for advanced use-cases where you may need access to additional data about the droppable element in custom sensors or presets. For example, if you were building a sortable preset, you could use the `data` attribute to store the index of the droppable element within a sortable list.  
+The `id` argument is a string that should be a unique identifier, meaning there should be no other **droppable** elements that share that same identifier within a given [`DndContext`](../context-provider/) provider.
+
+If you're building a component that uses both the `useDroppable` and `useDraggable` hooks, they can both share the same identifier since droppable elements are stored in a different key-value store than draggable elements.
+
+#### Disabled
+
+Since hooks cannot be conditionally invoked, use the `disabled` argument and set it to `true` if you need to temporarily disable a `droppable` area.
+
+#### Data
+
+The `data` argument is for advanced use-cases where you may need access to additional data about the droppable element in custom sensors, presets or collision detection algorithm. 
+
+For example, if you were building a sortable preset, you could use the `data` attribute to store the index of the droppable element within a sortable list to access it within a custom sensor.
 
 ```jsx
   const {setNodeRef} = useDroppable<Data>({
@@ -29,13 +43,27 @@ The `data` argument is for advanced use-cases where you may need access to addit
 
 ```typescript
 {
-  clientRect: ClientRect;
+  rect: React.MutableRefObject<LayoutRect | null>;
   isOver: boolean;
   node: React.RefObject<HTMLElement>;
   over: {id: UniqueIdentifier} | null;
   setNodeRef(element: HTMLElement | null): void;
 }
 ```
+
+#### Node
+
+**`setNodeRef`**
+
+
+
+**`node`**
+
+A [ref](https://reactjs.org/docs/refs-and-the-dom.html) to the current node that is passed to `setNodeRef`
+
+**`rect`**
+
+
 
 #### Over
 
@@ -47,7 +75,5 @@ Use the `isOver` boolean returned by the `useDroppable` hook to change the appea
 
 If you'd like to change the appearance of the droppable in response to a draggable being dragged over a different droppable container, check whether the `over` value is defined. Depending on your use-case, you can also read the `id` of the other droppable that the draggable item to make changes to the render output of your droppable component.
 
-#### Node
-
-A [ref](https://reactjs.org/docs/refs-and-the-dom.html) to the current node that is passed to `setNodeRef`
+#### 
 

@@ -6,7 +6,9 @@ Use the `useDroppable` hook to set up DOM nodes as droppable targets that dragga
 
 ## Usage
 
-**dnd kit** isn't opinionated about how you should structure your app. At minimum though, you need to pass the `setNodeRef` function that is returned by the `useDroppable` hook to a DOM element so that **dnd kit** can access the underlying DOM node and keep track of it to detect collisions and intersections with other draggable elements. 
+The `useDroppable` hook isn't opinionated about how you should structure your application. 
+
+At minimum though, you need to pass the `setNodeRef` function that is returned by the `useDroppable` hook to a DOM element so that it can register the underlying DOM node and keep track of it to detect collisions and intersections with other draggable elements. 
 
 {% hint style="info" %}
  If the concept of `ref` is new to you, we recommend you first check out the [Refs and the DOM article](https://reactjs.org/docs/refs-and-the-dom.html#adding-a-ref-to-a-dom-element) on the React documentation website.
@@ -85,5 +87,7 @@ function MultipleDroppables() {
 }
 ```
 
+For more details usage of the `useDroppable` hook, refer to the API documentation section:
 
+{% page-ref page="usedroppable.md" %}
 
