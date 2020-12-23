@@ -1,14 +1,14 @@
 # DndContext
 
-In order for your your [Droppable](../droppable/) and [Draggable](../draggable/) components to interact with each other, you'll need to make sure that the part of your React tree that uses them is nested within  a parent `<DndContext>` component, which makes use of the [React Context API](https://reactjs.org/docs/context.html) to share data between draggable and droppable components and hooks.
-
-> React context provides a way to pass data through the component tree without having to pass props down manually at every level.
-
 ## Application structure
 
 ### Context provider
 
-Your components that use `useDraggable`, `useDroppable` or `DraggableClone` will need to be nested within a `DndContext` provider.
+In order for your your [Droppable](../droppable/) and [Draggable](../draggable/) components to interact with each other, you'll need to make sure that the part of your React tree that uses them is nested within  a parent `<DndContext>` component, which makes use of the [React Context API](https://reactjs.org/docs/context.html) to share data between draggable and droppable components and hooks.
+
+> React context provides a way to pass data through the component tree without having to pass props down manually at every level.
+
+Therefore, components that use `useDraggable`, `useDroppable` or `DraggableClone` will need to be nested within a `DndContext` provider.
 
  They don't need to be direct descendants, but, there does need to be a parent `<DndContext>` provider somewhere higher up in the tree.
 
@@ -177,6 +177,16 @@ To learn more, read the collision detection guide:
 {% page-ref page="collision-detection-algorithms.md" %}
 
 ### Sensors
+
+Sensors are an abstraction to detect different input methods in order to initiate drag operations, respond to movement and end or cancel the operation. 
+
+The default sensors used by `DndContext` are the [Pointer](../sensors/pointer.md) and [Keyboard](../sensors/keyboard.md) sensors.
+
+To learn how to customize sensors or how to pass different sensors to `DndContext`, read the Sensors guide:
+
+{% page-ref page="../sensors/" %}
+
+
 
 
 
