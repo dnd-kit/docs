@@ -98,9 +98,11 @@ This event contains information about the active draggable `id` along with infor
 If there are no [collisions detected](collision-detection-algorithms.md) when the draggable item is dropped, the `over` property will be `null`. If a collision is detected, the `over` property will contain the `id` of the droppable over which it was dropped.
 
 {% hint style="info" %}
-It's important to understand that the `onDragEnd` event does not move [draggable](../draggable/) items for you into [droppable](../droppable/) containers. It simply provides information about which draggable item was dropped and whether it was dropped over a droppable container.
+It's important to understand that the `onDragEnd` event **does not move** [**draggable**](../draggable/) **items into** [**droppable**](../droppable/) **containers.** 
 
-It is left up to the consumer's discretion as to what to do with that information and how to react to it.
+Rather, it provides **information** about which draggable item was dropped and whether it was over a droppable container when it was dropped.
+
+It is up to the **consumer** of `DndContext` to decide what to do with that information and how to react to it, for example, by updating \(or not\) its internal state in response to the event so that the items are declaratively rendered in a different parent droppable.
 {% endhint %}
 
 #### `onDragCancel`
