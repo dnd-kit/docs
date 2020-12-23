@@ -226,6 +226,9 @@ Here's a slightly more complex example that contains multiple **Droppable** cont
 import React from 'react';
 import {DndContext} from '@dnd-kit/core';
 
+import {Droppable} from './Droppable';
+import {Draggable} from './Draggable';
+
 function App() {
   const containers = ['A', 'B', 'C'];
   const [parent, setParent] = useState(null);
