@@ -5,7 +5,7 @@ For advanced use-cases, for example, if you're building your own presets on top 
 ```jsx
 import {useDndContext} from '@dnd-kit/core`;
 
-function MyCustomPreset() {
+function CustomPreset() {
   const dndContext = useDndContext();
 }
 ```
