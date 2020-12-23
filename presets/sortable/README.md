@@ -48,7 +48,7 @@ If you paid close attention to the illustration above, you may also have noticed
 
 In addition to the [drag and drop context provider](../../guides/getting-started.md#context-provider),  the Sortable preset requires its own context provider that contains the **sorted** array of the unique identifiers associated to each sortable item:
 
-```javascript
+```jsx
 import React, {useState} from 'react';
 import {DndContext} from '@dnd-kit/core';
 import {SortableContext} from '@dnd-kit/sortable';
@@ -70,7 +70,7 @@ The `SortableContext` provides information via context that is consumed by the `
 
 It does not expose any callback props. To know when a sortable \(draggable\) item is being picked or moved over another sortable \(droppable\) item, use the callback props of `DndContext`:
 
-```javascript
+```jsx
 import React, {useState} from 'react';
 import {DndContext} from '@dnd-kit/core';
 import {SortableContext} from '@dnd-kit/sortable';
@@ -79,12 +79,14 @@ function App() {
   const [items] = useState(['1', '2', '3']);
 
   return (
-    <DndContext onDragStart={} onDragOver={} onDragEnd={}>
+    <DndContext onDragEnd={handleDragEnd}>
       <SortableContext items={items}>
         {/* ... */}
       </SortableContext>
     </DndContext>
   );
+  
+  function handleDragEnd() {}
 }
 ```
 
@@ -106,7 +108,7 @@ If you're already familiar with the [`useDraggable`](../../api-documentation/dra
 
 In addition to the `attributes`, `listeners`,`transform`  and `setNodeRef` arguments, which you should already be familiar with if you've used the `useDraggable` hook before, you'll notice that the `useSortable` hook also provides a `transition` argument.
 
-```javascript
+```jsx
 // SortableItem.jsx
 
 import {useSortable} from '@dnd-kit/sortable';
@@ -187,7 +189,7 @@ useSortableSensors({
 
 If you'd like to configure the Pointer sensor, or use the Mouse and Touch sensors instead, initialize those sensors separately with the options you'd like to use and pass those as the second argument to `useSortableSensors`:
 
-```javascript
+```jsx
 import {MouseSensor, TouchSensor, useSensor} from '@dnd-kit/core';
 import {SortableContext, useSortableSensors} from '@dnd-kit/sortable';
 
@@ -237,7 +239,7 @@ For sortable lists, we recommend using a more forgiving collision detection stra
 
 In this example, we'll be using the closest center algorithm:
 
-```javascript
+```jsx
 import {
   closestCenter,
   SortableContext, 
@@ -262,8 +264,9 @@ function App() {
 
 First, let's go ahead and render all of our sortable items:
 
-```javascript
+```jsx
 import {
+  closestCenter,
   SortableContext,
   useSortableSensors,
 } from '@dnd-kit/sortable';
@@ -276,7 +279,7 @@ function App() {
   const sensors = useSortableSensors();
 
   return (
-    <DndContext sensors={sensors}>
+    <DndContext sensors={sensors} collisionDetection={closestCenter}>
       <SortableContext items={items}>
         {items.map(id => <SortableItem key={id} id={id} />)}
       </SortableContext>
@@ -287,8 +290,9 @@ function App() {
 
 In this example, we'll be building a vertical sortable list, so we will be using the `verticalListSortingStrategy`. Make sure to pass the strategy both to `SortableContext` and to `useSortableSensors`:
 
-```javascript
+```jsx
 import {
+  closestCenter,
   SortableContext,
   useSortableSensors,
   verticalListSortingStrategy,
@@ -303,8 +307,11 @@ function App() {
   });
 
   return (
-    <DndContext sensors={sensors}>
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
+    <DndContext sensors={sensors} collisionDetection={closestCenter}>
+      <SortableContext 
+        items={items}
+        strategy={verticalListSortingStrategy}
+      >
         {items.map(id => <SortableItem key={id} id={id} />)}
       </SortableContext>
     </DndContext>
@@ -312,75 +319,52 @@ function App() {
 }
 ```
 
-Finally, we'll need to set up the event handlers on the `DndContext` component in order to update the order of the items on drag end.
+Finally, we'll need to set up event handlers on the `DndContext` provider in order to update the order of the items on drag end.
 
 ```jsx
 import {
   arrayMove,
-  SortableContainer,
+  closestCenter,
+  SortableContext,
   useSortableSensors,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import {closestRect, DndContext, restrictToWindowEdges} from '@dnd-kit/core';
-import {restrictToVerticalAxis} from '@dnd-kit/modifiers';
-import React, {useState} from 'react';
 
-const VerticalSortableList = () => {
-  const [items, setItems] = useState(['item #1', 'item #2', 'item #3']);
+import {SortableItem} from './SortableItem.jsx';
 
-  // We store which item is currentrly being dragged
-  const [activeId, setActiveId] = useState(null);
-
-  const sensors = useSortableSensors({strategy: verticalListSortingStrategy});
-
-  // We constraint the item movement to be only vertical and inside
-  const translateModifiers = [restrictToVerticalAxis, restrictToWindowEdges];
-
-  const handleDragStart = ({active}) => {
-    if (!active) {
-      return;
-    }
-
-    // We set the active id in our state
-    setActiveId(active.id);
-  };
-
-  const getIndex = items.indexOf.bind(items);
-  const activeIndex = activeId ? getIndex(activeId) : -1;
-
-  const handleDragEnd = ({over}) => {
-    // When the drag is over, we look for the active item new position
-    // and move it accordingly
-    if (over) {
-      const overIndex = getIndex(over.id);
-      if (activeIndex !== overIndex) {
-        setItems((items) => arrayMove(items, activeIndex, overIndex));
-      }
-    }
-
-    // Reset the state
-    setActiveId(null);
-  };
+function App() {
+  const [items, setItems] = useState(['1', '2', '3']);
+  const sensors = useSortableSensors({
+    strategy: verticalListSortingStrategy,
+  });
 
   return (
-    <DndContext
+    <DndContext 
       sensors={sensors}
-      collisionDetection={closestRect}
-      onDragStart={handleDragStart}
+      collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
-      onDragCancel={() => setActiveId(null)}
-      translateModifiers={translateModifiers}
     >
-      <SortableContainer id="container" items={items}>
-        {/* Sortable list */}
-      </SortableContainer>
+      <SortableContext 
+        items={items}
+        strategy={verticalListSortingStrategy}
+      >
+        {items.map(id => <SortableItem key={id} id={id} />)}
+      </SortableContext>
     </DndContext>
   );
-};
-
-export default VerticalSortableList;
-
+  
+  function handleDragEnd(event) {
+    const {active, over} = event;
+    
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+        
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  }
+}
 ```
-
-
 
