@@ -6,6 +6,12 @@ In order for your your [Droppable](../droppable/) and [Draggable](../draggable/)
 
 ## Application structure
 
+### Context provider
+
+Your components that use `useDraggable`, `useDroppable` or `DraggableClone` will need to be nested within a `DndContext` provider.
+
+ They don't need to be direct descendants, but, there does need to be a parent `<DndContext>` provider somewhere higher up in the tree.
+
 ```jsx
 import React from 'react';
 import {DndContext} from '@dnd-kit/core';
@@ -13,29 +19,45 @@ import {DndContext} from '@dnd-kit/core';
 function App() {
   return (
     <DndContext>
-      /* Your components that use `useDraggable`,
-       * `useDroppable` or `DraggableClone` will need
-       * to be nested within here.
-       *
-       * They don't need to be direct descendants, but
-       * there does need to be a parent <DndContext>
-       * somewhere higher up in the tree.
-       * 
-       * You can also nest <DndContext> providers within
-       * other <DndContext> to achieve nested draggable
-       * UIs that are independent of one another.
-       */
+      {/* Components that use `useDraggable`, `useDroppable` */}
     </DndContext>
   );
 }
 ```
 
+### Nesting
+
+You may also nest `<DndContext>` providers within other `<DndContext>` providers to achieve nested draggable/droppable interfaces that are independent of one another.
+
+```jsx
+import React from 'react';
+import {DndContext} from '@dnd-kit/core';
+
+function App() {
+  return (
+    <DndContext>
+      {/* Components that use `useDraggable`, `useDroppable` */}
+      <DndContext>
+        {/* ... */}
+        <DndContext>
+          {/* ... */}
+        </DndContext>
+      </DndContext>
+    </DndContext>
+  );
+}
+```
+
+When nesting `DndContext` providers, keep in mind that the `useDroppable` and `useDraggable` hooks will only have access to the other draggable and droppable nodes within that context.
+
+If multiple `DndContext` providers are listening for the same event, events will be captured by the first `DndContext` that contains a [Sensor](../sensors/) that is activated by that event, similar to how [events bubble in the DOM](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture).
+
 ## Props
 
 ```typescript
 interface Props {
-  autoScroll?: boolean;
   announcements?: Announcements;
+  autoScroll?: boolean;
   children?: React.ReactNode;
   collisionDetection?: CollisionDetection;
   screenReaderInstructions?: ScreenReaderInstructions;
@@ -49,17 +71,118 @@ interface Props {
 }
 ```
 
-## Events
+### Event handlers
 
-As you can see from the list of props above, there's a number of different events you can subscribe to and different customizations you can pass to `<DndContext>`.
+As you can see from the list of props above, there are a number of different events emitted by `<DndContext>` that you can listen to and decide how to handle.
 
-The main events you can subscribe to are:
+The main events you can listen to are:
 
-* `onDragStart`: Fires when a drag event that meets the [activation constraints]() for that [sensor ](../sensors/)happens.
-* `onDragMove`:  Fires anytime as the draggable item is moved. Depending on the activated sensor, this could for example be as mouse is moved or the keyboard movement keys are pressed.
-* `onDragOver`:  Fires anytime a draggable item is moved over a droppable container, along with the unique identifier of that droppable container.
-* `onDragEnd`:  Fires after a draggable item is dropped. This event 
-* `onDragCancel`: Fires if a drag operation is cancelled, for example, if the user presses `escape` while dragging a draggable.
+#### `onDragStart`
+
+Fires when a drag event that meets the [activation constraints](../sensors/#concepts) for that [sensor ](../sensors/)happens.
+
+#### `onDragMove`
+
+Fires anytime as the [draggable](../draggable/) item is moved. Depending on the activated [sensor](../sensors/#activators), this could for example be as the [Pointer](../sensors/pointer.md) is moved or the [Keyboard](../sensors/keyboard.md) movement keys are pressed.
+
+#### `onDragOver` 
+
+Fires when a [draggable](../draggable/) item is moved over a [droppable](../droppable/) container, along with the unique identifier of that droppable container.
+
+#### `onDragEnd` 
+
+Fires after a draggable item is dropped. 
+
+This event contains information about the active draggable `id` along with information on whether the draggable item was dropped `over`. 
+
+If there are no [collisions detected](collision-detection-algorithms.md) when the draggable item is dropped, the `over` property will be `null`. If a collision is detected, the `over` property will contain the `id` of the droppable over which it was dropped.
+
+{% hint style="info" %}
+It's important to understand that the `onDragEnd` event does not move [draggable](../draggable/) items for you into [droppable](../droppable/) containers. It simply provides information about which draggable item was dropped and whether it was dropped over a droppable container.
+
+It is left up to the consumer's discretion as to what to do with that information and how to react to it.
+{% endhint %}
+
+#### `onDragCancel`
+
+Fires if a drag operation is cancelled, for example, if the user presses `escape` while dragging a draggable item.
+
+### Accessibility
+
+For more details and best practices around accessibility of draggable and droppable components, read the accessibility section:
+
+{% page-ref page="../../guides/accessibility.md" %}
+
+#### Announcements
+
+Use the `announcements` prop to customize the screen reader announcements that are announced in the live region when draggable items are picked up, moved over droppable regions, and dropped.
+
+The default announcements are:
+
+```javascript
+const defaultAnnouncements = {
+  onDragStart(id) {
+    return `Picked up draggable item ${id}.`;
+  },
+  onDragOver(id, overId) {
+    if (overId) {
+      return `Draggable item ${id} was moved over droppable area ${overId}.`;
+    }
+
+    return `Draggable item ${id} is no longer over a droppable area.`;
+  },
+  onDragEnd(id, overId) {
+    if (overId) {
+      return `Draggable item was dropped over droppable area ${overId}`;
+    }
+
+    return `Draggable item ${id} was dropped.`;
+  },
+  onDragCancel(id) {
+    return `Dragging was cancelled. Draggable item ${id} was dropped.`;
+  },
+}
+```
+
+While these default announcements are sensible defaults that should cover most simple use cases, you know your application best, and we highly recommend that you customize these to provide a screen reader experience that is more tailored to the use case you are building.
+
+#### Screen reader instructions
+
+Use the `screenReaderInstructions` prop to customize the instructions that are read to screen readers when the focus is moved 
+
+### Autoscroll
+
+Use the optional `autoScroll` boolean prop to temporarily or permanently disable auto-scrolling for all sensors used within this `DndContext`.
+
+Auto-scrolling may also be disabled on an individual sensor basis using the static property `autoScrollEnabled` of the sensor. For example, the [Keyboard sensor](../sensors/keyboard.md) manages scrolling internally, and therefore has the static property `autoScrollEnabled` set to `false`.
+
+### Collision detection
+
+Use the `collisionDetection` prop to customize the collision detection algorithm used to detect collisions between draggable nodes and droppable areas within the`DndContext` provider. 
+
+The default collision detection algorithm is the [rectangle intersection](collision-detection-algorithms.md#rectangle-intersection) algorithm.
+
+The built-in collision detection algorithms are:
+
+* [Rectangle intersection](collision-detection-algorithms.md#rectangle-intersection)
+* [Closest center](collision-detection-algorithms.md#closest-center)
+* [Closest corners](collision-detection-algorithms.md#closest-corners)
+
+You may also build custom collision detection algorithms or compose existing ones.
+
+To learn more, read the collision detection guide:
+
+{% page-ref page="collision-detection-algorithms.md" %}
+
+### Sensors
+
+
+
+### 
+
+
+
+### 
 
 
 
