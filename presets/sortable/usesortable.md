@@ -45,15 +45,23 @@ function SortableItem(props) {
 
 ### Listeners
 
+The `listeners` property contains the a[ctivator event handlers](../../api-documentation/sensors/#activators) for each [Sensor](../../api-documentation/sensors/) that is defined on the parent [`DndContext`](../../api-documentation/context-provider/#props) provider. 
+
+It should be attached to the node\(s\) that you wish to use as the activator to begin a sort event. In most cases, that will be the same node as the one passed to `setNodeRef`, though not necessarily. For instance, when implementing a sortable element with a "drag handle", the ref should be attached to the parent node that should be sortable, but the listeners can be attached to the handle node instead.
+
 For additional details on the [`listeners`](../../api-documentation/draggable/#listeners) property, refer to the [`useDraggable`](../../api-documentation/draggable/) documentation.
 
 ### Attributes
+
+**dnd kit** provides a set of sensible default attributes for draggable items. We recommend you attach these to your draggable elements, though nothing will break if you don't. 
 
 For additional details on the [`attributes`](../../api-documentation/draggable/#attributes) property, refer to the [`useDraggable`](../../api-documentation/draggable/) documentation.
 
 ### Transform
 
+The `transform` property 
 
+For additional details on the [`transform`](../../api-documentation/draggable/#transforms) property, refer to the [`useDraggable`](../../api-documentation/draggable/) documentation.
 
 ### Node ref
 
