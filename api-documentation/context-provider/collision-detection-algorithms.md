@@ -9,7 +9,7 @@ The built-in collision detection algorithms assume a rectangular bounding box.
 > The bounding box of an element is the smallest possible rectangle \(aligned with the axes of that element's user coordinate system\) that entirely encloses it and its descendants.  
 > – Source: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/bounding_box)
 
-This means that even if the draggable or droppable nodes are round or triangular, their bounding boxes will still be rectangular:
+This means that even if the draggable or droppable nodes look round or triangular, their bounding boxes will still be rectangular:
 
 ![](../../.gitbook/assets/axis-aligned-rectangle.png)
 
