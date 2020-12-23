@@ -108,9 +108,10 @@ If you're already familiar with the [`useDraggable`](../../api-documentation/dra
 
 In addition to the `attributes`, `listeners`,`transform`  and `setNodeRef` arguments, which you should already be familiar with if you've used the `useDraggable` hook before, you'll notice that the `useSortable` hook also provides a `transition` argument.
 
+{% tabs %}
+{% tab title="SortableItem.jsx" %}
 ```jsx
-// SortableItem.jsx
-
+import React from 'react';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 
@@ -135,6 +136,8 @@ function SortableItem(props) {
   );
 }
 ```
+{% endtab %}
+{% endtabs %}
 
 The default transition is `250` milliseconds, with an easing function set to `ease`, but you can customize this and pass any valid [CSS transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function), or set the transition argument to `null` to disable transitions entirely:
 
