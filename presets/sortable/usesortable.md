@@ -41,6 +41,26 @@ function SortableItem(props) {
 }
 ```
 
+## Properties
+
+### Listeners
+
+For additional details on the [`listeners`](../../api-documentation/draggable/#listeners) property, refer to the [`useDraggable`](../../api-documentation/draggable/) documentation.
+
+### Attributes
+
+For additional details on the [`attributes`](../../api-documentation/draggable/#attributes) property, refer to the [`useDraggable`](../../api-documentation/draggable/) documentation.
+
+### Transform
+
+
+
+### Node ref
+
+For additional details on the `setNodeRef` property, refer to the [`useDraggable`](../../api-documentation/draggable/) documentation.
+
+### Transition
+
 ## Arguments
 
 ### Identifier
