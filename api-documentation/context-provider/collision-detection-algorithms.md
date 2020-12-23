@@ -9,9 +9,9 @@ The built-in collision detection algorithms assume a rectangular bounding box.
 > The bounding box of an element is the smallest possible rectangle \(aligned with the axes of that element's user coordinate system\) that entirely encloses it and its descendants.  
 > – Source: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/bounding_box)
 
-This means that if the draggable or droppable nodes are round or triangular, their bounding boxes will still be rectangular:
+This means that even if the draggable or droppable nodes are round or triangular, their bounding boxes will still be rectangular:
 
-
+![](../../.gitbook/assets/axis-aligned-rectangle.png)
 
 If you'd like to use other shapes than rectangles for detecting collisions, build your own [custom collision detection strategy](collision-detection-algorithms.md#custom-collision-detection-strategies).
 
@@ -92,5 +92,69 @@ function customCollisionDetectionStrategy(rects, rect) {
 };
 ```
 
+### Building custom collision detection algorithms
 
+For advanced use cases or to detect collision between non-rectangular or non-axis aligned shapes, you'll want to build your own collision detection algorithms.
+
+Here's an example to [detect collisions between circles](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection#Circle_Collision) instead of rectangles:
+
+```javascript
+function getMaxValueIndex(
+  array: number[],
+  comparator: (value: number, tracked: number) => boolean
+) {
+  if (array.length === 0) {
+    return -1;
+  }
+
+  let tracked = array[0];
+  let index = 0;
+
+  for (var i = 1; i < array.length; i++) {
+    const value = array[i];
+    
+    if (value > tracked) {
+      index = i;
+      tracked = value;
+    }
+  }
+
+  return index;
+}
+
+function getCircleIntersection(entry, target) {
+  // Abstracted the logic to calculate the radius for simplicity
+  var circle1 = {radius: 20, x: entry.offsetLeft, y: entry.offsetTop};
+  var circle2 = {radius: 12, x: target.offsetLeft, y: target.offsetTop};
+
+  var dx = circle1.x - circle2.x;
+  var dy = circle1.y - circle2.y;
+  var distance = Math.sqrt(dx * dx + dy * dy);
+
+  if (distance < circle1.radius + circle2.radius) {
+    return distance;
+  }
+
+  return 0;
+}
+
+/**
+ * Returns the circle that has the greatest intersection area
+ */
+function circleIntersection(entries, target) => {
+  const intersections = entries.map(([_, entry]) =>
+    getCircleIntersection(entry, target)
+  );
+
+  const maxValueIndex = getMaxValueIndex(intersections);
+
+  if (intersections[maxValueIndex] <= 0) {
+    return null;
+  }
+
+  return entries[maxValueIndex] ? entries[maxValueIndex][0] : null;
+};
+```
+
+To learn more, refer to the implementation of the built-in collision detection algorithms.
 
