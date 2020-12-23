@@ -16,15 +16,19 @@ description: >-
 * **Performance:** It was built with performance and silky smooth animations in mind.
 * **Presets:** Need to build a sortable interface? Check out `@dnd-kit/sortable`, which is a thin layer built on top of `@dnd-kit/core`. Preset for multiple container sortable lists \(Kanban\) coming soon.
 
+![](.gitbook/assets/robot-illustration-concepts.svg)
+
 ### Powerfully simple
 
 **dnd kit** is powerful and packed with features, and built with the hope of being the last drag and drop library you'll ever need, whether you're building a simple draggable element or a complex application built around drag and drop interactions .
 
  At its core, **dnd kit** exposes two main concepts: [Draggable](api-documentation/draggable/) items and [Droppable](api-documentation/droppable/) containers. Augment your existing components using the `useDraggable` and `useDroppable` hooks, or combine both to create components that can both be dragged and dropped over.
 
-Manage events and customize the behaviour of your application using the [`<DndContext>`](api-documentation/context-provider/)  provider. Check out our [quick start guide](guides/getting-started.md) to learn how get started with **dnd kit**.
+Manage events and customize the behaviour of your application using the [`<DndContext>`](api-documentation/context-provider/)  provider. 
 
-![](.gitbook/assets/robot-illustration-concepts.svg)
+Check out our quick start guide to learn how get started with **dnd kit:**
+
+{% page-ref page="guides/getting-started.md" %}
 
 ### Extensibility
 
@@ -36,8 +40,7 @@ The primary extension points of **dnd kit** are:
 
 * [Sensors](api-documentation/sensors/)
 * [Modifiers](api-documentation/modifiers.md)
-* [Constraints]()
-* Custom collision detection algorithms
+* [Custom collision detection algorithms](api-documentation/context-provider/collision-detection-algorithms.md#custom-collision-detection-strategies)
 
 ### Accessibility
 
