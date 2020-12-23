@@ -16,11 +16,12 @@ npm install @dnd-kit/sortable
 
 ## Overview
 
-The sortable preset builds on top of the primitives exposed by `@dnd-kit/core` to help building sortable interfaces. The sortable preset exposes two main concepts: [~~`SortableContext`~~](./#sortable-context), and the [`useSortable`](./#usesortable) hook. 
+The sortable preset builds on top of the primitives exposed by `@dnd-kit/core` to help building sortable interfaces. 
 
-The `SortableContext` provides information via context that is consumed by the `useSortable` hook.
+The sortable preset exposes two main concepts: [~~`SortableContext`~~](./#sortable-context), and the [`useSortable`](./#usesortable) hook:
 
-The `useSortable` hook is an abstraction that composes the [`useDroppable`](../../api-documentation/droppable.md) and [`useDraggable`](../../api-documentation/draggable/) hooks:
+* The `SortableContext` provides information via context that is consumed by the `useSortable` hook.
+* The `useSortable` hook is an abstraction that composes the [`useDroppable`](../../api-documentation/droppable.md) and [`useDraggable`](../../api-documentation/draggable/) hooks:
 
 ![](../../.gitbook/assets/usesortable-1-.png)
 
