@@ -214,7 +214,7 @@ export function Draggable(props) {
 {% endtab %}
 {% endtabs %}
 
-That's it! You've set up your first [**Droppable**](../api-documentation/droppable.md) ****and [**Draggable**](../api-documentation/draggable/) components.
+That's it! You've set up your first [**Droppable**](../api-documentation/droppable/) ****and [**Draggable**](../api-documentation/draggable/) components.
 
 ### Pushing things a bit further
 

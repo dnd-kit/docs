@@ -1,6 +1,6 @@
 # useSortable
 
-The `useSortable` hook is an abstraction that composes the [`useDroppable`](../../api-documentation/droppable.md) and [`useDraggable`](../../api-documentation/draggable/) hooks. 
+The `useSortable` hook is an abstraction that composes the [`useDroppable`](../../api-documentation/droppable/) and [`useDraggable`](../../api-documentation/draggable/) hooks. 
 
 ![](../../.gitbook/assets/usesortable-3-.png)
 

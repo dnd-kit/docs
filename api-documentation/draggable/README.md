@@ -2,7 +2,7 @@
 
 ![](../../.gitbook/assets/draggable-large.svg)
 
-Use the `useDraggable` hook turn DOM nodes into draggable sources that can be moved and dropped over [Droppable](../droppable.md) containers.
+Use the `useDraggable` hook turn DOM nodes into draggable sources that can be moved and dropped over [Droppable](../droppable/) containers.
 
 **dnd kit** isn't opinionated about how you should structure your app. At minimum though, you need to pass the `setNodeRef` function that is returned by the `useDraggable` hook to a DOM element so that **dnd kit** can access the underlying DOM node and keep track of it to detect collisions and intersections with other droppable elements. 
 
@@ -34,7 +34,7 @@ function Draggable() {
 
 ### Listeners
 
-If you've been paying close attention, you'll notice that unlike the [`useDroppable`](../droppable.md) hook,  the `useDraggable` hook also requires that you attach `listeners` to the DOM node that you would like to make draggable. 
+If you've been paying close attention, you'll notice that unlike the [`useDroppable`](../droppable/) hook,  the `useDraggable` hook also requires that you attach `listeners` to the DOM node that you would like to make draggable. 
 
 While we could have attached these listeners manually to the node  provided to `setNodeRef`, there are actually a number of key advantages to forcing the consumer to manually attach the listeners.
 
@@ -170,7 +170,7 @@ We hope this has given you a taste of what Draggable clones are used for. There'
 
 ### Attributes
 
-**dnd kit** provides a set of sensible default attributes for draggable items. We recommend you attach these to your draggable elements, though nothing will break if you don't. You can also manually attach the attributes that you think make sense in the context of your application.
+The `useSortable` hook ****provides a set of sensible default attributes for draggable items. We recommend you attach these to your draggable elements, though nothing will break if you don't. You can also manually attach the attributes that you think make sense in the context of your application.
 
 | Attribute | Default value | Description |
 | :--- | :--- | :--- |
@@ -178,44 +178,5 @@ We hope this has given you a taste of what Draggable clones are used for. There'
 | `aria-roledescription` | `"draggable"` | While `draggable` is a sensible default, we recommend you customize this value to something that is  |
 | `aria-describedby` | `"DndContext-[uniqueId]"` | Each draggable item is provided a unique `aria-describedby` ID that points to the voiceover instructions to be read out when a draggable item receives focus. |
 
-## Hook API – `useDraggable`
 
-### Arguments
-
-```typescript
-interface UseDraggableArguments {
-  id: string;
-  disabled?: boolean;
-  ariaRoleDescription?: string;
-}
-```
-
-Set the `disabled` argument to `true` if you'd like to temporarily disable a `draggable` element.
-
-The `ariaRoleDescription` argument can be used to tailor the screen reader experience to your application. For example, if you're building a sortable list of products you'd want to set the `ariaRoleDescription` value to something along the lines of `"sortable product"`.
-
-### Return value
-
-```typescript
-{
-  active: {
-    id: UniqueIdentifier;
-    node: React.MutableRefObject<HTMLElement>;
-  } | null;
-  activeRect: PositionalClientRect | null;
-  attributes: {
-    role: string;
-    'aria-pressed': boolean;
-    'aria-roledescription': string;
-    'aria-describedby': string;
-  },
-  clientRects: PositionalClientRectMap;
-  isDragging: boolean;
-  listeners: Record<SyntheticListenerName, Function> | undefined;
-  node: React.MutableRefObject<HTMLElement | null>;
-  over: {id: UniqueIdentifier} | null;
-  setNodeRef(HTMLElement | null): void;
-  transform: {x: number, y: number, scaleX: number, scaleY: number} | null;
-}
-```
 

@@ -21,7 +21,7 @@ The sortable preset builds on top of the primitives exposed by `@dnd-kit/core` t
 The sortable preset exposes two main concepts: [~~`SortableContext`~~](./#sortable-context), and the [`useSortable`](./#usesortable) hook:
 
 * The `SortableContext` provides information via context that is consumed by the `useSortable` hook.
-* The `useSortable` hook is an abstraction that composes the [`useDroppable`](../../api-documentation/droppable.md) and [`useDraggable`](../../api-documentation/draggable/) hooks:
+* The `useSortable` hook is an abstraction that composes the [`useDroppable`](../../api-documentation/droppable/) and [`useDraggable`](../../api-documentation/draggable/) hooks:
 
 ![](../../.gitbook/assets/usesortable-1-.png)
 
@@ -97,7 +97,7 @@ In order for the `SortableContext` component to function properly, make sure it 
 
 ### useSortable
 
-As outlined above, the `useSortable` hook combines both the [`useDraggable`](../../api-documentation/draggable/) and [`useDroppable`](../../api-documentation/droppable.md) hooks to connect elements as both draggable sources and drop targets:
+As outlined above, the `useSortable` hook combines both the [`useDraggable`](../../api-documentation/draggable/) and [`useDroppable`](../../api-documentation/droppable/) hooks to connect elements as both draggable sources and drop targets:
 
 ![](../../.gitbook/assets/usesortable-3-.png)
 
