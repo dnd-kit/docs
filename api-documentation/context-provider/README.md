@@ -61,31 +61,5 @@ The main events you can subscribe to are:
 * `onDragEnd`:  Fires after a draggable item is dropped. This event 
 * `onDragCancel`: Fires if a drag operation is cancelled, for example, if the user presses `escape` while dragging a draggable.
 
-## Collision detection algorithms
 
-### Rectangle intersection
-
-By default, `DndContext` uses the rectangle intersection collision detection strategy. This means that in order for a draggable item to be considered **over** a droppable area, there needs to be an intersection between both rectangles:
-
-![](../../.gitbook/assets/rect-intersection.png)
-
-### Closest center
-
-While the rectangle intersection strategy is well suited for most drag and drop use cases, it can be unforgiving, since it requires both the draggable and droppable bounding rectangles to come into direct contact and intersect.
-
-For some use cases, such as sortable lists, using a more forgiving collision detection strategy is recommended. 
-
-As its name suggests, the closest center strategy finds the droppable container who's center is closest to  the center of the bounding rectangle of the active draggable item.
-
-![](../../.gitbook/assets/closest-center-2-.png)
-
-### Closest corners
-
-Similarly to the closest center algorithm, the closest corner algorithm doesn't require the draggable and droppable rectangles to intersect.
-
-Rather, it measures the distance between all four corners of the active draggable item and the four corners of each droppable container to find the closest one. 
-
-The distance is measured from the top left corner of the draggable item to the top left corner of the droppable bounding rectangle, top right to top right, bottom left to bottom left, and bottom right to bottom right. 
-
-![](../../.gitbook/assets/closest-corners.png)
 

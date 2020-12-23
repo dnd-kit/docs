@@ -11,6 +11,7 @@
 ## API Documentation
 
 * [DndContext](api-documentation/context-provider/README.md)
+  * [Collision detection algorithms](api-documentation/context-provider/collision-detection-algorithms.md)
   * [useDndContext](api-documentation/context-provider/usedndcontext.md)
 * [Droppable](api-documentation/droppable.md)
 * [Draggable](api-documentation/draggable/README.md)

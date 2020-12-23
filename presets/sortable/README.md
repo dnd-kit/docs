@@ -35,13 +35,13 @@ At a high level, the application structure to implement a **sortable list with a
 
 To implement sortable list with items that can be dropped within **multiple containers**, the application structure is the same, but we add as many `SortableContexts` as we have containers:
 
-![](../../.gitbook/assets/sortable-multiple-containers.png)
+![](../../.gitbook/assets/sortable-multiple-containers-example.png)
 
 In this example, we would use the `onDragOver` callback of `DndContext` to detect when a draggable element is moved over a different container to insert it in that new container while dragging. 
 
 If you paid close attention to the illustration above, you may also have noticed that we added a droppable zone around each sortable context. This isn't required, but will likely be the behaviour most people want. If you move all sortable items from one column into the other, you will need a droppable zone for the empty column so that you may drag sortable items back into that empty column:
 
-![](../../.gitbook/assets/sortable-multiple-containers-empty-column.png)
+![](../../.gitbook/assets/sortable-multiple-containers-empty-column-1-.png)
 
 ## Concepts
 
@@ -241,9 +241,9 @@ Make sure to use the sorting strategy that is the most adapted to the use case y
 
 ### Collision detection algorithm
 
-The default collision detection algorithm of `DndContext` is the [rectangle intersection](../../api-documentation/context-provider/#rectangle-intersection) algorithm. While the rectangle intersection strategy is well suited for many use cases, it can be unforgiving, since it requires both the draggable and droppable bounding rectangles to come into direct contact and intersect.
+The default collision detection algorithm of `DndContext` is the [rectangle intersection](../../api-documentation/context-provider/collision-detection-algorithms.md#rectangle-intersection) algorithm. While the rectangle intersection strategy is well suited for many use cases, it can be unforgiving, since it requires both the draggable and droppable bounding rectangles to come into direct contact and intersect.
 
-For sortable lists, we recommend using a more forgiving collision detection strategy such as the [closest center](../../api-documentation/context-provider/#closest-center) or [closest corner](../../api-documentation/context-provider/#closest-corners) algorithms. 
+For sortable lists, we recommend using a more forgiving collision detection strategy such as the [closest center](../../api-documentation/context-provider/collision-detection-algorithms.md#closest-center) or [closest corners](../../api-documentation/context-provider/collision-detection-algorithms.md#closest-corners) algorithms. 
 
 In this example, we'll be using the closest center algorithm:
 
@@ -267,6 +267,10 @@ function App() {
   );
 }
 ```
+
+To learn more about collision detection algorithms and when to use one over the other, read our guide on collision detection algorithms:
+
+{% page-ref page="../../api-documentation/context-provider/collision-detection-algorithms.md" %}
 
 ## Connecting all the pieces
 
