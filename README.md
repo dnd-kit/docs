@@ -36,7 +36,7 @@ The primary extension points of **dnd kit** are:
 
 * [Sensors](api-documentation/sensors/)
 * [Modifiers](api-documentation/modifiers.md)
-* [Constraints](api-documentation/constraints.md)
+* [Constraints]()
 * Custom collision detection algorithms
 
 ### Accessibility

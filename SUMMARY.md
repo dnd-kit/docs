@@ -20,7 +20,6 @@
   * [Mouse](api-documentation/sensors/mouse.md)
   * [Touch](api-documentation/sensors/touch.md)
   * [Keyboard](api-documentation/sensors/keyboard.md)
-* [Constraints](api-documentation/constraints.md)
 * [Modifiers](api-documentation/modifiers.md)
 
 ## Presets

@@ -55,7 +55,7 @@ As you can see from the list of props above, there's a number of different event
 
 The main events you can subscribe to are:
 
-* `onDragStart`: Fires when a drag event that meets the [activation constraints](../constraints.md) for that [sensor ](../sensors/)happens.
+* `onDragStart`: Fires when a drag event that meets the [activation constraints]() for that [sensor ](../sensors/)happens.
 * `onDragMove`:  Fires anytime as the draggable item is moved. Depending on the activated sensor, this could for example be as mouse is moved or the keyboard movement keys are pressed.
 * `onDragOver`:  Fires anytime a draggable item is moved over a droppable container, along with the unique identifier of that droppable container.
 * `onDragEnd`:  Fires after a draggable item is dropped. This event 
