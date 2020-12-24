@@ -71,7 +71,7 @@ function Droppable(props) {
 
 ![](../.gitbook/assets/draggable-large.svg)
 
-Finally, let's take a look at implementing our first **Draggable** component. To do so, we'll be using the `useDraggable` hook.
+Next, let's take a look at implementing our first **Draggable** component. To do so, we'll be using the `useDraggable` hook.
 
 The `useDraggable` ****hook isn't opinionated about how your app should be structured. It does however require you to be able to attach listeners and a ref to the DOM element that you would like to become draggable. You'll also need to provide a unique `id` attribute to all your draggable components. 
 
