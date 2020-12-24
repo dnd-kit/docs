@@ -38,6 +38,10 @@ Always try to use the  DOM element that is most [semantic](https://developer.moz
 Check out our [Accessibility guide](../../guides/accessibility.md) to learn more about how you can help provide a better experience for screen readers.
 {% endhint %}
 
+### Identifier
+
+The `id` argument is a string that should be a unique identifier, meaning there should be no other **draggable** elements that share that same identifier within a given [`DndContext`](../context-provider/) provider.
+
 ### Listeners
 
 The `useDraggable` hook requires that you attach `listeners` to the DOM node that you would like to become the activator to start dragging. 
@@ -113,8 +117,6 @@ The `CSS` helper is entirely optional; it's a convenient helper for generating [
 CSS.Translate.toString(transform) ===
 `translate3d(${translate.x}, ${translate.y}, 0)`
 ```
-
-
 
 ### Attributes
 
