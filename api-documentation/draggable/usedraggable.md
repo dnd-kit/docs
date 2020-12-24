@@ -98,7 +98,62 @@ Internally, the `isActive` property just checks if the `active.id === id`.
 
 ### Listeners
 
+The `useDraggable` hook requires that you attach `listeners` to the DOM node that you would like to become the activator to start dragging. 
 
+While we could have attached these listeners manually to the node  provided to `setNodeRef`, there are actually a number of key advantages to forcing the consumer to manually attach the listeners.
+
+#### Flexibility
+
+While many drag and drop libraries need to expose the concept of "drag handles", creating a drag handle with the `useDraggable` hook is as simple as manually attaching the listeners to a different DOM element than the one that is set as the draggable source DOM node:
+
+```jsx
+import {useDraggable} from '@dnd-kit/core';
+
+
+function Draggable() {
+  const {attributes, listeners, setNodeRef} = useDraggable({
+    id: 'unique-id',
+  });
+  
+  return (
+    <div ref={setNodeRef}>
+      /* Some other content that does not activate dragging */
+      <button {...listeners} {...attributes}>Drag handle</button>
+    </div>
+  );
+}
+```
+
+{% hint style="info" %}
+When attaching the listeners to a different element than the node that is draggable, make sure you also attach the attributes to the same node that has the listeners attached so that it is still [accessible](../../guides/accessibility.md). 
+{% endhint %}
+
+You can even have multiple drag handles if that makes sense in the context of your application:
+
+```jsx
+import {useDraggable} from '@dnd-kit/core';
+
+
+function Draggable() {
+  const {attributes, listeners, setNodeRef} = useDraggable({
+    id: 'unique-id',
+  });
+  
+  return (
+    <div ref={setNodeRef}>
+      <button {...listeners} {...attributes}>Drag handle 1</button>
+      /* Some other content that does not activate dragging */
+      <button {...listeners} {...attributes}>Drag handle 2</button>
+    </div>
+  );
+}
+```
+
+#### Performance
+
+This strategy also means that we're able to use [React synthetic events](https://reactjs.org/docs/events.html), which ultimately leads to improved performance over manually attaching event listeners to each individual node.  
+  
+Why? Because rather than having to attach individual event listeners for each draggable DOM node, React attaches a single event listener for every type of event we listen to on the `document`. Once click on one of the draggable nodes happens, React's listener on the document dispatches a SyntheticEvent back to the original handler. 
 
 ### Node
 

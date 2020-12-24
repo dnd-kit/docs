@@ -50,7 +50,7 @@ While we could have attached these listeners manually to the node  provided to `
 
 #### Flexibility
 
-While many drag and drop libraries need to expose the concept of "drag handles", creating a drag handle with **dnd kit** is as simple as manually attaching the listeners to a different DOM element than the one that is set as the draggable source DOM node:
+While many drag and drop libraries need to expose the concept of "drag handles", creating a drag handle with the `useDraggable` hook is as simple as manually attaching the listeners to a different DOM element than the one that is set as the draggable source DOM node:
 
 ```jsx
 import {useDraggable} from '@dnd-kit/core';
@@ -69,6 +69,10 @@ function Draggable() {
   );
 }
 ```
+
+{% hint style="info" %}
+When attaching the listeners to a different element than the node that is draggable, make sure you also attach the attributes to the same node that has the listeners attached so that it is still [accessible](../../guides/accessibility.md). 
+{% endhint %}
 
 You can even have multiple drag handles if that makes sense in the context of your application:
 
@@ -174,9 +178,10 @@ To learn more about the best practices for making draggable interfaces accessibl
 
 ## Draggable clone
 
-In some cases, you may want to use a [Draggable clone ](clone.md)rather than transforming the original draggable source. This will largely depend on your use-case.
+In some cases, you may want to use a [Draggable clone ](clone.md)rather than transforming the original draggable source. This will largely depend on your use-case:
 
-If your item needs to move from one container to another, or if your draggable item is within a scrollable container, we recommend you use the [`<DraggableClone>`](clone.md) component so the item can move more freely from one container to another.
+* If your item needs to move from one container to another while dragging, we highly recommend you use the [`<DraggableClone>`](clone.md) component so the item can move more freely from one container to another. You'll also be able to get smooth drop animations when using the draggable clone.
+* If your draggable item is within a scrollable container, we also recommend you use a `<DraggableClone>`, otherwise you'll need to set the draggable element to `position: fixed` yourself so the item isn't restricted to the overflow and stacking context of its scroll container, and can move without being affected by the scroll position of its container.
 
 {% tabs %}
 {% tab title="App.jsx" %}
