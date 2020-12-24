@@ -40,13 +40,9 @@ const defaultKeyboardCodes = {
 
 You can customize these values, but keep in mind that the [third rule of ARIA ](https://www.w3.org/TR/using-aria/#3rdrule)requires that a user **must** be able to activate the action associated with a draggable widget using **both** the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` key. To learn more, read the in-depth [accessibility guide](../../guides/accessibility.md).
 
+Keep in mind that you should also customize the screen reader instructions using the `screenReaderInstructions` prop of [`<DndContext>`](../context-provider/) if you update these values, as the screen reader instructions assume that the Keyboard sensor is initialized with the default keyboard shortcuts.
+
 The `move` keyboard codes are not a customizable option, because those are handled by the [coordinate getter function](keyboard.md#coordinates-getter). To customize them, write a custom coordinate getter function.
-
-#### Scroll behavior
-
-This option represents the [scroll behavior ](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)that should be used when scrolling to new coordinates. The default value is `smooth`, which results in the scroll container being scrolled smoothly to the new coordinates. 
-
-The other possible value is `auto`, which results in the scroll container being scrolled directly to the new coordinates without any animation.
 
 #### Coordinates getter
 
@@ -89,4 +85,10 @@ function customCoordinatesGetter(event, args) {
 ```
 
 While the example above is fairly simple, you can build complex coordinate getters to support advanced use cases. The [Sortable](../../presets/sortable/) preset uses the `getNextCoordinates` option to build on top of the Keyboard sensor and move the active sortable item to its new index depending on the arrow key that is pressed.
+
+#### Scroll behavior
+
+This option represents the [scroll behavior ](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)that should be used when scrolling to new coordinates. The default value is `smooth`, which results in the scroll container being scrolled smoothly to the new coordinates. 
+
+The other possible value is `auto`, which results in the scroll container being scrolled directly to the new coordinates without any animation.
 

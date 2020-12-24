@@ -35,9 +35,9 @@ You know your application best, and while these sensible defaults will go a long
 
 The three main areas of focus for this guide to help you make your drag and drop interface more accessible are:
 
-* Keyboard support
-* Screen reader instructions
-* Live regions to provide screen reader announcements
+* [Keyboard support](accessibility.md#keyboard-support)
+* [Screen reader instructions](accessibility.md#screen-reader-instructions)
+* [Live regions to provide screen reader announcements](accessibility.md#screen-reader-announcements-using-live-regions)
 
 ### Keyboard support
 
@@ -77,35 +77,181 @@ After an item is picked up, it can be dropped using the `enter` \(on Windows\) o
 
 A drag operation can be cancelled using the `escape` key. It is recommended to allow users to cancel the drag operation using the `escape` key for all sensors, not just the Keyboard sensor.
 
+The keyboard shortcuts of the Keyboard sensor can be [customized](../api-documentation/sensors/keyboard.md#keyboard-codes), but we discourage you to do so unless you maintain support for the `enter`, `return` and `space` keys to follow the guidelines set by the third rule of ARIA.
+
+By default, the [Keyboard sensor](../api-documentation/sensors/keyboard.md) moves in any given direction by `25` pixels when the arrow keys are pressed while dragging.
+
+This is an arbitrary default that is likely not suited for all use-cases. We encourage you to customize this behaviour and tailor it to the context of your application using the  [`getNextCoordinates` option ](../api-documentation/sensors/keyboard.md#coordinates-getter)of the Keyboard sensor.
+
+For example, the `useSortable` hook ships with an augmented version of the Keyboard sensor that uses the `getNextCoordinates` option behind the scenes to find the coordinates of the next sortable element in any given direction when an arrow key is pressed.
+
 In order to let users learn how to interact with draggable elements using these keyboard shortcuts, it's important to provide screen reader instructions.
 
 ### Screen reader instructions
 
-In order to let screen reader users know how to interact with draggable items using only the keyboard, it's important to provide clear instructions on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
+In order to users know how to interact with draggable items using only the keyboard, it's important to provide information to the user that their focus is currently on a draggable item, along with clear instruction  on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
 
-By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used to provide these instructions to screen readers. The default instructions are:
+#### Role
 
-> To pick up a draggable item, press the space bar.   
-> While dragging, use the arrow keys to move the item around.  
-> Press space again to drop the item in its new position, or press escape to cancel.
+To let users know that their focus is currently on a draggable item, the [`useDraggable`](../api-documentation/draggable/usedraggable.md) hook provides the [`role`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) and [`aria-roledescription`](https://www.digitala11y.com/aria-roledescriptionproperties/), and [`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) attributes by default:
 
-We recommend you customize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](../api-documentation/context-provider/). 
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Attribute</th>
+      <th style="text-align:left">Default value</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>role</code>
+      </td>
+      <td style="text-align:left"><code>&quot;button&quot;</code>
+      </td>
+      <td style="text-align:left">
+        <p>The ARIA <code>&quot;role&quot;</code> attribute lets you explicitly define
+          the role for an element, which communicates its purpose to assistive technologies.
+          <br
+          />
+        </p>
+        <p>If possible, we recommend you use a semantic <code>&lt;button&gt;</code> element
+          for the DOM element you plan on attaching draggable listeners to.
+          <br />
+          <br />In case that&apos;s not possible, make sure you include the <code>role=&quot;button&quot;</code>attribute,
+          which is the default value.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>aria-roledescription</code>
+      </td>
+      <td style="text-align:left"><code>&quot;draggable&quot;</code>
+      </td>
+      <td style="text-align:left">
+        <p>Defines a human-readable, localized description for the role of an element
+          that is read by screen readers.
+          <br />
+        </p>
+        <p>While <code>draggable</code> is a sensible default, we recommend you customize
+          this value to something that is tailored to your use-case.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>aria-describedby</code>
+      </td>
+      <td style="text-align:left"><code>&quot;DndContext-[uniqueId]&quot;</code>
+      </td>
+      <td style="text-align:left">Each draggable item is provided a unique <code>aria-describedby</code> ID
+        that points to the voiceover instructions to be read out when a draggable
+        item receives focus</td>
+    </tr>
+  </tbody>
+</table>
 
-If your application supports multiple languages, make sure you also translate and localize these instructions. The `<DndContext>` component only ships with announcements in English due to bundle size concerns.
+The `role` and `aria-roledescription` attributes can be customized via the [options passed to the `useDraggable` hook](../api-documentation/draggable/usedraggable.md#arguments).
 
-### Live regions to provide screen reader announcements
+To customize the `aria-describedby` instructions, refer to the section below.
 
-[Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) are used to notify screen readers of content changes. We use them in **dnd kit** to provide screen reader announcements in real-time of time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus .
+#### Instructions
+
+By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used to provide these instructions to screen readers. 
+
+The default instructions are:
+
+> To pick up a draggable item, press space or enter.   
+> While dragging, use the arrow keys to move the item in any given direction.  
+> Press space or enter again to drop the item in its new position, or press escape to cancel.
+
+We recommend you customize and localize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](../api-documentation/context-provider/).  
+
+For example, if you were building a sortable grocery shopping list, you may want to tailor the instructions like so:
+
+> To pick up a grocery list item, press space or enter.   
+> Use the up and down arrow keys to update the position of the item in the grocery list.  
+> Press space or enter again to drop the item in its new position, or press escape to cancel.
+
+If your application supports multiple languages, make sure you also translate these instructions. The `<DndContext>` component only ships with instructions in English due to bundle size concerns.
+
+### Screen reader announcements using live regions
+
+[Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) are used to notify screen readers of content changes. 
+
+When building accessible drag and drop interfaces, live regions should be used to provide screen reader announcements in real-time of time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus .
 
 By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used for live screen-reader announcements of events like when a drag operation has started, when a draggable item has been dragged over a droppable container, when a drag operation has ended, and when a drag operation has been cancelled.
 
-#### Aria attributes
+These instructions can be customized using the `announcements` prop of `DndContext`.
 
-| Attribute | Default value | Description |
-| :--- | :--- | :--- |
-| `role` | `"button"` | If possible, we recommend you use a semantic `<button>` element for the DOM element you plan on attaching draggable listeners to. In case that's not possible, make sure you include the `role="button"`attribute, which is the default value. |
-| `aria-roledescription` | `"draggable"` | While `draggable` is a sensible default, we recommend you customize this value to something that is  |
-| `aria-describedby` | `"DndContext-[uniqueId]"` | Each draggable item is provided a unique `aria-describedby` ID that points to the voiceover instructions to be read out when a draggable item receives focus. |
+The default announcements are:
 
-### 
+```javascript
+const defaultAnnouncements = {
+  onDragStart(id) {
+    return `Picked up draggable item ${id}.`;
+  },
+  onDragOver(id, overId) {
+    if (overId) {
+      return `Draggable item ${id} was moved over droppable area ${overId}.`;
+    }
+
+    return `Draggable item ${id} is no longer over a droppable area.`;
+  },
+  onDragEnd(id, overId) {
+    if (overId) {
+      return `Draggable item was dropped over droppable area ${overId}`;
+    }
+
+    return `Draggable item ${id} was dropped.`;
+  },
+  onDragCancel(id) {
+    return `Dragging was cancelled. Draggable item ${id} was dropped.`;
+  },
+}
+```
+
+While these default announcements are sensible defaults that should cover most simple use cases, you know your application best, and we highly recommend that you customize these to provide a screen reader experience that is more tailored to the use case you are building.
+
+{% hint style="info" %}
+When writing screen reader announcements that rely on an element's position \(index\) in a list, use positions rather than indices to describe the element's current position.
+
+Here's an example of index based announcements and why you should avoid them:
+
+> Item with index 0 was picked up. Item was moved to index 1 of 4.
+
+Position based announcements are much more intuitive and natural:
+
+> Item at position 1 was picked up. Item was moved to position 2 of 5.
+{% endhint %}
+
+For example, when building a sortable list, you could write custom announcements that are tailored to that use-case using position based announcements:
+
+```javascript
+function App() {
+const items = useState(['Apple', 'Orange', 'Strawberries', 'Raspberries']);
+const getIndex = (id) => items.indexOf(id);
+const itemCount = items.length;
+
+const announcements: Announcements = {
+    onDragStart(id) {
+      return `Picked up sortable item ${id}. Sortable item ${id} is in position ${getIndex(id)} of ${itemCount}`;
+    },
+    onDragOver(id, overId) {
+      if (overId) {
+        return `Sortable item ${id} was moved into position ${getIndex(overId)} of ${itemCount}`;
+      }
+    },
+    onDragEnd(id, overId) {
+      if (overId) {
+        return `Draggable item was dropped at position ${getIndex(overId)} of ${itemCount}`;
+      }
+    },
+    onDragCancel(id) {
+      return `Dragging was cancelled. Draggable item ${id} was dropped.`;
+    },
+  };
+```
+
+The example above assumes that the [`closestCenter` collision detection strategy](../api-documentation/context-provider/collision-detection-algorithms.md#closest-center) is used, so the `overId` should always be defined.
+
+If your application supports multiple languages, make sure you also translate these announcements. The `<DndContext>` component only ships with announcements in English due to bundle size concerns.
 
