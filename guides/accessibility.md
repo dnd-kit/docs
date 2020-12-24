@@ -2,7 +2,7 @@
 
 ## Introduction
 
-If you're new to accessibility for the web, the Web Almanac by HTTP Archive has an excellent primer on the subject and the state of web accessibility that you should read before diving into this guide: [https://almanac.httparchive.org/en/2020/accessibility](https://almanac.httparchive.org/en/2020/accessibility)
+If you're new to accessibility for the web, the _Web Almanac by HTTP Archive_ has an excellent primer on the subject and the state of web accessibility that you should read before diving into this guide: [https://almanac.httparchive.org/en/2020/accessibility](https://almanac.httparchive.org/en/2020/accessibility)
 
 > Web accessibility is about achieving feature and information parity and giving complete access to all aspects of an interface to disabled people. 
 >
@@ -41,7 +41,43 @@ The three main areas of focus for this guide to help you make your drag and drop
 
 ### Keyboard support
 
+One of the[ five rules of ARIA](https://www.w3.org/TR/using-aria/#rule3) is that all interactive ARIA controls must be usable with the keyboard.
 
+When creating widgets that a user can click or tap, drag, and drop, a user must also be able to **navigate to the widget** and **perform an equivalent action using the keyboard**.
+
+For drag and drop interfaces, this means that the activator element that initiates the drag action must:
+
+* Be able to receive focus
+* A user must be able to activate the action associated with the element using **both** the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` key.
+
+Both these guidelines should be respected to comply with the [third rule of ARIA](https://www.w3.org/TR/using-aria/#3rdrule).
+
+The `@dnd-kit/core` library ships with a [Keyboard sensor ](../api-documentation/sensors/keyboard.md)that adheres to these guidelines. The keyboard sensor is one of the two sensors that are enabled by default on the [`<DndContext>`](../api-documentation/context-provider/) provider component.
+
+#### Focus
+
+In order for the Keyboard sensor to function properly, the activator element that receives the `useDraggable` [listeners](../api-documentation/draggable/usedraggable.md#listeners) **must** be able to receive focus.
+
+The `tabindex` attribute dictates the order in which focus moves throughout the document.
+
+* Natively interactive elements such as [buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button), [anchor tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) and[ form controls ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection)have a default `tabindex` value of `0`. 
+* Custom elements that are intended to be interactive and receive keyboard focus need to have an explicitly assigned `tabindex="0"`\(for example, `div` and `li` elements\)
+
+In other words, in order for your draggable activator elements to be able to receive keyboard focus, they _need_ to have the `tabindex` attribute set to `0` **if** they are not natively interactive elements \(such as the HTML `button` element\).
+
+For this reason, the `useDraggable` hook sets the `tabindex="0"` attribute by default.
+
+#### Keyboard shortcuts
+
+Once a draggable activator element receives focus, the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` keys can be used to initiate a drag operation and pick up the draggable item.
+
+The arrow keys are used to move the draggable item in any given direction.
+
+After an item is picked up, it can be dropped using the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` keys.
+
+A drag operation can be cancelled using the `escape` key. It is recommended to allow users to cancel the drag operation using the `escape` key for all sensors, not just the Keyboard sensor.
+
+In order to let users learn how to interact with draggable elements using these keyboard shortcuts, it's important to provide screen reader instructions.
 
 ### Screen reader instructions
 

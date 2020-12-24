@@ -2,6 +2,10 @@
 
 The Keyboard sensor responds to [Keyboard events](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent). It is one of the default sensors used by the [DndContext](../context-provider/) provider if none are defined.
 
+{% hint style="warning" %}
+In order for the Keyboard sensor to function properly, the activator element that receives the `useDraggable` [listeners](../draggable/usedraggable.md#listeners) **must** be able to receive focus. To learn more, read the in-depth [Accessibility guide](../../guides/accessibility.md).
+{% endhint %}
+
 ### Activator
 
 The keyboard activator is the `onKeyDown` event handler. The Keyboard sensor is initialized if the [`event.code`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code) property matches one of the `start` keys passed to `keyboardCodes` option of the Keyboard sensor.
@@ -34,7 +38,9 @@ const defaultKeyboardCodes = {
 };
 ```
 
-The `move` keyboard codes are not an option, because those are handled by the [coordinate getter function](keyboard.md#coordinates-getter). To customize them, simply write a custom coordinate getter function.
+You can customize these values, but keep in mind that the [third rule of ARIA ](https://www.w3.org/TR/using-aria/#3rdrule)requires that a user **must** be able to activate the action associated with a draggable widget using **both** the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` key. To learn more, read the in-depth [accessibility guide](../../guides/accessibility.md).
+
+The `move` keyboard codes are not a customizable option, because those are handled by the [coordinate getter function](keyboard.md#coordinates-getter). To customize them, write a custom coordinate getter function.
 
 #### Scroll behavior
 

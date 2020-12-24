@@ -52,7 +52,7 @@ The `roleDescription` argument can be used to tailor the screen reader experienc
 
 The `tabindex` attribute dictates the order in which focus moves throughout the document.
 
-* Natively interactive elements such as buttons \(`button`\), anchor \(`a`\) tags and form controls have a default `tabindex` value of `0`. 
+* Natively interactive elements such as [buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button), [anchor tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) and[ form controls ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection)have a default `tabindex` value of `0`. 
 * Custom elements that are intended to be interactive and receive keyboard focus need to have an explicitly assigned `tabindex="0"`\(for example, `div` and `li` elements\)
 
 In other words, in order for your draggable elements to receive keyboard focus, they _need_ to have the `tabindex` attribute set to `0` if they are not natively interactive elements \(such as the HTML `button` element\).
