@@ -48,15 +48,15 @@ Building accessible drag and drop interfaces is hard; **dnd kit**  has a number 
 
 * Customizable **screen reader instructions** for how to interact with draggable items
 * Customizable **live region updates** to provide screen reader announcements in real-time of what is currently happening with draggable and droppable elements.
-* Sensible defaults for **`aria` attributes** that should be passed to draggable items
+* Sensible defaults for **`aria` attributes** that should be passed to draggable item
 
-{% hint style="info" %}
-Check out our [Accessibility guide](guides/accessibility.md) to learn more about how you can help provide a better experience for screen readers.
-{% endhint %}
+Check out our Accessibility guide to learn more about how you can help provide a better experience for screen readers:
+
+{% page-ref page="guides/accessibility.md" %}
 
 ### Architecture
 
-Unlike most drag and drop libraries, **dnd kit** intentionally ****is **not** built on top of the [HTML5 Drag and drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API). This was a deliberate architectural decision, that does come with tradeoffs that you should be aware of before deciding to use it, but for most applications, we believe the benefits outweigh the tradeoffs. 
+Unlike many drag and drop libraries, **dnd kit** intentionally ****is **not** built on top of the [HTML5 Drag and drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API). This was a deliberate architectural decision, that does come with tradeoffs that you should be aware of before deciding to use it. For most web applications, we believe the benefits outweigh the tradeoffs. 
 
 The HTML5 Drag and drop API has some severe **limitations**. It does not support touch devices, which means that the libraries that are built on top of it need to expose an entirely different implementation to support touch devices. This typically increases the complexity of the codebase and the overall bundle size of the library. Further, it requires workarounds to implement common use cases such as customizing the drag preview, locking dragging to a specific axis or to the bounds of a container, or animating the dragged item as it is picked up. 
 
