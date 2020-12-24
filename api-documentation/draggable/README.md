@@ -6,7 +6,7 @@ Use the `useDraggable` hook turn DOM nodes into draggable sources that can be pi
 
 ## Usage
 
-The `useDraggable` hook isn't opinionated about how you should structure your app. 
+The `useDraggable` hook isn't particularly opinionated about how your app should be structured. 
 
 ### Node ref
 
