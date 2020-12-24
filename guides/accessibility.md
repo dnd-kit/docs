@@ -2,7 +2,7 @@
 
 ## Introduction
 
-If you're new to digital accessibility for the web, the Web Almanac by HTTP Archive has an excellent primer on the subject and the state of web accessibility that you should read before diving into this guide: [https://almanac.httparchive.org/en/2020/accessibility](https://almanac.httparchive.org/en/2020/accessibility)
+If you're new to accessibility for the web, the Web Almanac by HTTP Archive has an excellent primer on the subject and the state of web accessibility that you should read before diving into this guide: [https://almanac.httparchive.org/en/2020/accessibility](https://almanac.httparchive.org/en/2020/accessibility)
 
 > Web accessibility is about achieving feature and information parity and giving complete access to all aspects of an interface to disabled people. 
 >
@@ -10,7 +10,9 @@ If you're new to digital accessibility for the web, the Web Almanac by HTTP Arch
 >
 > – Source: [Web Almanac by HTTP Archive](https://almanac.httparchive.org/en/2020/accessibility#screen-reader-only-text)
 
-People with varying disabilities use different assistive technologies to help them experience the web. The [Tools and Techniques](https://www.w3.org/WAI/people-use-web/tools-techniques/) article from the Web Accessibility Initiative \(WAI\) of the W3C covers how users can perceive, understand and interact with the web using different assistive technologies.
+People with varying disabilities use different assistive technologies to help them experience the web. 
+
+The [Tools and Techniques](https://www.w3.org/WAI/people-use-web/tools-techniques/) article from the Web Accessibility Initiative \(WAI\) of the W3C covers how users can perceive, understand and interact with the web using different assistive technologies.
 
 Some assistive technologies for the web include:
 
@@ -52,6 +54,8 @@ By default, each  [`<DndContext>`](../api-documentation/context-provider/) compo
 > Press space again to drop the item in its new position, or press escape to cancel.
 
 We recommend you customize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](../api-documentation/context-provider/). 
+
+If your application supports multiple languages, make sure you also translate and localize these instructions. The `<DndContext>` component only ships with announcements in English due to bundle size concerns.
 
 ### Live regions to provide screen reader announcements
 
