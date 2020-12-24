@@ -8,7 +8,7 @@
 interface UseDraggableArguments {
   id: string;
   disabled?: boolean;
-  aria?: {
+  attributes?: {
     role?: string;
     roleDescription?: string;
     tabIndex?: number;
@@ -26,15 +26,25 @@ If you're building a component that uses both the `useDraggable` and `useDroppab
 
 Since hooks cannot be conditionally invoked, use the `disabled` argument and set it to `true` if you need to temporarily disable a `draggable` element.
 
-### ARIA
+### Attributes
 
 #### Role
 
+The ARIA `"role"` attribute lets you explicitly define the role for an element, which communicates its purpose to assistive technologies.
+
+The default value for the `"role"` attribute is `"button"`.
+
+{% hint style="info" %}
+If it makes sense in the context of what you are building, we recommend that you leverage the native HTML `<button>` element for draggable elements.
+{% endhint %}
+
 #### Role description
 
-The `ariaRoleDescription` argument can be used to tailor the screen reader experience to your application. For example, if you're building a sortable list of products you'd want to set the `ariaRoleDescription` value to something like `"sortable product"`.
+The `roleDescription` argument can be used to tailor the screen reader experience to your application. For example, if you're building a sortable list of products you'd want to set the `roleDescription` value to something like `"sortable product"`.
 
 **Tab index**
+
+\*\*\*\*
 
 ## Properties
 
