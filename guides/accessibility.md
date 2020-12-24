@@ -29,9 +29,9 @@ Building drag and drop interfaces that are accessible to everyone isn't easy, an
 
 The `@dnd-kit/core` library provides a number of sensible defaults to help you make your drag and drop interfaces accessible.
 
-These sensible defaults should be seen as starting points rather than something you can set and forget; there is no one-size-fits-all solution to web accessibility.
+These sensible defaults should be seen as _starting points_ rather than something you can set and forget; there is no one-size-fits-all solution to web accessibility.
 
-You know your application best, and while these sensible defaults will go a long way to help making your application accessible, in most cases you'll want to customize these  so that they are tailored to the context of your application.
+You know your application best, and while these sensible defaults will go a long way to help making your application more accessible, in most cases you'll want to customize these  so that they are tailored to the context of your application.
 
 The three main areas of focus for this guide to help you make your drag and drop interface more accessible are:
 
