@@ -21,6 +21,12 @@ Some assistive technologies for the web include:
 * Screen magnifiers
 * Input devices \(such as the keyboard, pointers and switch devices\)
 
+When building accessible interfaces for the web, it's important to keep the three  following questions in mind:
+
+1. **Identity:** What element is the user interacting with?
+2. **Operation:** How can the user interact with the element?
+3. **State:** What is the current state of the element?
+
 In this guide, we'll focus on how to make drag and drop interfaces that are keyboard accessible and provide an experience that is optimized for screen readers.
 
 ## Building accessible drag and drop interfaces
