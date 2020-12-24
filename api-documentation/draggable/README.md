@@ -2,11 +2,13 @@
 
 ![](../../.gitbook/assets/draggable-large.svg)
 
-Use the `useDraggable` hook turn DOM nodes into draggable sources that can be picked up, moved and dropped over [Droppable](../droppable/) containers.
+Use the `useDraggable` hook turn DOM nodes into draggable sources that can be picked up, moved and dropped over [droppable](../droppable/) containers.
 
 ## Usage
 
 The `useDraggable` hook isn't opinionated about how you should structure your app. 
+
+### Node ref
 
 At minimum though, you need to pass the `setNodeRef` function that is returned by the `useDraggable` hook to a DOM element so that it can access the underlying DOM node and keep track of it to [detect collisions and intersections](../context-provider/collision-detection-algorithms.md) with other [droppable](../droppable/) elements. 
 
@@ -38,7 +40,7 @@ Check out our [Accessibility guide](../../guides/accessibility.md) to learn more
 
 ### Listeners
 
-If you've been paying close attention, you'll notice that unlike the [`useDroppable`](../droppable/) hook,  the `useDraggable` hook also requires that you attach `listeners` to the DOM node that you would like to make draggable. 
+The `useDraggable` hook requires that you attach `listeners` to the DOM node that you would like to become the activator to start dragging. 
 
 While we could have attached these listeners manually to the node  provided to `setNodeRef`, there are actually a number of key advantages to forcing the consumer to manually attach the listeners.
 
@@ -170,7 +172,7 @@ To learn more about the best practices for making draggable interfaces accessibl
 
 ## Draggable clone
 
-In many cases, you'll probably want to use a [Draggable clone ](clone.md)rather than transforming the original draggable source. This will largely depend on your use-case.
+In some cases, you may want to use a [Draggable clone ](clone.md)rather than transforming the original draggable source. This will largely depend on your use-case.
 
 If your item needs to move from one container to another, or if your draggable item is within a scrollable container, we recommend you use the [`<DraggableClone>`](clone.md) component so the item can move more freely from one container to another.
 
