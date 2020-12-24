@@ -2,11 +2,10 @@
 
 * [Overview](README.md)
 
-## Guides
+## Introduction
 
-* [Installation](guides/installation.md)
-* [Quick start](guides/getting-started.md)
-* [Accessibility](guides/accessibility.md)
+* [Installation](introduction/installation.md)
+* [Quick start](introduction/getting-started.md)
 
 ## API Documentation
 
@@ -30,4 +29,8 @@
 * [Sortable](presets/sortable/README.md)
   * [Sortable Context](presets/sortable/sortable-context.md)
   * [useSortable](presets/sortable/usesortable.md)
+
+## Guides
+
+* [Accessibility](guides/accessibility.md)
 

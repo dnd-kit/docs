@@ -47,7 +47,7 @@ If you paid close attention to the illustration above, you may also have noticed
 
 ### Sortable Context
 
-In addition to the [drag and drop context provider](../../guides/getting-started.md#context-provider),  the Sortable preset requires its own context provider that contains the **sorted** array of the unique identifiers associated to each sortable item:
+In addition to the [drag and drop context provider](../../introduction/getting-started.md#context-provider),  the Sortable preset requires its own context provider that contains the **sorted** array of the unique identifiers associated to each sortable item:
 
 ```jsx
 import React, {useState} from 'react';

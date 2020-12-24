@@ -28,7 +28,7 @@ Manage events and customize the behaviour of your application using the [`<DndCo
 
 Check out our quick start guide to learn how get started with **dnd kit:**
 
-{% page-ref page="guides/getting-started.md" %}
+{% page-ref page="introduction/getting-started.md" %}
 
 ### Extensibility
 
