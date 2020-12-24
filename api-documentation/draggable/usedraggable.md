@@ -24,7 +24,7 @@ If you're building a component that uses both the `useDraggable` and `useDroppab
 
 ### Disabled
 
-Since hooks cannot be conditionally invoked, use the `disabled` argument and set it to `true` if you need to temporarily disable a `draggable` element.
+Since [hooks cannot be conditionally invoked](https://reactjs.org/docs/hooks-rules.html), use the `disabled` argument and set it to `true` if you need to temporarily disable a `draggable` element.
 
 ### Attributes
 

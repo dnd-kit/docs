@@ -22,7 +22,7 @@ If you're building a component that uses both the `useDroppable` and `useDraggab
 
 #### Disabled
 
-Since hooks cannot be conditionally invoked, use the `disabled` argument and set it to `true` if you need to temporarily disable a `droppable` area.
+Since [hooks cannot be conditionally invoked](https://reactjs.org/docs/hooks-rules.html), use the `disabled` argument and set it to `true` if you need to temporarily disable a `droppable` area.
 
 #### Data
 
@@ -31,7 +31,7 @@ The `data` argument is for advanced use-cases where you may need access to addit
 For example, if you were building a sortable preset, you could use the `data` attribute to store the index of the droppable element within a sortable list to access it within a custom sensor.
 
 ```jsx
-  const {setNodeRef} = useDroppable<Data>({
+  const {setNodeRef} = useDroppable({
     id: props.id,
     data: {
       index: props.index,
@@ -55,7 +55,21 @@ For example, if you were building a sortable preset, you could use the `data` at
 
 **`setNodeRef`**
 
+In order for the `useDroppable` hook to function properly, it needs the `setNodeRef` property to be attached to the HTML element you intend on turning into a droppable area:
 
+```jsx
+function Droppable(props) {
+  const {setNodeRef} = useDroppable({
+    id: props.id,
+  });
+  
+  return (
+    <div ref={setNodeRef}>
+      {/* ... */}
+    </div>
+  );
+}
+```
 
 **`node`**
 
@@ -63,7 +77,7 @@ A [ref](https://reactjs.org/docs/refs-and-the-dom.html) to the current node that
 
 **`rect`**
 
-
+For advanced use cases, if you need the bounding rect measurement of the droppable area.
 
 #### Over
 
