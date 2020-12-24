@@ -2,14 +2,13 @@
 
 ![](../../.gitbook/assets/draggable-large.svg)
 
-Use the `useDraggable` hook turn DOM nodes into draggable sources that can be moved and dropped over [Droppable](../droppable/) containers.
+Use the `useDraggable` hook turn DOM nodes into draggable sources that can be picked up, moved and dropped over [Droppable](../droppable/) containers.
 
-**dnd kit** isn't opinionated about how you should structure your app. At minimum though, you need to pass the `setNodeRef` function that is returned by the `useDraggable` hook to a DOM element so that **dnd kit** can access the underlying DOM node and keep track of it to detect collisions and intersections with other droppable elements. 
+## Usage
 
-{% hint style="info" %}
-Always try to use the  DOM element that is most [semantic](https://developer.mozilla.org/en-US/docs/Glossary/Semantics) in the context of your app.   
-Check out our [Accessibility guide](../../guides/accessibility.md) to learn more about how you can help provide a better experience for screen readers.
-{% endhint %}
+The `useDraggable` hook isn't opinionated about how you should structure your app. 
+
+At minimum though, you need to pass the `setNodeRef` function that is returned by the `useDraggable` hook to a DOM element so that it can access the underlying DOM node and keep track of it to [detect collisions and intersections](../context-provider/collision-detection-algorithms.md) with other [droppable](../droppable/) elements. 
 
 ```jsx
 import {useDraggable} from '@dnd-kit/core';
@@ -31,6 +30,11 @@ function Draggable() {
   );
 }
 ```
+
+{% hint style="info" %}
+Always try to use the  DOM element that is most [semantic](https://developer.mozilla.org/en-US/docs/Glossary/Semantics) in the context of your app.   
+Check out our [Accessibility guide](../../guides/accessibility.md) to learn more about how you can help provide a better experience for screen readers.
+{% endhint %}
 
 ### Listeners
 
@@ -108,9 +112,65 @@ CSS.Translate.toString(transform) ===
 `translate3d(${translate.x}, ${translate.y}, 0)`
 ```
 
-### Draggable clone
 
-In most cases, you'll probably want to use a [Draggable clone ](clone.md)rather than transforming the original draggable source. This will largely depend on your use-case.
+
+### Attributes
+
+The `useDraggable` hook ****provides a set of sensible default attributes for draggable items. We recommend you attach these to the HTML element you are attaching the draggable listeners to.
+
+We encourage you to manually attach the attributes that you think make sense in the context of your application rather than using them all without considering whether it makes sense to do so.
+
+For example, if the HTML element you are attaching the `useDraggable` `listeners` to is already a semantic `button`, although it's harmless to do so, there's no need to add the `role="button"` attribute, since that is already the default role. 
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Attribute</th>
+      <th style="text-align:left">Default value</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>role</code>
+      </td>
+      <td style="text-align:left"><code>&quot;button&quot;</code>
+      </td>
+      <td style="text-align:left">
+        <p>If possible, we recommend you use a semantic <code>&lt;button&gt;</code> element
+          for the DOM element you plan on attaching draggable listeners to.</p>
+        <p></p>
+        <p>In case that&apos;s not possible, make sure you include the <code>role=&quot;button&quot;</code>attribute,
+          which is the default value.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>aria-roledescription</code>
+      </td>
+      <td style="text-align:left"><code>&quot;draggable&quot;</code>
+      </td>
+      <td style="text-align:left">While <code>draggable</code> is a sensible default, we recommend you customize
+        this value to something that is tailored to the use case you are building.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>aria-describedby</code>
+      </td>
+      <td style="text-align:left"><code>&quot;DndContext-[uniqueId]&quot;</code>
+      </td>
+      <td style="text-align:left">Each draggable item is provided a unique <code>aria-describedby</code> ID
+        that points to the <a href="../context-provider/#screen-reader-instructions">screen reader instructions</a> to
+        be read out when a draggable item receives focus.</td>
+    </tr>
+  </tbody>
+</table>
+
+To learn more about the best practices for making draggable interfaces accessible, read the full accessibility guide:
+
+{% page-ref page="../../guides/accessibility.md" %}
+
+## Draggable clone
+
+In many cases, you'll probably want to use a [Draggable clone ](clone.md)rather than transforming the original draggable source. This will largely depend on your use-case.
 
 If your item needs to move from one container to another, or if your draggable item is within a scrollable container, we recommend you use the [`<DraggableClone>`](clone.md) component so the item can move more freely from one container to another.
 
@@ -169,60 +229,4 @@ We hope this has given you a taste of what Draggable clones are used for. There'
 We recommend you read about all of the possibilities that it provides in the in-depth guide:
 
 {% page-ref page="clone.md" %}
-
-### Attributes
-
-The `useDraggable` hook ****provides a set of sensible default attributes for draggable items. We recommend you attach these to the HTML element you are attaching the draggable listeners to.
-
-We encourage you to manually attach the attributes that you think make sense in the context of your application rather than using them all without considering whether it makes sense to do so.
-
-For example, if the HTML element you are attaching the `useDraggable` `listeners` to is already a semantic `button`, although it's harmless to do so, there's no need to add the `role="button"` attribute, since that is already the default role. 
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Attribute</th>
-      <th style="text-align:left">Default value</th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>role</code>
-      </td>
-      <td style="text-align:left"><code>&quot;button&quot;</code>
-      </td>
-      <td style="text-align:left">
-        <p>If possible, we recommend you use a semantic <code>&lt;button&gt;</code> element
-          for the DOM element you plan on attaching draggable listeners to.</p>
-        <p></p>
-        <p>In case that&apos;s not possible, make sure you include the <code>role=&quot;button&quot;</code>attribute,
-          which is the default value.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>aria-roledescription</code>
-      </td>
-      <td style="text-align:left"><code>&quot;draggable&quot;</code>
-      </td>
-      <td style="text-align:left">While <code>draggable</code> is a sensible default, we recommend you customize
-        this value to something that is tailored to the use case you are building.</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>aria-describedby</code>
-      </td>
-      <td style="text-align:left"><code>&quot;DndContext-[uniqueId]&quot;</code>
-      </td>
-      <td style="text-align:left">Each draggable item is provided a unique <code>aria-describedby</code> ID
-        that points to the <a href="../context-provider/#screen-reader-instructions">screen reader instructions</a> to
-        be read out when a draggable item receives focus.</td>
-    </tr>
-  </tbody>
-</table>
-
-To learn more about the best practices for making draggable interfaces accessible, read the full accessibility guide:
-
-{% page-ref page="../../guides/accessibility.md" %}
-
-
 

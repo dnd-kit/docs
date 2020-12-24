@@ -2,7 +2,7 @@
 
 ![](../../.gitbook/assets/droppable-large.svg)
 
-Use the `useDroppable` hook to set up DOM nodes as droppable targets that draggable elements can be dropped over. 
+Use the `useDroppable` hook to set up DOM nodes as droppable areas that draggable elements can be dropped over. 
 
 ## Usage
 

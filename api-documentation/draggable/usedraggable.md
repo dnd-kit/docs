@@ -66,15 +66,13 @@ For this reason, the `useDraggable` hook sets the `tabindex="0"` attribute by de
   active: {
     id: UniqueIdentifier;
     node: React.MutableRefObject<HTMLElement>;
+    rect: ViewRect;
   } | null;
-  activeRect: PositionalClientRect | null;
   attributes: {
     role: string;
-    'aria-pressed': boolean;
     'aria-roledescription': string;
     'aria-describedby': string;
   },
-  clientRects: PositionalClientRectMap;
   isDragging: boolean;
   listeners: Record<SyntheticListenerName, Function> | undefined;
   node: React.MutableRefObject<HTMLElement | null>;
@@ -83,4 +81,77 @@ For this reason, the `useDraggable` hook sets the `tabindex="0"` attribute by de
   transform: {x: number, y: number, scaleX: number, scaleY: number} | null;
 }
 ```
+
+### Active
+
+#### `active`
+
+If there is currently an active draggable element within the [`DndContext`](../context-provider/) provider where the `useDraggable` hook is used, the `active` property will be defined with the corresponding `id`, `node` and `rect` of that draggable element. 
+
+Otherwise, the `active` property will be set to `null`.
+
+#### `isDragging`
+
+If the draggable element that is currently being dragged is the current one where `useDraggable` is used, the `isDragging` property will be `true`. Otherwise the `isDragging` property will be false.
+
+Internally, the `isActive` property just checks if the `active.id === id`.
+
+### Listeners
+
+
+
+### Node
+
+**`setNodeRef`**
+
+In order for the `useDraggable` hook to function properly, it needs the `setNodeRef` property to be attached to the HTML element you intend on turning into a draggable element:
+
+```jsx
+function Draggable(props) {
+  const {setNodeRef} = useDraggable({
+    id: props.id,
+  });
+  
+  return (
+    <button ref={setNodeRef}>
+      {/* ... */}
+    </button>
+  );
+}
+```
+
+Keep in mind that the `ref` should be assigned to the outer container that you want to become draggable, but this doesn't necessarily need to coincide with the container that the listeners are attached to.
+
+#### **`node`**
+
+A [ref](https://reactjs.org/docs/refs-and-the-dom.html) to the current node that is passed to `setNodeRef`
+
+### Over
+
+#### **`over`**
+
+If you'd like to change the appearance of the draggable element in response to it being dragged over a different droppable container, check whether the `over` value is defined. 
+
+If a draggable element is moved over a droppable area, the `over` property will be defined for all draggable elements, regardless of whether or not those draggable elements are active or not.
+
+If you'd like to make changes to only the active draggable element in response to it being moved over a droppable area, check whether the `isDragging` property is `true`.
+
+### Transform
+
+After a draggable item is picked up, the `transform` property will be populated with the `translate` coordinates you'll need to move the item on the screen.  
+
+The `transform` object adheres to the following shape: 
+
+```typescript
+{
+  x: number;
+  y: number;
+  scaleX: number;
+  scaleY: number;
+}
+```
+
+The `x` and `y` coordinates represent the delta from the point of origin of your draggable element since it started being dragged.
+
+The `scaleX` and `scaleY` properties represent the difference in scale between the element that is currently being dragged and the droppable it is currently over, which can be useful if the draggable item needs to be dynamically resized to the size of the droppable it is over.
 
