@@ -164,19 +164,65 @@ function App() {
 
 In this example, whenever a draggable item is picked up, we render a clone that can move freely outside of the `<ScrollableList>` and isn't constrained to it's overflow or stacking context.
 
-{% hint style="info" %}
-We hope this has given you a taste of what Draggable clones are used for. There's a lot more you can do with Draggable clones. We recommend you read about all of the possibilities that it provides in the in-depth guide on [Draggable clone](clone.md).
-{% endhint %}
+We hope this has given you a taste of what Draggable clones are used for. There's a lot more you can do with Draggable clones. 
+
+We recommend you read about all of the possibilities that it provides in the in-depth guide:
+
+{% page-ref page="clone.md" %}
 
 ### Attributes
 
-The `useSortable` hook ****provides a set of sensible default attributes for draggable items. We recommend you attach these to your draggable elements, though nothing will break if you don't. You can also manually attach the attributes that you think make sense in the context of your application.
+The `useDraggable` hook ****provides a set of sensible default attributes for draggable items. We recommend you attach these to the HTML element you are attaching the draggable listeners to.
 
-| Attribute | Default value | Description |
-| :--- | :--- | :--- |
-| `role` | `"button"` | If possible, we recommend you use a semantic `<button>` element for the DOM element you plan on attaching draggable listeners to. In case that's not possible, make sure you include the `role="button"`attribute, which is the default value. |
-| `aria-roledescription` | `"draggable"` | While `draggable` is a sensible default, we recommend you customize this value to something that is  |
-| `aria-describedby` | `"DndContext-[uniqueId]"` | Each draggable item is provided a unique `aria-describedby` ID that points to the voiceover instructions to be read out when a draggable item receives focus. |
+We encourage you to manually attach the attributes that you think make sense in the context of your application rather than using them all without considering whether it makes sense to do so.
+
+For example, if the HTML element you are attaching the `useDraggable` `listeners` to is already a semantic `button`, although it's harmless to do so, there's no need to add the `role="button"` attribute, since that is already the default role. 
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Attribute</th>
+      <th style="text-align:left">Default value</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>role</code>
+      </td>
+      <td style="text-align:left"><code>&quot;button&quot;</code>
+      </td>
+      <td style="text-align:left">
+        <p>If possible, we recommend you use a semantic <code>&lt;button&gt;</code> element
+          for the DOM element you plan on attaching draggable listeners to.</p>
+        <p></p>
+        <p>In case that&apos;s not possible, make sure you include the <code>role=&quot;button&quot;</code>attribute,
+          which is the default value.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>aria-roledescription</code>
+      </td>
+      <td style="text-align:left"><code>&quot;draggable&quot;</code>
+      </td>
+      <td style="text-align:left">While <code>draggable</code> is a sensible default, we recommend you customize
+        this value to something that is tailored to the use case you are building.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>aria-describedby</code>
+      </td>
+      <td style="text-align:left"><code>&quot;DndContext-[uniqueId]&quot;</code>
+      </td>
+      <td style="text-align:left">Each draggable item is provided a unique <code>aria-describedby</code> ID
+        that points to the <a href="../context-provider/#screen-reader-instructions">screen reader instructions</a> to
+        be read out when a draggable item receives focus.</td>
+    </tr>
+  </tbody>
+</table>
+
+To learn more about the best practices for making draggable interfaces accessible, read the full accessibility guide:
+
+{% page-ref page="../../guides/accessibility.md" %}
 
 
 
