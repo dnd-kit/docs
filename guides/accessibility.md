@@ -27,7 +27,7 @@ When building accessible interfaces for the web, it's important to keep the thre
 2. **Operation:** How can the user interact with the element?
 3. **State:** What is the current state of the element?
 
-In this guide, we'll focus on how to make drag and drop interfaces that are keyboard accessible and provide an experience that is optimized for screen readers.
+In this guide, we'll focus on how to make drag and drop interfaces that are keyboard accessible and provide identity, operation instructions and live state updates for screen readers.
 
 ## Building accessible drag and drop interfaces
 
