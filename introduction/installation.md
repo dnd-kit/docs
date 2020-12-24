@@ -12,27 +12,47 @@ You'll also need to be make sure you have **dnd kit**'s peer dependencies instal
 npm install react react-dom
 ```
 
-## Sub-packages
+## Packages
 
 {% hint style="info" %}
  **dnd kit** is a [monorepo](https://en.wikipedia.org/wiki/Monorepo). Depending on your needs, you may also want to install other  sub-packages that are available under the `@dnd-kit` namespace.
 {% endhint %}
 
-In order to keep the core of the library small, **dnd kit** only ships with the core building blocks that the majority of users will need most of the time for building drag and drop experiences:
+### Core library
+
+In order to keep the core of the library small, `@dnd-kit/core` only ships with the main building blocks that the majority of users will need most of the time for building drag and drop experiences:
 
 * [Context provider](../api-documentation/context-provider/)
 * Hooks for: 
   * [Draggable](../api-documentation/draggable/)
   * [Droppable](../api-documentation/droppable/)
 * Sensors for:
-  *  [Mouse](../api-documentation/sensors/mouse.md)
+  * [Pointer](../api-documentation/sensors/pointer.md)
+  * [Mouse](../api-documentation/sensors/mouse.md)
   * [Touch](../api-documentation/sensors/touch.md)
   * [Keyboard](../api-documentation/sensors/keyboard.md)
-* Accessibility features
+* [Accessibility features](../guides/accessibility.md)
 
-If you don't need any other features, you can skip right ahead to the [Quick start](getting-started.md) guide. 
+### Modifiers
 
-### [Sortable](../presets/sortable/)
+Modifiers let you dynamically modify the movement coordinates that are detected by sensors. They can be used for a wide range of use cases, for example:
+
+* Restricting motion to a single axis
+* Restricting motion to the draggable node container's bounding rectangle 
+* Restricting motion to the draggable node's scroll container bounding rectangle
+* Applying resistance or clamping the motion
+
+The modifiers repository contains a number of useful modifiers that can be applied on [`DndContext`](../api-documentation/context-provider/) as well as [`DraggableClone`](../api-documentation/draggable/clone.md).
+
+To start using modifiers, install the modifiers package via yarn or npm:
+
+```
+npm install @dnd-kit/modifiers
+```
+
+### Presets
+
+#### [Sortable](../presets/sortable/)
 
 The `@dnd-kit/core` package provides all the building blocks you would need to build a sortable interface from scratch should you choose to, but thankfully you don't need to. 
 
