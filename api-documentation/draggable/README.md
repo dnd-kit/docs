@@ -176,12 +176,54 @@ In some cases, you may want to use a [Draggable clone ](clone.md)rather than tra
 
 If your item needs to move from one container to another, or if your draggable item is within a scrollable container, we recommend you use the [`<DraggableClone>`](clone.md) component so the item can move more freely from one container to another.
 
+{% tabs %}
+{% tab title="App.jsx" %}
 ```jsx
 import React, {useState} from 'react';
 import {DndContext, DraggableClone} from '@dnd-kit/core';
 
+import {Draggable} from './Draggable';
+
 /* The implementation details of <Item> and <ScrollableList> are not
  * relevant for this example and are therefore omitted. */
+
+function App() {
+  const [items] = useState(['1', '2', '3', '4', '5']);
+  const [activeId, setActiveId] = useState(null);
+  
+  return (
+    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+      <ScrollableList>
+        {items.map(id =>
+          <Draggable key={id} id={id}>
+            <Item value={`Item ${id}`} />
+          </Draggable>
+        )}
+      </ScrollableList>
+      
+      <DraggableClone>
+        {activeId ? (
+          <Item value={`Item ${activeId}`} /> 
+        ): null}
+      </DraggableClone>
+    </DndContext>
+  );
+  
+  function handleDragStart(event) {
+    setActiveId(event.active.id);
+  }
+  
+  function handleDragEnd() {
+    setActiveId(null);
+  }
+}
+```
+{% endtab %}
+
+{% tab title="Draggable.jsx" %}
+```jsx
+import React from 'react';
+import {useDraggable} from '@dnd-kit/core';
 
 function Draggable(props) {
   const {attributes, listeners, setNodeRef} = useDraggable({
@@ -194,41 +236,13 @@ function Draggable(props) {
     </li>
   );
 }
-
-function App() {
-  const [activeId, setActiveId] = useState(null);
-  
-  return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <ScrollableList>
-        <Draggable id="1"><Item value="Item 1" /></Draggable>
-        <Draggable id="2"><Item value="Item 2" /></Draggable>
-        <Draggable id="3"><Item value="Item 3" /></Draggable>
-      </ScrollableList>
-      
-      <DraggableClone>
-        {activeId ? (
-          <Item value={`Item ${activeId}`} /> 
-        ): null}
-      </DraggableClone>
-    </DndContext>
-  );
-  
-  function handleDragStart({active}) {
-    setActiveId(active.id);
-  }
-  
-  function handleDragEnd() {
-    setActiveId(null);
-  }
-}
 ```
+{% endtab %}
+{% endtabs %}
 
 In this example, whenever a draggable item is picked up, we render a clone that can move freely outside of the `<ScrollableList>` and isn't constrained to it's overflow or stacking context.
 
-We hope this has given you a taste of what Draggable clones are used for. There's a lot more you can do with Draggable clones. 
-
-We recommend you read about all of the possibilities that it provides in the in-depth guide:
+We hope this has given you a taste of what Draggable clones are used for and how to use them. There's a lot more you can do with Draggable clones, we recommend you read about all of the possibilities that it provides in the in-depth guide:
 
 {% page-ref page="clone.md" %}
 
