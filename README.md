@@ -18,15 +18,18 @@ description: >-
 
 ![](.gitbook/assets/robot-illustration-concepts.svg)
 
-### Powerfully simple
+The core library of **dnd kit** exposes two main concepts:
 
-**dnd kit** is powerful and packed with features, and built with the hope of being the last drag and drop library you'll ever need, whether you're building a simple draggable element or a complex application built around drag and drop interactions .
+* [Draggable elements](api-documentation/draggable/)
+* [Droppable areas](api-documentation/droppable/)
 
- At its core, **dnd kit** exposes two main concepts: [Draggable](api-documentation/draggable/) items and [Droppable](api-documentation/droppable/) containers. Augment your existing components using the `useDraggable` and `useDroppable` hooks, or combine both to create components that can both be dragged and dropped over.
+Augment your existing components using the [`useDraggable`](api-documentation/draggable/usedraggable.md) and [`useDroppable`](api-documentation/droppable/usedroppable.md) hooks, or combine both to create components that can both be dragged and dropped over.
 
-Manage events and customize the behaviour of your application using the [`<DndContext>`](api-documentation/context-provider/)  provider. 
+Handle events and customize the behaviour of your draggable elements and droppable areas using the [`<DndContext>`](api-documentation/context-provider/)  provider.  Configure [sensors](api-documentation/sensors/) to handle different input methods.
 
-Check out our quick start guide to learn how get started with **dnd kit:**
+Use the [`<DragOverlay>`](api-documentation/draggable/drag-overlay.md) component to render a draggable overlay that is removed from the normal document flow and is positioned relative to the viewport.
+
+Check out our quick start guide to learn how get started:
 
 {% page-ref page="introduction/getting-started.md" %}
 
@@ -36,7 +39,7 @@ Extensibility is at the core of **dnd kit**. It was built to be lean and extensi
 
 A prime example of the level of extensibility of **dnd kit** is the[ Sortable preset](presets/sortable/), which is built using the extension points that are exposed by `@dnd-kit/core`.
 
-The primary extension points of **dnd kit** are:
+The primary extension points are:
 
 * [Sensors](api-documentation/sensors/)
 * [Modifiers](api-documentation/modifiers.md)
@@ -44,13 +47,15 @@ The primary extension points of **dnd kit** are:
 
 ### Accessibility
 
-Building accessible drag and drop interfaces is hard; **dnd kit**  has a number of sensible defaults and starting points to help you make your drag and drop interface accessible: 
+Building drag and drop interfaces that are accessible to everyone isn't easy, and requires thoughtful consideration.
+
+The `@dnd-kit/core` library provides a number of starting points to help you make your drag and drop interfaces accessible:
 
 * Customizable **screen reader instructions** for how to interact with draggable items
 * Customizable **live region updates** to provide screen reader announcements in real-time of what is currently happening with draggable and droppable elements.
 * Sensible defaults for **`aria` attributes** that should be passed to draggable item
 
-Check out our Accessibility guide to learn more about how you can help provide a better experience for screen readers:
+Check out our Accessibility guide to learn more about how you can help make your drag and drop interface accessible for everyone:
 
 {% page-ref page="guides/accessibility.md" %}
 
