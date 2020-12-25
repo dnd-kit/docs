@@ -9,7 +9,7 @@ description: >-
 * **Built for React:** exposes hooks such as ****[`useDraggable`](api-documentation/draggable/usedraggable.md) and [`useDroppable`](api-documentation/droppable/usedroppable.md), and  won't require you to re-architect your app or create additional wrapper DOM nodes.
 * **Feature packed:** customizable collision detection algorithms, multiple activators, draggable clone, drag handles, auto-scrolling, constraints, and so much more.
 * **Supports a wide range of use cases:** vertical lists, horizontal lists, grids, multiple containers, nested contexts, variable sized list and grids, transformed items, virtualized lists.
-* **Zero dependencies and modular:** the core of the library weighs around 10kb. It's built around built-in React state management and context, which keeps the library lean.
+* **Zero dependencies and modular:** the core of the library weighs around 10kb and has no external dependencies. It's built around built-in React state management and context, which keeps the library lean.
 * **Built-in support for multiple input methods:** Pointer, mouse, touch and keyboard sensors.
 * **Fully customizable & extensible:** Customize every detail: animations, transitions, behaviours, styles. Build your own [sensors](api-documentation/sensors/), [collision detection algorithms](api-documentation/context-provider/collision-detection-algorithms.md), customize key bindings and so much more.
 * **Accessibility:** Keyboard support, sensible default aria attributes, customizable screen reader instructions and live regions built-in.
@@ -54,7 +54,7 @@ The `@dnd-kit/core` library provides a number of starting points to help you mak
 * [Keyboard support ](api-documentation/sensors/keyboard.md)out of the box
 * [Customizable screen reader instructions](guides/accessibility.md#screen-reader-instructions) for how to interact with draggable items
 * [Customizable live region updates](guides/accessibility.md#screen-reader-announcements-using-live-regions) to provide screen reader announcements in real-time of what is currently happening with draggable and droppable elements.
-* [Sensible defaults for `aria` attributes](api-documentation/draggable/usedraggable.md#attributes) that should be passed to draggable elements
+* [Sensible defaults for attributes](api-documentation/draggable/usedraggable.md#attributes) that should be passed to draggable elements
 
 Check out our Accessibility guide to learn more about how you can help make your drag and drop interface accessible for everyone:
 
