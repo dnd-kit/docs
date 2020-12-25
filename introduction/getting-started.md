@@ -20,6 +20,9 @@ First, we'll set up the general structure of the app. In order for the [`useDrag
 import React from 'react';
 import {DndContext} from '@dnd-kit/core';
 
+import {Draggable} from './Draggable';
+import {Droppable} from './Droppable';
+
 function App() {
   return (
     <DndContext>
