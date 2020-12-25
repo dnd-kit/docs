@@ -17,10 +17,10 @@ npm install @dnd-kit/modifiers
 
 ## Usage
 
-The modifiers repository contains a number of useful modifiers that can be applied on [`DndContext`](context-provider/) as well as [`DraggableClone`](draggable/drag-overlay.md).
+The modifiers repository contains a number of useful modifiers that can be applied on [`DndContext`](context-provider/) as well as [`DragOverlay`](draggable/drag-overlay.md).
 
 ```jsx
-import {DndContext, DraggableClone} from '@dnd-kit';
+import {DndContext, DragOverlay} from '@dnd-kit';
 import {
   restrictToVerticalAxis,
   restrictToWindowEdges,
@@ -30,15 +30,15 @@ function App() {
   return (
     <DndContext modifiers={[restrictToVerticalAxis]}>
       {/* ... */}
-      <DraggableClone modifiers={[restrictToWindowEdges]}>
+      <DragOverlay modifiers={[restrictToWindowEdges]}>
         {/* ... */}
-      </DraggableClone>
+      </DragOverlay>
     </DndContext>
   )
 }
 ```
 
-As you can see from the example above, `DndContext` and `DraggableClone` can both have different modifiers.
+As you can see from the example above, `DndContext` and `DragOverlay` can both have different modifiers.
 
 ## Built-in modifiers
 
@@ -56,7 +56,7 @@ Restrict movement to only the vertical axis.
 
 #### `restrictToWindowEdges`
 
-Restrict movement to the edges of the window. This modifier can be useful to prevent the `DraggableClone` from being moved outside of the bounds of the window.
+Restrict movement to the edges of the window. This modifier can be useful to prevent the `DragOverlay` from being moved outside of the bounds of the window.
 
 #### `restrictToContainerEdges`
 
