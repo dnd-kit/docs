@@ -26,6 +26,7 @@ In order to keep the core of the library small, `@dnd-kit/core` only ships with 
 * Hooks for: 
   * [Draggable](../api-documentation/draggable/)
   * [Droppable](../api-documentation/droppable/)
+* [Drag Overlay](../api-documentation/draggable/drag-overlay.md)
 * Sensors for:
   * [Pointer](../api-documentation/sensors/pointer.md)
   * [Mouse](../api-documentation/sensors/mouse.md)
