@@ -51,9 +51,10 @@ Building drag and drop interfaces that are accessible to everyone isn't easy, an
 
 The `@dnd-kit/core` library provides a number of starting points to help you make your drag and drop interfaces accessible:
 
-* Customizable **screen reader instructions** for how to interact with draggable items
-* Customizable **live region updates** to provide screen reader announcements in real-time of what is currently happening with draggable and droppable elements.
-* Sensible defaults for **`aria` attributes** that should be passed to draggable item
+* [Keyboard support ](api-documentation/sensors/keyboard.md)out of the box
+* [Customizable screen reader instructions](guides/accessibility.md#screen-reader-instructions) for how to interact with draggable items
+* [Customizable live region updates](guides/accessibility.md#screen-reader-announcements-using-live-regions) to provide screen reader announcements in real-time of what is currently happening with draggable and droppable elements.
+* [Sensible defaults for `aria` attributes](api-documentation/draggable/usedraggable.md#attributes) that should be passed to draggable elements
 
 Check out our Accessibility guide to learn more about how you can help make your drag and drop interface accessible for everyone:
 
