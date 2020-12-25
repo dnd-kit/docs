@@ -222,5 +222,124 @@ function App() {
 }
 ```
 
+## Props
 
+```typescript
+{
+  adjustScale?: boolean;
+  children?: React.ReactNode;
+  className?: string;
+  dropAnimation?: DropAnimation | null;
+  style?: React.CSSProperties;
+  transition?: string | TransitionGetter;
+  modifiers?: Modifiers;
+  wrapperElement?: keyof JSX.IntrinsicElements;
+  zIndex?: number;
+}
+```
+
+### Children
+
+You may render any valid JSX within the children of the `<DragOverlay>`. However, **make sure that the components rendered within the drag overlay do not use the `useDraggable` hook**.
+
+Prefer conditionally rendering the `children` of `<DragOverlay>` rather than conditionally rendering `<DragOverlay>`, otherwise drop animations will not work.
+
+### Class name and inline styles
+
+If you'd like to customize the[ wrapper element](drag-overlay.md#wrapper-element) that the `DragOverlay`'s children are rendered into, use the `className` and `style` props:
+
+```jsx
+<DragOverlay
+  className="my-drag-overlay"
+  style={{
+    width: 500,
+  }}
+>
+  {/* ... */}
+</DragOverlay>
+```
+
+### Drop animation
+
+Use the `dropAnimation` prop to configure the drop animation.
+
+```typescript
+interface DropAnimation {
+  duration: number;
+  easing: string;
+}
+```
+
+The `duration` option should be a number, in `milliseconds`. The default value is `250` milliseconds. The `easing` option should be a string that represents a valid [CSS easing function](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function). The default easing is `ease`.
+
+```jsx
+<DragOverlay dropAnimation={{
+  duration: 500,
+  easing: 'cubic-bezier(0.18, 0.67, 0.6, 1.22)',
+}}>
+  {/* ... */}
+</DragOverlay>
+```
+
+To disable drop animations, set the `dropAnimation` prop to `null`.
+
+```jsx
+<DragOverlay dropAnimation={null}>
+  {/* ... */}
+</DragOverlay>
+```
+
+{% hint style="warning" %}
+The `<DragOverlay>` component should **remain mounted at all times** so that it can perform the drop animation. If you conditionally render the `<DragOverlay>` component, drop animations will not work.
+{% endhint %}
+
+### Modifiers
+
+Modifiers let you dynamically modify the movement coordinates that are detected by sensors. They can be used for a wide range of use-cases, which you can learn more about by reading the [Modifiers](../modifiers.md) documentation.
+
+For example, you can use modifiers to restrict the movement of the `<DragOverlay>` to the bounds of the window:
+
+```jsx
+import {DndContext, DragOverlay} from '@dnd-kit';
+import {
+  restrictToWindowEdges,
+} from '@dnd-kit/modifiers';
+
+function App() {
+  return (
+    <DndContext>
+      {/* ... */}
+      <DragOverlay modifiers={[restrictToWindowEdges]}>
+        {/* ... */}
+      </DragOverlay>
+    </DndContext>
+  )
+}
+```
+
+### Transition
+
+By default, the `<DragOverlay>` component does not have any transitions, unless activated by the [`Keyboard` sensor](../sensors/keyboard.md). Use the `transition` prop to create a function that returns the transition based on the [activator event](../sensors/#activators). The default implementation is:
+
+```javascript
+function defaultTransition(activatorEvent) {
+  const isKeyboardActivator = activatorEvent instanceof KeyboardEvent;
+
+  return isKeyboardActivator ? 'transform 250ms ease' : undefined;
+};
+```
+
+### Wrapper element
+
+By default, the `<DragOverlay>` component renders your elements within a `div` element. If your draggable elements are list items, you'll want to update the `<DragOverlay>` component to render a `ul` wrapper instead, since wrapping a `li` item without a parent `ul` is invalid HTML:
+
+```jsx
+<DragOverlay wrapperElement="ul">
+  {/* ... */}
+</DragOverlay>
+```
+
+### `z-index`
+
+The `zIndex` prop sets the [z-order](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index) of the drag overlay. The default value is `999` for compatibility reasons, but we highly recommend you use a lower value. 
 
