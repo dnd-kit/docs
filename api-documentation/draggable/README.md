@@ -176,18 +176,23 @@ To learn more about the best practices for making draggable interfaces accessibl
 
 {% page-ref page="../../guides/accessibility.md" %}
 
-## Draggable clone
+## Drag Overlay
 
-In some cases, you may want to use a [Draggable clone ](clone.md)rather than transforming the original draggable source. This will largely depend on your use-case:
+The `<DragOverlay>` component provides a way to render a fixed overlay for the active draggable component to be dragged instead of the original drag source.
 
-* If your item needs to move from one container to another while dragging, we highly recommend you use the [`<DraggableClone>`](clone.md) component so the item can move more freely from one container to another. You'll also be able to get smooth drop animations when using the draggable clone.
-* If your draggable item is within a scrollable container, we also recommend you use a `<DraggableClone>`, otherwise you'll need to set the draggable element to `position: fixed` yourself so the item isn't restricted to the overflow and stacking context of its scroll container, and can move without being affected by the scroll position of its container.
+![](../../.gitbook/assets/dragoverlay%20%281%29.png)
+
+Depending on your use-case, you may want to use a [drag overlay ](drag-overlay.md)rather than transforming the original draggable source:
+
+* If you'd like to show a preview of where the draggable source will be when dropped
+* If your item needs to move from one container to another while dragging, we highly recommend you use the [`<DragOverlay>`](drag-overlay.md) component so the item can move more freely from one container to another. You'll also be able to get smooth drop animations when using the draggable clone.
+* If your draggable item is within a scrollable container, we also recommend you use a `<DragOverlay>`, otherwise you'll need to set the draggable element to `position: fixed` yourself so the item isn't restricted to the overflow and stacking context of its scroll container, and can move without being affected by the scroll position of its container.
 
 {% tabs %}
 {% tab title="App.jsx" %}
 ```jsx
 import React, {useState} from 'react';
-import {DndContext, DraggableClone} from '@dnd-kit/core';
+import {DndContext, DragOverlay} from '@dnd-kit/core';
 
 import {Draggable} from './Draggable';
 
@@ -208,11 +213,11 @@ function App() {
         )}
       </ScrollableList>
       
-      <DraggableClone>
+      <DragOverlay>
         {activeId ? (
           <Item value={`Item ${activeId}`} /> 
         ): null}
-      </DraggableClone>
+      </DragOverlay>
     </DndContext>
   );
   
@@ -251,5 +256,5 @@ In this example, whenever a draggable item is picked up, we render a clone that 
 
 We hope this has given you a taste of what Draggable clones are used for and how to use them. There's a lot more you can do with Draggable clones, we recommend you read about all of the possibilities that it provides in the in-depth guide:
 
-{% page-ref page="clone.md" %}
+{% page-ref page="drag-overlay.md" %}
 

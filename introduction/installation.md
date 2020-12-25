@@ -42,7 +42,7 @@ Modifiers let you dynamically modify the movement coordinates that are detected 
 * Restricting motion to the draggable node's scroll container bounding rectangle
 * Applying resistance or clamping the motion
 
-The modifiers repository contains a number of useful modifiers that can be applied on [`DndContext`](../api-documentation/context-provider/) as well as [`DraggableClone`](../api-documentation/draggable/clone.md).
+The modifiers repository contains a number of useful modifiers that can be applied on [`DndContext`](../api-documentation/context-provider/) as well as [`DraggableClone`](../api-documentation/draggable/drag-overlay.md).
 
 To start using modifiers, install the modifiers package via yarn or npm:
 

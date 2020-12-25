@@ -17,7 +17,7 @@ npm install @dnd-kit/modifiers
 
 ## Usage
 
-The modifiers repository contains a number of useful modifiers that can be applied on [`DndContext`](context-provider/) as well as [`DraggableClone`](draggable/clone.md).
+The modifiers repository contains a number of useful modifiers that can be applied on [`DndContext`](context-provider/) as well as [`DraggableClone`](draggable/drag-overlay.md).
 
 ```jsx
 import {DndContext, DraggableClone} from '@dnd-kit';

@@ -16,7 +16,7 @@
   * [useDroppable](api-documentation/droppable/usedroppable.md)
 * [Draggable](api-documentation/draggable/README.md)
   * [useDraggable](api-documentation/draggable/usedraggable.md)
-  * [DraggableClone](api-documentation/draggable/clone.md)
+  * [Drag Overlay](api-documentation/draggable/drag-overlay.md)
 * [Sensors](api-documentation/sensors/README.md)
   * [Pointer](api-documentation/sensors/pointer.md)
   * [Mouse](api-documentation/sensors/mouse.md)

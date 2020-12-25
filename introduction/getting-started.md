@@ -111,7 +111,7 @@ As you can see from the example above, it really only takes just a few lines to 
 
 * For performance reasons, we recommend you use **`transform`** over other positional CSS properties to move the dragged element. 
 * You'll likely want to alter the **`z-index`** of your Draggable component to ensure it appears on top of other elements.
-* If your item needs to move from one container to another, we recommend you use the [`<DraggableClone>`](../api-documentation/draggable/clone.md) component so the item isn't constrained to its parent's stacking context and overflow constraints.
+* If your item needs to move from one container to another, we recommend you use the [`<DragOverlay>`](../api-documentation/draggable/drag-overlay.md) component so the item isn't constrained to its parent's stacking context and overflow constraints.
 {% endhint %}
 
 Converting the `transform` object to a string can feel tedious. Fear not, you can avoid having to do this by hand by importing the `CSS` utility from the `@dnd-kit/utilities` package: 
