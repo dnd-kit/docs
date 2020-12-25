@@ -199,8 +199,6 @@ function DraggableItem(props) {
 });
 ```
 
-The advantage of this pattern is that you can then 
-
 ### Portals
 
 The drag overlay is not rendered in a portal by default. Rather, it is rendered in the container where it is rendered. 
