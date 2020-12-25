@@ -6,7 +6,7 @@ To get started with **dnd kit**, install the core library via `npm` or `yarn`:
 npm install @dnd-kit/core
 ```
 
-You'll also need to be make sure you have **dnd kit**'s peer dependencies installed. Chances are you already have `react` and `react-dom` installed in your project, but if not, make sure to ins:
+You'll also need to be make sure you have peer dependencies installed. Chances are you already have `react` and `react-dom` installed in your project, but if not, make sure to ins:
 
 ```bash
 npm install react react-dom
