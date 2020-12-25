@@ -18,7 +18,9 @@ Depending on your use-case, you may want to use a drag overlay rather than trans
 
 You may render any valid JSX within the children of the `<DragOverlay>`. However, **make sure that the components rendered within the drag overlay do not use the `useDraggable` hook**.  
 
-The `<DragOverlay>` component should remain mounted at all times so that it can perform the drop animation. If you conditionally render the `<DragOverlay>` component, drop animations will not work.
+The `<DragOverlay>` component should **remain mounted at all times** so that it can perform the drop animation. If you conditionally render the `<DragOverlay>` component, drop animations will not work.
+
+As a rule of thumb, try to render the `<DragOverlay>` outside fo your draggable components, and follow the [presentational component pattern ](drag-overlay.md#presentational-components)to maintain a good separation of concerns.
 
 Instead, you should conditionally render the children passed to the `<DragOverlay>`:
 
@@ -86,11 +88,85 @@ function Draggable(props) {
 {% endtab %}
 {% endtabs %}
 
-## Recommended patterns
+## Patterns
 
-### Presentational components with forwarded refs
+### Presentational components
 
 We **highly** recommend that all the components you intend to make draggable be [presentational components ](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)that are decoupled from `@dnd-kit` entirely.
+
+A common pitfall when using the `DragOverlay` component is rendering the same component that calls `useDraggable` inside the `DragOverlay`. This will lead to unexpected results, since there will be an `id` collision between the two components both calling `useDraggable` with the same `id`.
+
+Instead, create a presentational version of your component that you intend on rendering in the drag overlay, and another version that is draggable and renders the presentational component.
+
+#### Wrapper nodes
+
+As you may have noticed from the example above, we can create small abstract components that render a wrapper node and make any children rendered within draggable:
+
+{% tabs %}
+{% tab title="Draggable.jsx" %}
+```jsx
+import React from 'react';
+import {useDraggable} from '@dnd-kit/core';
+
+function Draggable(props) {
+  const Element = props.element || 'div';
+  const {attributes, listeners, setNodeRef} = useDraggable({
+    id: props.id,
+  });
+  
+  return (
+    <Element ref={setNodeRef} {...listeners} {...attributes}>
+      {props.children}
+    </Element>
+  );
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Using this pattern, we can then render our presentational components within `<Draggable>` and within `<DragOverlay>`:
+
+{% tabs %}
+{% tab title="App.jsx" %}
+```jsx
+import React, {useState} from 'react';
+import {DndContext, DragOverlay} from '@dnd-kit/core';
+
+import {Draggable} from './Draggable';
+
+/* The implementation details of <Item> is not
+ * relevant for this example and therefore omitted. */
+
+function App() {
+  const [isDragging, setIsDragging] = useState(false);
+  
+  return (
+    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+      <Draggable id="my-draggable-element">
+        <Item />
+      </Draggable>
+      
+      <DragOverlay>
+        {isDragging ? (
+          <Item />
+        ): null}
+      </DragOverlay>
+    </DndContext>
+  );
+  
+  function handleDragStart() {
+    setIsDragging(true);
+  }
+  
+  function handleDragEnd() {
+    setIsDragging(false);
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+#### Ref forwarding
 
 Use the[ ref forwarding pattern](https://reactjs.org/docs/forwarding-refs.html) to connect your presentational components to the `useDraggable` hook:
 
@@ -104,7 +180,7 @@ const Item = forwardRef(({children, ...props}, ref) => {
 });
 ```
 
-This way, you can create two versions of your component, one that is presentational, and one that is draggable and renders the presentational component without the need for additional wrapper elements:
+This way, you can create two versions of your component, one that is presentational, and one that is draggable and renders the presentational component **without the need for additional wrapper elements**:
 
 ```jsx
 import React from 'react';
