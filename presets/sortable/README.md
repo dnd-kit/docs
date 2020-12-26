@@ -212,7 +212,11 @@ function App() {
       tolerance: 5,
     },
   });
-  const sensors = useSortableSensors({}, [mouseSensor, touchSensor]);
+  const sensors = useSortableSensors({
+    keyboardSensorOptions: {
+      scrollBehavior: 'auto',
+    }
+  }, mouseSensor, touchSensor);
   
   return (
     <DndContext sensors={sensors}>
