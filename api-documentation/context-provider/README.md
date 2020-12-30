@@ -8,7 +8,7 @@ In order for your your [Droppable](../droppable/) and [Draggable](../draggable/)
 
 > React context provides a way to pass data through the component tree without having to pass props down manually at every level.
 
-Therefore, components that use `useDraggable`, `useDroppable` or `DraggableClone` will need to be nested within a `DndContext` provider.
+Therefore, components that use [`useDraggable`](../draggable/usedraggable.md), [`useDroppable`](../droppable/usedroppable.md)  or [`DragOverlay`](../draggable/drag-overlay.md) will need to be nested within a `DndContext` provider.
 
  They don't need to be direct descendants, but, there does need to be a parent `<DndContext>` provider somewhere higher up in the tree.
 
