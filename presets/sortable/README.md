@@ -160,16 +160,36 @@ For more details on the `useSortable` hook, read the full [API documentation](us
 
 Sensors are an abstraction to manage and listen to different input methods. If you're unfamiliar with the concept of sensors, we recommend you read the [introduction to sensors](../../api-documentation/sensors/) first. 
 
-The sortable preset ships with an augmented version of the keyboard sensor that is optimized for the use case of sortable lists. 
+By default, the [Keyboard](../../api-documentation/sensors/keyboard.md) sensor moves the active draggable item by `25` pixels in the direction of the arrow key that was pressed. This is an arbitrary default, and can be customized using the `coordinateGetter` option of the keyboard sensor. 
 
-To use it, import the `useSortableSensors` hook provided by `@dnd-kit/sortable`:
+The sortable preset ships with a custom coordinate getter function for the keyboard sensor that moves the active draggable to the closest sortable element in a given direction within the same `DndContext`.
+
+To use it, import the `useSortableSensors` coordinate getter provided by `@dnd-kit/sortable`, and pass it to the `coordiniateGetter` option of the Keyboard sensor.
+
+In this example, we'll also be setting up the [Pointer](../../api-documentation/sensors/pointer.md) sensor, which is the other sensor that is enabled by default on `DndContext` if none are defined. We use the `useSensor` and `useCombineSensor` hooks to initialize the sensors:
 
 ```jsx
-import {SortableContext, useSortableSensors} from '@dnd-kit/sortable';
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useCombineSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortableSensors,
+} from '@dnd-kit/sortable';
 
 function App() {
   const [items] = useState(['1', '2', '3']);
-  const sensors = useSortableSensors();
+  const sensors = useCombineSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   return (
     <DndContext sensors={sensors}>
@@ -181,17 +201,7 @@ function App() {
 }
 ```
 
-By default, `useSortableSensors` uses the [Keyboard](../../api-documentation/sensors/keyboard.md) and [Pointer](../../api-documentation/sensors/pointer.md) sensors. If you'd like to configure the keyboard sensor, you can do so by passing options directly to `useSortableSensors`:
-
-```javascript
-useSortableSensors({
-  keyboardSensorOptions: {
-    scrollBehavior: 'auto',
-  }
-})
-```
-
-If you'd like to configure the Pointer sensor, or use the Mouse and Touch sensors instead, initialize those sensors separately with the options you'd like to use and pass those as the second argument to `useSortableSensors`:
+If you'd like to use the [Mouse](../../api-documentation/sensors/mouse.md) and [Touch](../../api-documentation/sensors/touch.md) sensors instead of the [Pointer](../../api-documentation/sensors/pointer.md) sensor, simply initialize those sensors instead: 
 
 ```jsx
 import {MouseSensor, TouchSensor, useSensor} from '@dnd-kit/core';
@@ -199,25 +209,25 @@ import {SortableContext, useSortableSensors} from '@dnd-kit/sortable';
 
 function App() {
   const [items] = useState(['1', '2', '3']);
-  const mouseSensor = useSensor(MouseSensor, {
-    // Require the mouse to move by 10 pixels before activating
-    activationConstraint: {
-      distance: 10,
-    },
-  });
-  const touchSensor = useSensor(TouchSensor, {
-    // Press delay of 250ms, with tolerance of 5px of movement
-    activationConstraint: {
-      delay: 250,
-      tolerance: 5,
-    },
-  });
-  const sensors = useSortableSensors({
-    keyboardSensorOptions: {
-      scrollBehavior: 'auto',
-    }
-  }, mouseSensor, touchSensor);
-  
+  const sensors = useCombineSensors(
+    useSensor(MouseSensor, {
+      // Require the mouse to move by 10 pixels before activating
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
+    useSensor(TouchSensor, {
+      // Press delay of 250ms, with tolerance of 5px of movement
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
   return (
     <DndContext sensors={sensors}>
       <SortableContext items={items}>
@@ -228,7 +238,7 @@ function App() {
 }
 ```
 
-To learn more about sensors, read the detailed documentation on sensors:
+To learn more about sensors, read the in-depth documentation on sensors:
 
 {% page-ref page="../../api-documentation/sensors/" %}
 
