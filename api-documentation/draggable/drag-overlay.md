@@ -94,7 +94,7 @@ function Draggable(props) {
 
 We **highly** recommend that all the components you intend to make draggable be [presentational components ](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)that are decoupled from `@dnd-kit` entirely.
 
-A common pitfall when using the `DragOverlay` component is rendering the same component that calls `useDraggable` inside the `DragOverlay`. This will lead to unexpected results, since there will be an `id` collision between the two components both calling `useDraggable` with the same `id`.
+A **common pitfall** when using the `DragOverlay` component is rendering the same component that calls `useDraggable` inside the `DragOverlay`. This will lead to unexpected results, since there will be an `id` collision between the two components both calling `useDraggable` with the same `id`.
 
 Instead, create a presentational version of your component that you intend on rendering in the drag overlay, and another version that is draggable and renders the presentational component.
 
