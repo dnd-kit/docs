@@ -16,6 +16,100 @@ npm install @dnd-kit/sortable
 
 ## Overview
 
+If you're eager to get started right away, here's the code you'll need:
+
+{% tabs %}
+{% tab title="App.jsx" %}
+```jsx
+import React, {useState} from 'react';
+import {
+  DndContext, 
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+
+import {SortableItem} from './SortableItem';
+
+function App() {
+  const [items, setItems] = useState(['1', '2', '3']);
+  const sensors = useSortableSensors({
+    strategy: verticalListSortingStrategy,
+  });
+
+  return (
+    <DndContext 
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext 
+        items={items}
+        strategy={verticalListSortingStrategy}
+      >
+        {items.map(id => <SortableItem key={id} id={id} />)}
+      </SortableContext>
+    </DndContext>
+  );
+  
+  function handleDragEnd(event) {
+    const {active, over} = event;
+    
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+        
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  }
+}
+```
+{% endtab %}
+
+{% tab title="SortableItem.jsx" %}
+```jsx
+import React from 'react';
+import {useSortable} from '@dnd-kit/sortable';
+import {CSS} from '@dnd-kit/utilities';
+
+export function SortableItem(props) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({id: props.id});
+  
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+  
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {/* ... */}
+    </div>
+  );
+}
+```
+{% endtab %}
+{% endtabs %}
+
+For most sortable lists, we recommend you use a [`DragOverlay`](../../api-documentation/draggable/drag-overlay.md) if your sortable list is scrollable or if the contents of the scrollable list are taller than the viewport of the window. Check out the[ sortable drag overlay guide](./#drag-overlay) below to learn more.
+
+## Architecture
+
 The sortable preset builds on top of the primitives exposed by `@dnd-kit/core` to help building sortable interfaces. 
 
 The sortable preset exposes two main concepts: [~~`SortableContext`~~](./#sortable-context) and the [`useSortable`](./#usesortable) hook:
@@ -47,7 +141,7 @@ If you paid close attention to the illustration above, you may also have noticed
 
 ### Sortable Context
 
-In addition to the [drag and drop context provider](../../introduction/getting-started.md#context-provider),  the Sortable preset requires its own context provider that contains the **sorted** array of the unique identifiers associated to each sortable item:
+In addition to the [`DndContext` provider](../../introduction/getting-started.md#context-provider),  the Sortable preset requires its own context provider that contains the **sorted** array of the unique identifiers associated to each sortable item:
 
 ```jsx
 import React, {useState} from 'react';
@@ -68,6 +162,10 @@ function App() {
 ```
 
 The `SortableContext` provides information via context that is consumed by the `useSortable` hook, which is covered in greater detail in the next section.  
+
+{% hint style="info" %}
+It's important that the `items` prop passed to `SortableContext` be sorted in the same order in which the items are rendered, otherwise you will see unexpected results.
+{% endhint %}
 
 It does not expose any callback props. To know when a sortable \(draggable\) item is being picked or moved over another sortable \(droppable\) item, use the callback props of `DndContext`:
 
@@ -107,9 +205,13 @@ As outlined above, the `useSortable` hook combines both the [`useDraggable`](../
 In most cases, the draggable and droppable hooks will be attached to the same node, and therefore be identical in size. They are represented as different nodes for illustration purposes above.
 {% endhint %}
 
-If you're already familiar with the [`useDraggable`](../../api-documentation/draggable/) hook, the `useSortable` hook should look very familiar, since, it is an abstraction on top of it. 
+If you're already familiar with the [`useDraggable`](../../api-documentation/draggable/) hook, the [`useSortable`](usesortable.md) hook should look very familiar, since, it is an abstraction on top of it. 
 
-In addition to the `attributes`, `listeners`,`transform`  and `setNodeRef` arguments, which you should already be familiar with if you've used the `useDraggable` hook before, you'll notice that the `useSortable` hook also provides a `transition` argument.
+In addition to the `attributes`, `listeners`,`transform`  and `setNodeRef` properties, which you should already be familiar with if you've used the `useDraggable` hook before, you'll notice that the `useSortable` hook also provides a `transition` property.
+
+The `transform` property for `useSortable` represents the displacement and change of scale transformation that a sortable item needs to apply to transition to its new position without needing to update the DOM order.
+
+The `transform` property for the `useSortable` hook behaves similarly to the [`transform`](../../api-documentation/draggable/#transforms) property of the  [`useDraggable`](../../api-documentation/draggable/) hook for the active sortable item, when there is no [`DragOverlay`](../../api-documentation/draggable/drag-overlay.md) being used.
 
 {% tabs %}
 {% tab title="SortableItem.jsx" %}
@@ -166,9 +268,9 @@ By default, the [Keyboard](../../api-documentation/sensors/keyboard.md) sensor m
 
 The sortable preset ships with a custom coordinate getter function for the keyboard sensor that moves the active draggable to the closest sortable element in a given direction within the same `DndContext`.
 
-To use it, import the `useSortableSensors` coordinate getter provided by `@dnd-kit/sortable`, and pass it to the `coordiniateGetter` option of the Keyboard sensor.
+To use it, import the `sortableKeyboardCoordinates` coordinate getter function provided by `@dnd-kit/sortable`, and pass it to the `coordiniateGetter` option of the Keyboard sensor.
 
-In this example, we'll also be setting up the [Pointer](../../api-documentation/sensors/pointer.md) sensor, which is the other sensor that is enabled by default on `DndContext` if none are defined. We use the `useSensor` and `useCombineSensor` hooks to initialize the sensors:
+In this example, we'll also be setting up the [Pointer](../../api-documentation/sensors/pointer.md) sensor, which is the other sensor that is enabled by default on `DndContext` if none are defined. We use the `useSensor` and `useSensors` hooks to initialize the sensors:
 
 ```jsx
 import {
@@ -176,17 +278,16 @@ import {
   KeyboardSensor,
   PointerSensor,
   useSensor,
-  useCombineSensors,
+  useSensors,
 } from '@dnd-kit/core';
 import {
   SortableContext,
   sortableKeyboardCoordinates,
-  useSortableSensors,
 } from '@dnd-kit/sortable';
 
 function App() {
   const [items] = useState(['1', '2', '3']);
-  const sensors = useCombineSensors(
+  const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
@@ -206,12 +307,22 @@ function App() {
 If you'd like to use the [Mouse](../../api-documentation/sensors/mouse.md) and [Touch](../../api-documentation/sensors/touch.md) sensors instead of the [Pointer](../../api-documentation/sensors/pointer.md) sensor, simply initialize those sensors instead: 
 
 ```jsx
-import {MouseSensor, TouchSensor, useSensor} from '@dnd-kit/core';
-import {SortableContext, useSortableSensors} from '@dnd-kit/sortable';
+import {
+  DndContext,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+} from '@dnd-kit/sortable';
 
 function App() {
   const [items] = useState(['1', '2', '3']);
-  const sensors = useCombineSensors(
+  const sensors = useSensors(
     useSensor(MouseSensor, {
       // Require the mouse to move by 10 pixels before activating
       activationConstraint: {
@@ -267,15 +378,13 @@ In this example, we'll be using the closest center algorithm:
 import {
   closestCenter,
   SortableContext, 
-  useSortableSensors
 } from '@dnd-kit/sortable';
 
 function App() {
   const [items] = useState(['1', '2', '3']);
-  const sensors = useSortableSensors();
 
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter}>
+    <DndContext collisionDetection={closestCenter}>
       <SortableContext items={items}>
         {/* ... */}
       </SortableContext>
@@ -295,21 +404,17 @@ First, let's go ahead and render all of our sortable items:
 {% tabs %}
 {% tab title="App.jsx" %}
 ```jsx
-import {
-  closestCenter,
-  SortableContext,
-  useSortableSensors,
-} from '@dnd-kit/sortable';
+import React, {useState} from 'react';
+import {DndContext} from '@dnd-kit/core';
+import {SortableContext} from '@dnd-kit/sortable';
 
-
-import {SortableItem} from './SortableItem.jsx';
+import {SortableItem} from './SortableItem';
 
 function App() {
   const [items] = useState(['1', '2', '3']);
-  const sensors = useSortableSensors();
-
+  
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter}>
+    <DndContext>
       <SortableContext items={items}>
         {items.map(id => <SortableItem key={id} id={id} />)}
       </SortableContext>
@@ -319,8 +424,9 @@ function App() {
 ```
 {% endtab %}
 
-{% tab title="Sortable.jsx" %}
+{% tab title="SortableItem.jsx" %}
 ```jsx
+import React from 'react';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 
@@ -348,23 +454,105 @@ function SortableItem(props) {
 {% endtab %}
 {% endtabs %}
 
-In this example, we'll be building a vertical sortable list, so we will be using the `verticalListSortingStrategy`. Make sure to pass the strategy both to `SortableContext` and to `useSortableSensors`:
+Next, let's wire up the custom sensors for `DndContext` and add a custom collision detection strategy:
 
+{% tabs %}
+{% tab title="App.jsx" %}
 ```jsx
+import React, {useState} from 'react';
 import {
+  DndContext, 
   closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
   SortableContext,
-  useSortableSensors,
-  verticalListSortingStrategy,
+  sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
 
-import {SortableItem} from './SortableItem.jsx';
+
+import {SortableItem} from './SortableItem';
 
 function App() {
   const [items] = useState(['1', '2', '3']);
-  const sensors = useSortableSensors({
-    strategy: verticalListSortingStrategy,
-  });
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+  
+  return (
+    <DndContext sensors={sensors} collisionDetection={closestCenter}>
+      <SortableContext items={items}>
+        {items.map(id => <SortableItem key={id} id={id} />)}
+      </SortableContext>
+    </DndContext>
+  );
+}
+```
+{% endtab %}
+
+{% tab title="SortableItem.jsx" %}
+```jsx
+import {useSortable} from '@dnd-kit/sortable';
+import {CSS} from '@dnd-kit/utilities';
+
+export function SortableItem(props) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({id: props.id});
+  
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+  
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {/* ... */}
+    </div>
+  );
+}
+```
+{% endtab %}
+{% endtabs %}
+
+In this example, we'll be building a vertical sortable list, so we will be using the `verticalListSortingStrategy` sorting strategy:
+
+```jsx
+import React, {useState} from 'react';
+import {
+  DndContext, 
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+
+import {SortableItem} from './SortableItem';
+
+function App() {
+  const [items] = useState(['1', '2', '3']);
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter}>
@@ -382,15 +570,23 @@ function App() {
 Finally, we'll need to set up event handlers on the `DndContext` provider in order to update the order of the items on drag end.
 
 ```jsx
+import React, {useState} from 'react';
+import {
+  DndContext, 
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
 import {
   arrayMove,
-  closestCenter,
   SortableContext,
-  useSortableSensors,
+  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-import {SortableItem} from './SortableItem.jsx';
+import {SortableItem} from './SortableItem';
 
 function App() {
   const [items, setItems] = useState(['1', '2', '3']);
@@ -427,4 +623,133 @@ function App() {
   }
 }
 ```
+
+### Drag Overlay
+
+For most sortable lists, we recommend you use a [`DragOverlay`](../../api-documentation/draggable/drag-overlay.md) if your sortable list is scrollable or if the contents of the scrollable list are taller than the viewport of the window.
+
+The `<DragOverlay>` component provides a way to render a draggable overlay that is removed from the normal document flow and is positioned relative to the viewport. The drag overlay also implements drop animations.
+
+A **common pitfall** when using the `DragOverlay` component is rendering the same component that calls `useSortable` inside the `DragOverlay`. This will lead to unexpected results, since there will be an `id` collision between the two components both calling `useDraggable` with the same `id`, since `useSortable` is an abstraction on top of `useDraggable`.
+
+Instead, create a presentational version of your component that you intend on rendering in the drag overlay, and another version that is sortable and renders the presentational component. There are two recommended patterns for this, either using [wrapper nodes](../../api-documentation/draggable/drag-overlay.md#wrapper-nodes) or[ ref forwarding](../../api-documentation/draggable/drag-overlay.md#ref-forwarding). 
+
+In this example, we'll use the [ref forwarding](../../api-documentation/draggable/drag-overlay.md#ref-forwarding) pattern to avoid introducing wrapper nodes: 
+
+{% tabs %}
+{% tab title="App.jsx" %}
+```jsx
+import React, {useState} from 'react';
+import {
+  closestCenter,
+  DndContext, 
+  DragOverlay,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+
+import {SortableItem} from './SortableItem';
+import {Item} from './Item';
+
+function App() {
+  const [activeId, setActiveId] = useState(null);
+  const [items, setItems] = useState(['1', '2', '3']);
+  const sensors = useSortableSensors({
+    strategy: verticalListSortingStrategy,
+  });
+
+  return (
+    <DndContext 
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext 
+        items={items}
+        strategy={verticalListSortingStrategy}
+      >
+        {items.map(id => <SortableItem key={id} id={id} />)}
+      </SortableContext>
+      <DragOverlay>
+        {activeId ? <Item id={activeId} /> : null}
+      </DragOverlay>
+    </DndContext>
+  );
+  
+  function handleDragStart(event) {
+    const {active} = event;
+    
+    setActiveId(active.id);
+  }
+  
+  function handleDragEnd(event) {
+    const {active, over} = event;
+    
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+        
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+    
+    setActiveId(null);
+  }
+}
+```
+{% endtab %}
+
+{% tab title="SortableItem.jsx" %}
+```jsx
+import React from 'react';
+import {useSortable} from '@dnd-kit/sortable';
+import {CSS} from '@dnd-kit/utilities';
+
+import Item from './Item';
+
+export function SortableItem(props) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({id: props.id});
+  
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+  
+  return (
+    <Item ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {value}
+    </Item>
+  );
+}
+```
+{% endtab %}
+
+{% tab title="Item.jsx" %}
+```jsx
+import React, {forwardRef} from 'react';
+
+export const Item = forwardRef(({id, ...props}, ref) => {
+  return (
+    <div {...props} ref={ref}>{id}</div>
+  )
+});
+```
+{% endtab %}
+{% endtabs %}
 
