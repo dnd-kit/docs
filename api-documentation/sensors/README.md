@@ -98,3 +98,29 @@ function App() {
 }
 ```
 
+In other examples across the documentation, you may also see sensors initialized without intermediate variables, which is equivalent to the syntax above:
+
+```jsx
+import {
+  DndContext,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+} from '@dnd-kit/core';
+
+function App() {
+  const sensors = useCombineSensors(
+    useSensor(MouseSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor),
+  );
+  
+  return (
+    <DndContext sensors={sensors}>
+      {/* ... */}
+    </DndContext>
+  )
+}
+```
+
