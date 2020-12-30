@@ -26,6 +26,10 @@ function App() {
 }
 ```
 
+{% hint style="info" %}
+It's important that the `items` prop passed to `SortableContext` be sorted in the same order in which the items are rendered, otherwise you may see unexpected results.
+{% endhint %}
+
 ### Strategy
 
 The `SortableContext` component also accepts different [sorting strategies](./#sorting-strategies) to compute transforms for the `useSortable` hook. The built in strategies include:

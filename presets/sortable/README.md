@@ -164,7 +164,7 @@ function App() {
 The `SortableContext` provides information via context that is consumed by the `useSortable` hook, which is covered in greater detail in the next section.  
 
 {% hint style="info" %}
-It's important that the `items` prop passed to `SortableContext` be sorted in the same order in which the items are rendered, otherwise you will see unexpected results.
+It's important that the `items` prop passed to `SortableContext` be sorted in the same order in which the items are rendered, otherwise you may see unexpected results.
 {% endhint %}
 
 It does not expose any callback props. To know when a sortable \(draggable\) item is being picked or moved over another sortable \(droppable\) item, use the callback props of `DndContext`:
