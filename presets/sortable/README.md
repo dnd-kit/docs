@@ -33,7 +33,7 @@ At a high level, the application structure to implement a **sortable list with a
 
 ### Multiple containers
 
-To implement sortable list with items that can be dropped within **multiple containers**, the application structure is the same, but we add as many `SortableContexts` as we have containers:
+To implement sortable list with items that can be dropped within **multiple containers**, the application structure is the same, but we add as many `SortableContext` providers as we have containers:
 
 ![](../../.gitbook/assets/sortable-multiple-containers-example.png)
 
