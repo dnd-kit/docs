@@ -66,9 +66,9 @@ function App() {
 }
 ```
 
-### useCombineSensors
+### useSensors
 
-When initializing sensors with `useSensor`, make sure you pass the sensors to `useCombineSensors` before passing them to `DndContext`:
+When initializing sensors with `useSensor`, make sure you pass the sensors to `useSensors` before passing them to `DndContext`:
 
 ```jsx
 import {
@@ -77,6 +77,7 @@ import {
   MouseSensor,
   TouchSensor,
   useSensor,
+  useSensors,
 } from '@dnd-kit/core';
 
 function App() {
@@ -84,7 +85,7 @@ function App() {
   const touchSensor = useSensor(TouchSensor);
   const keyboardSensor = useSensor(KeyboardSensor);
   
-  const sensors = useCombineSensors(
+  const sensors = useSensors(
     mouseSensor,
     touchSensor,
     keyboardSensor,
@@ -107,10 +108,11 @@ import {
   MouseSensor,
   TouchSensor,
   useSensor,
+  useSensors,
 } from '@dnd-kit/core';
 
 function App() {
-  const sensors = useCombineSensors(
+  const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor),
     useSensor(KeyboardSensor),
