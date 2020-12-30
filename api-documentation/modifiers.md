@@ -58,13 +58,13 @@ Restrict movement to only the vertical axis.
 
 Restrict movement to the edges of the window. This modifier can be useful to prevent the `DragOverlay` from being moved outside of the bounds of the window.
 
-#### `restrictToContainerEdges`
+#### `restrictToParentElement`
 
-Restrict motion to the parent container of the draggable item that is picked up.
+Restrict movement to the parent element of the draggable item that is picked up.
 
-#### `restrictToScrollContainerEdges`
+#### `restrictToFirstScrollableAncestor`
 
-Restrict motion to the first scrollable parent of the draggable item that is picked up.
+Restrict movement to the first scrollable ancestor of the draggable item that is picked up.
 
 ### Snap to grid
 
@@ -80,6 +80,24 @@ const snapToGridModifier = createSnapModifier(gridSize);
 ```
 
 ## Building custom modifiers
+
+To build your own custom modifiers, refer to the implementation of the built-in modifiers of `@dnd-kit/modifiers`: [https://github.com/clauderic/dnd-kit/tree/master/packages/modifiers/src](https://github.com/clauderic/dnd-kit/tree/master/packages/modifiers/src)
+
+For example, here is an implementation to create a modifier to snap to grid:
+
+```javascript
+const gridSize = 20;
+
+function snapToGrid(args) {
+  const {transform} = args;
+  
+  return {
+    ...transform,
+    x: Math.ceil(transform.x / gridSize) * gridSize,
+    y: Math.ceil(transform.y / gridSize) * gridSize,
+  };
+ }
+```
 
 
 
