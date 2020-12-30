@@ -45,7 +45,7 @@ The `SortableContext` component also optionally accepts an `id` prop. If an `id`
 
 ## Usage
 
-{% hint style="warning" %}
+{% hint style="info" %}
 In order for the `SortableContext` component to function properly, make sure it is a descendant of a `DndContext` provider. 
 {% endhint %}
 
