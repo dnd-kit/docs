@@ -237,7 +237,7 @@ const items = useState(['Apple', 'Orange', 'Strawberries', 'Raspberries']);
 const getIndex = (id) => items.indexOf(id);
 const itemCount = items.length;
 
-const announcements: Announcements = {
+const announcements = {
   onDragStart(id) {
     return `Picked up sortable item ${id}. Sortable item ${id} is in position ${getIndex(id)} of ${itemCount}`;
   },
@@ -248,7 +248,7 @@ const announcements: Announcements = {
   },
   onDragEnd(id, overId) {
     if (overId) {
-      return `Draggable item was dropped at position ${getIndex(overId)} of ${itemCount}`;
+      return `Sortable item was dropped at position ${getIndex(overId)} of ${itemCount}`;
     }
   },
   onDragCancel(id) {
