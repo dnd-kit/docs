@@ -204,7 +204,7 @@ const defaultAnnouncements = {
   },
   onDragEnd(id, overId) {
     if (overId) {
-      return `Draggable item was dropped over droppable area ${overId}`;
+      return `Draggable item ${id} was dropped over droppable area ${overId}`;
     }
 
     return `Draggable item ${id} was dropped.`;
@@ -248,7 +248,7 @@ const announcements = {
   },
   onDragEnd(id, overId) {
     if (overId) {
-      return `Sortable item was dropped at position ${getIndex(overId)} of ${itemCount}`;
+      return `Sortable item ${id} was dropped at position ${getIndex(overId)} of ${itemCount}`;
     }
   },
   onDragCancel(id) {
