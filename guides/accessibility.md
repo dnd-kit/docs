@@ -234,21 +234,21 @@ For example, when building a sortable list, you could write custom announcements
 ```javascript
 function App() {
 const items = useState(['Apple', 'Orange', 'Strawberries', 'Raspberries']);
-const getIndex = (id) => items.indexOf(id);
+const getPosition = (id) => items.indexOf(id) + 1; // prefer position over index
 const itemCount = items.length;
 
 const announcements = {
   onDragStart(id) {
-    return `Picked up sortable item ${id}. Sortable item ${id} is in position ${getIndex(id)} of ${itemCount}`;
+    return `Picked up sortable item ${id}. Sortable item ${id} is in position ${getPosition(id)} of ${itemCount}`;
   },
   onDragOver(id, overId) {
     if (overId) {
-      return `Sortable item ${id} was moved into position ${getIndex(overId)} of ${itemCount}`;
+      return `Sortable item ${id} was moved into position ${getPosition(overId)} of ${itemCount}`;
     }
   },
   onDragEnd(id, overId) {
     if (overId) {
-      return `Sortable item ${id} was dropped at position ${getIndex(overId)} of ${itemCount}`;
+      return `Sortable item ${id} was dropped at position ${getPosition(overId)} of ${itemCount}`;
     }
   },
   onDragCancel(id) {
