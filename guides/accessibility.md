@@ -252,7 +252,7 @@ const announcements = {
     }
   },
   onDragCancel(id) {
-    return `Dragging was cancelled. Draggable item ${id} was dropped.`;
+    return `Dragging was cancelled. Sortable item ${id} was dropped.`;
   },
 };
 ```
