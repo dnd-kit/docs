@@ -238,23 +238,23 @@ const getIndex = (id) => items.indexOf(id);
 const itemCount = items.length;
 
 const announcements: Announcements = {
-    onDragStart(id) {
-      return `Picked up sortable item ${id}. Sortable item ${id} is in position ${getIndex(id)} of ${itemCount}`;
-    },
-    onDragOver(id, overId) {
-      if (overId) {
-        return `Sortable item ${id} was moved into position ${getIndex(overId)} of ${itemCount}`;
-      }
-    },
-    onDragEnd(id, overId) {
-      if (overId) {
-        return `Draggable item was dropped at position ${getIndex(overId)} of ${itemCount}`;
-      }
-    },
-    onDragCancel(id) {
-      return `Dragging was cancelled. Draggable item ${id} was dropped.`;
-    },
-  };
+  onDragStart(id) {
+    return `Picked up sortable item ${id}. Sortable item ${id} is in position ${getIndex(id)} of ${itemCount}`;
+  },
+  onDragOver(id, overId) {
+    if (overId) {
+      return `Sortable item ${id} was moved into position ${getIndex(overId)} of ${itemCount}`;
+    }
+  },
+  onDragEnd(id, overId) {
+    if (overId) {
+      return `Draggable item was dropped at position ${getIndex(overId)} of ${itemCount}`;
+    }
+  },
+  onDragCancel(id) {
+    return `Dragging was cancelled. Draggable item ${id} was dropped.`;
+  },
+};
 ```
 
 The example above assumes that the [`closestCenter` collision detection strategy](../api-documentation/context-provider/collision-detection-algorithms.md#closest-center) is used, so the `overId` should always be defined.
