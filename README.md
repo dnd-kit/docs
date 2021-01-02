@@ -16,6 +16,10 @@ description: >-
 * **Performance:** It was built with performance in mind in order to support silky smooth animations.
 * **Presets:** Need to build a sortable interface? Check out [`@dnd-kit/sortable`](presets/sortable/), which is a thin layer built on top of `@dnd-kit/core`. More presets coming in the future.
 
+{% hint style="info" %}
+**dnd kit** is currently in beta. Issues and bugs should be expected for early releases. The core concepts are stable, but some of the APIs may change in the future.
+{% endhint %}
+
 ![](.gitbook/assets/robot-illustration-concepts.svg)
 
 The core library of **dnd kit** exposes two main concepts:
