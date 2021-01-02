@@ -153,6 +153,17 @@ For example, if the HTML element you are attaching the `useDraggable` `listeners
       </td>
     </tr>
     <tr>
+      <td style="text-align:left"><code>tabIndex</code>
+      </td>
+      <td style="text-align:left"><code>&quot;0&quot;</code>
+      </td>
+      <td style="text-align:left">In order for your draggable elements to receive keyboard focus, they <b>need</b> to
+        have the <code>tabindex</code> attribute set to <code>0</code> if they are
+        not natively interactive elements (such as the HTML <code>button</code> element).
+        For this reason, the <code>useDraggable</code> hook sets the <code>tabindex=&quot;0&quot;</code> attribute
+        by default.</td>
+    </tr>
+    <tr>
       <td style="text-align:left"><code>aria-roledescription</code>
       </td>
       <td style="text-align:left"><code>&quot;draggable&quot;</code>
@@ -175,6 +186,28 @@ For example, if the HTML element you are attaching the `useDraggable` `listeners
 To learn more about the best practices for making draggable interfaces accessible, read the full accessibility guide:
 
 {% page-ref page="../../guides/accessibility.md" %}
+
+### Recommendations
+
+#### `touch-action`
+
+We highly recommend you specify the `touch-action` CSS property for all of your draggable elements.
+
+> The **`touch-action`** CSS property sets how an element's region can be manipulated by a touchscreen user \(for example, by zooming features built into the browser\).  
+>   
+> Source: [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action)
+
+In general, we recommend you set the `touch-action` property to `none` for draggable elements in order to prevent scrolling on mobile devices. 
+
+{% hint style="info" %}
+For [Pointer Events,](../sensors/pointer.md) there is no way to prevent the default behaviour of the browser on touch devices when interacting with a draggable element from the pointer event listeners. Using `touch-action: none;` is the only way to reliably prevent scrolling for pointer events.
+
+Further,  using `touch-action: none;` is currently the only reliable way to prevent scrolling in iOS Safari for both Touch and Pointer events. 
+{% endhint %}
+
+If your draggable item is part of a scrollable list, we recommend you use a drag handle and set `touch-action` to `none` only for the drag handle, so that the contents of the list can still be scrolled, but that initiating a drag from the drag handle does not scroll the page.
+
+Once a `pointerdown` or `touchstart` event has been initiated, any changes to the `touch-action` value will be ignored. Programmatically changing the `touch-action` value for an element from `auto` to `none` after a pointer or touch event has been initiated will not result in the user agent aborting or suppressing any default behavior for that event for as long as that pointer is active.
 
 ## Drag Overlay
 

@@ -44,3 +44,25 @@ The `tolerance` property represents the distance, in _pixels_, of motion that is
 
 This property is particularly useful for touch input, where some tolerance should be accounted for when using a delay constraint, as touch input is less precise than mouse input.
 
+### Recommendations
+
+#### `touch-action`
+
+We highly recommend you specify the `touch-action` CSS property for all of your draggable elements.
+
+> The **`touch-action`** CSS property sets how an element's region can be manipulated by a touchscreen user \(for example, by zooming features built into the browser\).  
+>   
+> Source: [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action)
+
+In general, we recommend you set the `touch-action` property to `none` for draggable elements in order to prevent scrolling on mobile devices. 
+
+{% hint style="info" %}
+For [Pointer Events,](pointer.md) there is no way to prevent the default behaviour of the browser on touch devices when interacting with a draggable element from the pointer event listeners. Using `touch-action: none;` is the only way to reliably prevent scrolling for pointer events.
+
+Further,  using `touch-action: none;` is currently the only reliable way to prevent scrolling in iOS Safari for both Touch and Pointer events. 
+{% endhint %}
+
+If your draggable item is part of a scrollable list, we recommend you use a drag handle and set `touch-action` to `none` only for the drag handle, so that the contents of the list can still be scrolled, but that initiating a drag from the drag handle does not scroll the page.
+
+Once a `pointerdown` or `touchstart` event has been initiated, any changes to the `touch-action` value will be ignored. Programmatically changing the `touch-action` value for an element from `auto` to `none` after a pointer or touch event has been initiated will not result in the user agent aborting or suppressing any default behavior for that event for as long as that pointer is active.
+
