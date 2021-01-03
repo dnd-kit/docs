@@ -41,9 +41,12 @@ import {SortableItem} from './SortableItem';
 
 function App() {
   const [items, setItems] = useState(['1', '2', '3']);
-  const sensors = useSortableSensors({
-    strategy: verticalListSortingStrategy,
-  });
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   return (
     <DndContext 
@@ -590,9 +593,12 @@ import {SortableItem} from './SortableItem';
 
 function App() {
   const [items, setItems] = useState(['1', '2', '3']);
-  const sensors = useSortableSensors({
-    strategy: verticalListSortingStrategy,
-  });
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   return (
     <DndContext 
@@ -662,9 +668,12 @@ import {Item} from './Item';
 function App() {
   const [activeId, setActiveId] = useState(null);
   const [items, setItems] = useState(['1', '2', '3']);
-  const sensors = useSortableSensors({
-    strategy: verticalListSortingStrategy,
-  });
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   return (
     <DndContext 
