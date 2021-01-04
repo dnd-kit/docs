@@ -20,7 +20,7 @@ description: >-
 **dnd kit** is currently in beta. Issues and bugs should be expected for early releases. The core concepts are stable, but some of the APIs may change in the future.
 {% endhint %}
 
-![](.gitbook/assets/robot-illustration-concepts.svg)
+![](.gitbook/assets/concepts-illustration.svg)
 
 The core library of **dnd kit** exposes two main concepts:
 
