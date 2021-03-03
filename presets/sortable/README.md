@@ -378,10 +378,8 @@ For sortable lists, we recommend using a more forgiving collision detection stra
 In this example, we'll be using the closest center algorithm:
 
 ```jsx
-import {
-  closestCenter,
-  SortableContext, 
-} from '@dnd-kit/sortable';
+import {DndContext, closestCenter} from '@dnd-kit/core';
+import {SortableContext} from '@dnd-kit/sortable';
 
 function App() {
   const [items] = useState(['1', '2', '3']);
