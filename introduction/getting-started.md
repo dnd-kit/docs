@@ -173,6 +173,7 @@ function App() {
 
 {% tab title="Droppable.jsx" %}
 ```jsx
+import React from 'react';
 import {useDroppable} from '@dnd-kit/core';
 
 export function Droppable(props) {
@@ -225,6 +226,8 @@ The example we've set up above is a bit simplistic. In the real world, you may h
 
 Here's a slightly more complex example that contains multiple **Droppable** containers:
 
+{% tabs %}
+{% tab title="App.jsx" %}
 ```jsx
 import React from 'react';
 import {DndContext} from '@dnd-kit/core';
@@ -236,7 +239,7 @@ function App() {
   const containers = ['A', 'B', 'C'];
   const [parent, setParent] = useState(null);
   const draggableMarkup = (
-    <Draggable>Drag me</Draggable>
+    <Draggable id="draggable">Drag me</Draggable>
   );
 
   return (
@@ -262,6 +265,54 @@ function App() {
   }
 };
 ```
+{% endtab %}
+
+{% tab title="Droppable.jsx" %}
+```jsx
+import React from 'react';
+import {useDroppable} from '@dnd-kit/core';
+
+export function Droppable(props) {
+  const {isOver, setNodeRef} = useDroppable({
+    id: props.id,
+  });
+  const style = {
+    color: isOver ? 'green' : undefined,
+  };
+  
+  
+  return (
+    <div ref={setNodeRef} style={style}>
+      {props.children}
+    </div>
+  );
+}
+```
+{% endtab %}
+
+{% tab title="Draggable.jsx" %}
+```jsx
+import React from 'react';
+import {useDraggable} from '@dnd-kit/core';
+
+export function Draggable(props) {
+  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+    id: props.id,
+  });
+  const style = transform ? {
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+  } : undefined;
+
+  
+  return (
+    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
+      {props.children}
+    </button>
+  );
+}
+```
+{% endtab %}
+{% endtabs %}
 
 We hope this quick start guide has given you a glimpse of the simplicity and power of **dnd kit**. There's much more to learn, and we encourage you to keep reading about all of the different options you can pass to `<DndContext>` , `useDroppable` and `useDraggable` by reading their respective API documentation.
 
