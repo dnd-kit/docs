@@ -58,8 +58,10 @@ If multiple `DndContext` providers are listening for the same event, events will
 interface Props {
   announcements?: Announcements;
   autoScroll?: boolean;
+  cancelDrop?: CancelDrop;
   children?: React.ReactNode;
   collisionDetection?: CollisionDetection;
+  layoutMeasuring?: Partial<LayoutMeasuring>;
   modifiers?: Modifiers;
   screenReaderInstructions?: ScreenReaderInstructions;
   sensors?: SensorDescriptor<any>[];
@@ -199,13 +201,17 @@ To learn more about how to use Modifiers, read the Modifiers guide:
 
 {% page-ref page="../modifiers.md" %}
 
+### Layout measuring
 
+You can configure when and how often `DndContext`  should measure its droppable elements by using the `layoutMeasuring` prop. 
 
-### 
+The `frequency` argument controls how frequently layouts should be measured. By default, layout measuring is set to `optimized`, which only measures layouts based on the `strategy`.
 
+Specify one of the following strategies:
 
+* `LayoutMeasuringStrategy.WhileDragging`: Default behavior, only measure droppable elements right after dragging has begun.
 
-### 
+  `LayoutMeasuringStrategy.BeforeDragging`:  Measure droppable elements before dragging begins and right after it ends. 
 
-
+* `LayoutMeasuringStrategy.Always`: Measure droppable elements before dragging begins, right after dragging has begun, and after it ends.
 
