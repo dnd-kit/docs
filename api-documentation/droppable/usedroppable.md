@@ -24,17 +24,61 @@ Since [hooks cannot be conditionally invoked](https://reactjs.org/docs/hooks-rul
 
 ### Data
 
-The `data` argument is for advanced use-cases where you may need access to additional data about the droppable element in custom sensors, presets or collision detection algorithm. 
+The `data` argument is for advanced use-cases where you may need access to additional data about the droppable element in event handlers, modifiers or custom sensors.
 
 For example, if you were building a sortable preset, you could use the `data` attribute to store the index of the droppable element within a sortable list to access it within a custom sensor.
 
 ```jsx
+const {setNodeRef} = useDroppable({
+  id: props.id,
+  data: {
+    index: props.index,
+  },
+});
+```
+
+Another more advanced example where the `data` argument can be useful is create relationships between draggable nodes and droppable areas, for example, to specify which types of draggable nodes your droppable accepts:
+
+```jsx
+import {DndContext, useDraggable, useDroppable} from '@dnd-kit/core';
+
+function Droppable() {
   const {setNodeRef} = useDroppable({
-    id: props.id,
+    id: 'droppable',
     data: {
-      index: props.index,
-    }
+      accepts: ['type1', 'type2'],
+    },
   });
+
+  /* ... */
+}
+
+function Draggable() {
+  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+    id: 'draggable',
+    data: {
+      type: 'type1',
+    },
+  });
+
+  /* ... */
+}
+
+function App() {
+  return (
+    <DndContext onDragEnd={handleDragEnd}>
+      /* ... */
+    </DndContext>
+  );
+  
+  function handleDragEnd(event) {
+    const {active, over} = event;
+
+    if (over && over.data.current.accepts.includes(active.data.current.type)) {
+      // do stuff
+    }
+  }
+}
 ```
 
 ## Properties

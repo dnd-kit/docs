@@ -23,6 +23,65 @@ The `id` argument is a string that should be a unique identifier, meaning there 
 
 If you're building a component that uses both the `useDraggable` and `useDroppable` hooks, they can both share the same identifier since draggable elements are stored in a different key-value store than droppable elements.
 
+### Data
+
+The `data` argument is for advanced use-cases where you may need access to additional data about the draggable element in event handlers, modifiers or custom sensors.
+
+For example, if you were building a sortable preset, you could use the `data` attribute to store the index of the draggable element within a sortable list to access it within a custom sensor.
+
+```jsx
+const {setNodeRef} = useDraggable({
+  id: props.id,
+  data: {
+    index: props.index,
+  },
+});
+```
+
+Another more advanced example where the `data` argument can be useful is create relationships between draggable nodes and droppable areas, for example, to specify which types of droppable nodes your draggable node can be dropped on:
+
+```jsx
+import {DndContext, useDraggable, useDroppable} from '@dnd-kit/core';
+
+function Droppable() {
+  const {setNodeRef} = useDroppable({
+    id: 'droppable',
+    data: {
+      type: 'type1',
+    },
+  });
+
+  /* ... */
+}
+
+function Draggable() {
+  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+    id: 'draggable',
+    data: {
+      supports: ['type1', 'type2'],
+    },
+  });
+
+  /* ... */
+}
+
+function App() {
+  return (
+    <DndContext onDragEnd={handleDragEnd}>
+      /* ... */
+    </DndContext>
+  );
+  
+  function handleDragEnd(event) {
+    const {active, over} = event;
+
+    if (over && active.data.current.supports.includes(over.data.current.type)) {
+      // do stuff
+    }
+  }
+}
+```
+
 ### Disabled
 
 Since [hooks cannot be conditionally invoked](https://reactjs.org/docs/hooks-rules.html), use the `disabled` argument and set it to `true` if you need to temporarily disable a `draggable` element.
