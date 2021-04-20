@@ -215,3 +215,11 @@ Specify one of the following strategies:
 
 * `LayoutMeasuringStrategy.Always`: Measure droppable elements before dragging begins, right after dragging has begun, and after it ends.
 
+Example usage:
+
+```jsx
+import {DndContext, LayoutMeasuringStrategy} from '@dnd-kit/core';
+
+<DndContext layoutMeasuring={{strategy: LayoutMeasuringStrategy.Always}} />
+```
+
