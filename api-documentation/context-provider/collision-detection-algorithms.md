@@ -49,7 +49,7 @@ The distance is measured from the top left corner of the draggable item to the t
 
 In most cases, the **closest center** algorithm works well, and is generally the recommended default for sortable lists because it provides a more forgiving experience than the **rectangle intersection algorithm**.
 
-In general, the closest center and closest corners algorithms will yield the same results. However, when building interfaces where droppable containers are stacked on top of one another, for example, when building a kanban, the closest center algorithm can sometimes return the underlaying droppable of the entire kanban column rather than the droppable areas within that column. 
+In general, the closest center and closest corners algorithms will yield the same results. However, when building interfaces where droppable containers are stacked on top of one another, for example, when building a Kanban, the closest center algorithm can sometimes return the underlaying droppable of the entire Kanban column rather than the droppable areas within that column. 
 
 ![Closest center is &apos;A&apos;, though the human eye would likely expect &apos;A2&apos;](../../.gitbook/assets/closest-center-kanban.png)
 

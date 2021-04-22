@@ -1,6 +1,6 @@
 # Installation
 
-To get started with **dnd kit**, install the core library via `npm` or `yarn`:  
+To get started with **@dnd-kit**, install the core library via `npm` or `yarn`:  
 
 ```
 npm install @dnd-kit/core
