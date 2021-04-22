@@ -37,7 +37,7 @@ As its name suggests, the closest center strategy finds the droppable container 
 
 ## Closest corners
 
-Similarly to the closest center algorithm, the closest corner algorithm doesn't require the draggable and droppable rectangles to intersect.
+Like to the closest center algorithm, the closest corner algorithm doesn't require the draggable and droppable rectangles to intersect.
 
 Rather, it measures the distance between all four corners of the active draggable item and the four corners of each droppable container to find the closest one. 
 
