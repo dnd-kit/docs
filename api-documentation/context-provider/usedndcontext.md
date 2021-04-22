@@ -3,7 +3,7 @@
 For advanced use-cases, for example, if you're building your own presets on top of `@dnd-kit/core`, you may want to have access to the internal context of `<DndContext>` that the `useDraggable` and `useDroppable` have access to.
 
 ```jsx
-import {useDndContext} from '@dnd-kit/core`;
+import {useDndContext} from '@dnd-kit/core';
 
 function CustomPreset() {
   const dndContext = useDndContext();
