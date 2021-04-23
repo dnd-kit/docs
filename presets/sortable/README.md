@@ -271,7 +271,7 @@ By default, the [Keyboard](../../api-documentation/sensors/keyboard.md) sensor m
 
 The sortable preset ships with a custom coordinate getter function for the keyboard sensor that moves the active draggable to the closest sortable element in a given direction within the same `DndContext`.
 
-To use it, import the `sortableKeyboardCoordinates` coordinate getter function provided by `@dnd-kit/sortable`, and pass it to the `coordiniateGetter` option of the Keyboard sensor.
+To use it, import the `sortableKeyboardCoordinates` coordinate getter function provided by `@dnd-kit/sortable`, and pass it to the `coordinateGetter` option of the Keyboard sensor.
 
 In this example, we'll also be setting up the [Pointer](../../api-documentation/sensors/pointer.md) sensor, which is the other sensor that is enabled by default on `DndContext` if none are defined. We use the `useSensor` and `useSensors` hooks to initialize the sensors:
 
