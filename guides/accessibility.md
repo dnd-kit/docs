@@ -186,7 +186,7 @@ When building accessible drag and drop interfaces, live regions should be used t
 
 By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used for live screen-reader announcements of events like when a drag operation has started, when a draggable item has been dragged over a droppable container, when a drag operation has ended, and when a drag operation has been cancelled.
 
-These instructions can be customized using the `announcements` prop of `DndContext`.
+These instructions can be customized using the `announcements` prop of [`<DndContext>`](../api-documentation/context-provider/).
 
 The default announcements are:
 
