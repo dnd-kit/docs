@@ -95,7 +95,7 @@ In order to let users learn how to interact with draggable elements using these 
 
 ### Screen reader instructions
 
-In order to users know how to interact with draggable items using only the keyboard, it's important to provide information to the user that their focus is currently on a draggable item, along with clear instruction  on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
+In order to let users know how to interact with draggable items using only the keyboard, it's important to provide information to the user that their focus is currently on a draggable item, along with clear instruction  on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
 
 #### Role
 
