@@ -182,7 +182,7 @@ If your application supports multiple languages, make sure you also translate th
 
 [Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) are used to notify screen readers of content changes. 
 
-When building accessible drag and drop interfaces, live regions should be used to provide screen reader announcements in real-time of time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus .
+When building accessible drag and drop interfaces, live regions should be used to provide screen reader announcements in real-time with time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus .
 
 By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used for live screen-reader announcements of events like when a drag operation has started, when a draggable item has been dragged over a droppable container, when a drag operation has ended, and when a drag operation has been cancelled.
 
