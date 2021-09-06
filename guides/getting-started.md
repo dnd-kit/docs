@@ -89,10 +89,10 @@ function Draggable(props) {
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
     id: 'draggable',
   });
-  const style = transform ? {
-    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-  } : undefined;
-
+  const style = {
+    transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
+    touchAction: 'none'
+  };
   
   return (
     <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
@@ -110,6 +110,7 @@ As you can see from the example above, it really only takes just a few lines to 
 **Tips:** 
 
 * For performance reasons, we recommend you use **`transform`** over other positional CSS properties to move the dragged element. 
+* Setting the `touch-action` CSS property to `none` is required for dragging to work properly on touch devices. See the [PointerSensor documentation](../api-documentation/sensors/pointer.md#touch-action) for details.
 * You'll likely want to alter the **`z-index`** of your Draggable component to ensure it appears on top of other elements.
 * If your item needs to move from one container to another, we recommend you use the [`<DraggableClone>`](../api-documentation/draggable/clone.md) component so the item isn't constrained to its parent's stacking context and overflow constraints.
 {% endhint %}
@@ -122,6 +123,7 @@ import {CSS} from '@dnd-kit/utilities';
 // Within your component that receives `transform` from `useDraggable`:
 const style = {
   transform: CSS.Translate.toString(transform),
+  touchAction: 'none'
 }
 ```
 
@@ -199,9 +201,10 @@ export function Draggable(props) {
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
     id: 'draggable',
   });
-  const style = transform ? {
-    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-  } : undefined;
+  const style = {
+    transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
+    touchAction: 'none'
+  };
 
   
   return (
