@@ -124,7 +124,7 @@ CSS.Translate.toString(transform) ===
 
 ### Attributes
 
-The `useDraggable` hook ****provides a set of sensible default attributes for draggable items. We recommend you attach these to the HTML element you are attaching the draggable listeners to.
+The `useDraggable` hook provides a set of sensible default attributes for draggable items. We recommend you attach these to the HTML element you are attaching the draggable listeners to.
 
 We encourage you to manually attach the attributes that you think make sense in the context of your application rather than using them all without considering whether it makes sense to do so.
 
