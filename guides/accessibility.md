@@ -4,24 +4,24 @@
 
 If you're new to accessibility for the web, the _Web Almanac by HTTP Archive_ has an excellent primer on the subject and the state of web accessibility that you should read before diving into this guide: [https://almanac.httparchive.org/en/2020/accessibility](https://almanac.httparchive.org/en/2020/accessibility)
 
-> Web accessibility is about achieving feature and information parity and giving complete access to all aspects of an interface to disabled people. 
+> Web accessibility is about achieving feature and information parity and giving complete access to all aspects of an interface to disabled people.
 >
 > A digital product or website is simply not complete if it is not usable by everyone. If it excludes certain disabled populations, this is discrimination and potentially grounds for fines and/or lawsuits.
 >
 > – Source: [Web Almanac by HTTP Archive](https://almanac.httparchive.org/en/2020/accessibility#screen-reader-only-text)
 
-People with varying disabilities use different assistive technologies to help them experience the web. 
+People with varying disabilities use different assistive technologies to help them experience the web.
 
 The [Tools and Techniques](https://www.w3.org/WAI/people-use-web/tools-techniques/) article from the Web Accessibility Initiative \(WAI\) of the W3C covers how users can perceive, understand and interact with the web using different assistive technologies.
 
 Some assistive technologies for the web include:
 
-* Screen readers
-* Voice control
-* Screen magnifiers
-* Input devices \(such as the keyboard, pointers and switch devices\)
+- Screen readers
+- Voice control
+- Screen magnifiers
+- Input devices \(such as the keyboard, pointers and switch devices\)
 
-When building accessible interfaces for the web, it's important to keep the three  following questions in mind:
+When building accessible interfaces for the web, it's important to keep the three following questions in mind:
 
 1. **Identity:** What element is the user interacting with?
 2. **Operation:** How can the user interact with the element?
@@ -37,13 +37,13 @@ The `@dnd-kit/core` library provides a number of sensible defaults to help you m
 
 These sensible defaults should be seen as _starting points_ rather than something you can set and forget; there is no one-size-fits-all solution to web accessibility.
 
-You know your application best, and while these sensible defaults will go a long way to help making your application more accessible, in most cases you'll want to customize these  so that they are tailored to the context of your application.
+You know your application best, and while these sensible defaults will go a long way to help making your application more accessible, in most cases you'll want to customize these so that they are tailored to the context of your application.
 
 The three main areas of focus for this guide to help you make your drag and drop interface more accessible are:
 
-* [Keyboard support](accessibility.md#keyboard-support)
-* [Screen reader instructions](accessibility.md#screen-reader-instructions)
-* [Live regions to provide screen reader announcements](accessibility.md#screen-reader-announcements-using-live-regions)
+- [Keyboard support](accessibility.md#keyboard-support)
+- [Screen reader instructions](accessibility.md#screen-reader-instructions)
+- [Live regions to provide screen reader announcements](accessibility.md#screen-reader-announcements-using-live-regions)
 
 ### Keyboard support
 
@@ -53,8 +53,8 @@ When creating widgets that a user can click or tap, drag, and drop, a user must 
 
 For drag and drop interfaces, this means that the activator element that initiates the drag action must:
 
-* Be able to receive focus
-* A user must be able to activate the action associated with the element using **both** the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` key.
+- Be able to receive focus
+- A user must be able to activate the action associated with the element using **both** the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` key.
 
 Both these guidelines should be respected to comply with the [third rule of ARIA](https://www.w3.org/TR/using-aria/#3rdrule).
 
@@ -66,8 +66,8 @@ In order for the Keyboard sensor to function properly, the activator element tha
 
 The `tabindex` attribute dictates the order in which focus moves throughout the document.
 
-* Natively interactive elements such as [buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button), [anchor tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) and[ form controls ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection)have a default `tabindex` value of `0`. 
-* Custom elements that are intended to be interactive and receive keyboard focus need to have an explicitly assigned `tabindex="0"`\(for example, `div` and `li` elements\)
+- Natively interactive elements such as [buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button), [anchor tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) and[ form controls ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection)have a default `tabindex` value of `0`.
+- Custom elements that are intended to be interactive and receive keyboard focus need to have an explicitly assigned `tabindex="0"`\(for example, `div` and `li` elements\)
 
 In other words, in order for your draggable activator elements to be able to receive keyboard focus, they _need_ to have the `tabindex` attribute set to `0` **if** they are not natively interactive elements \(such as the HTML `button` element\).
 
@@ -87,7 +87,7 @@ The keyboard shortcuts of the Keyboard sensor can be [customized](../api-documen
 
 By default, the [Keyboard sensor](../api-documentation/sensors/keyboard.md) moves in any given direction by `25` pixels when the arrow keys are pressed while dragging.
 
-This is an arbitrary default that is likely not suited for all use-cases. We encourage you to customize this behaviour and tailor it to the context of your application using the  [`getNextCoordinates` option ](../api-documentation/sensors/keyboard.md#coordinates-getter)of the Keyboard sensor.
+This is an arbitrary default that is likely not suited for all use-cases. We encourage you to customize this behaviour and tailor it to the context of your application using the [`getNextCoordinates` option ](../api-documentation/sensors/keyboard.md#coordinates-getter)of the Keyboard sensor.
 
 For example, the `useSortable` hook ships with an augmented version of the Keyboard sensor that uses the `getNextCoordinates` option behind the scenes to find the coordinates of the next sortable element in any given direction when an arrow key is pressed.
 
@@ -95,7 +95,7 @@ In order to let users learn how to interact with draggable elements using these 
 
 ### Screen reader instructions
 
-In order to users know how to interact with draggable items using only the keyboard, it's important to provide information to the user that their focus is currently on a draggable item, along with clear instruction  on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
+In order to users know how to interact with draggable items using only the keyboard, it's important to provide information to the user that their focus is currently on a draggable item, along with clear instruction on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
 
 #### Role
 
@@ -160,19 +160,19 @@ To customize the `aria-describedby` instructions, refer to the section below.
 
 #### Instructions
 
-By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used to provide these instructions to screen readers. 
+By default, each [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used to provide these instructions to screen readers.
 
 The default instructions are:
 
-> To pick up a draggable item, press space or enter.   
+> To pick up a draggable item, press space or enter.  
 > While dragging, use the arrow keys to move the item in any given direction.  
 > Press space or enter again to drop the item in its new position, or press escape to cancel.
 
-We recommend you customize and localize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](../api-documentation/context-provider/).  
+We recommend you customize and localize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](../api-documentation/context-provider/).
 
 For example, if you were building a sortable grocery shopping list, you may want to tailor the instructions like so:
 
-> To pick up a grocery list item, press space or enter.   
+> To pick up a grocery list item, press space or enter.  
 > Use the up and down arrow keys to update the position of the item in the grocery list.  
 > Press space or enter again to drop the item in its new position, or press escape to cancel.
 
@@ -180,11 +180,11 @@ If your application supports multiple languages, make sure you also translate th
 
 ### Screen reader announcements using live regions
 
-[Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) are used to notify screen readers of content changes. 
+[Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) are used to notify screen readers of content changes.
 
 When building accessible drag and drop interfaces, live regions should be used to provide screen reader announcements in real-time of time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus .
 
-By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used for live screen-reader announcements of events like when a drag operation has started, when a draggable item has been dragged over a droppable container, when a drag operation has ended, and when a drag operation has been cancelled.
+By default, each [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used for live screen-reader announcements of events like when a drag operation has started, when a draggable item has been dragged over a droppable container, when a drag operation has ended, and when a drag operation has been cancelled.
 
 These instructions can be customized using the `announcements` prop of `DndContext`.
 
@@ -212,7 +212,7 @@ const defaultAnnouncements = {
   onDragCancel(id) {
     return `Dragging was cancelled. Draggable item ${id} was dropped.`;
   },
-}
+};
 ```
 
 While these default announcements are sensible defaults that should cover most simple use cases, you know your application best, and we highly recommend that you customize these to provide a screen reader experience that is more tailored to the use case you are building.
@@ -227,7 +227,7 @@ Here's an example of index based announcements and why you should avoid them:
 Position based announcements are much more intuitive and natural:
 
 > Item at position 1 was picked up. Item was moved to position 2 of 5.
-{% endhint %}
+> {% endhint %}
 
 For example, when building a sortable list, you could write custom announcements that are tailored to that use-case using position based announcements:
 
@@ -260,4 +260,3 @@ const announcements = {
 The example above assumes that the [`closestCenter` collision detection strategy](../api-documentation/context-provider/collision-detection-algorithms.md#closest-center) is used, so the `overId` should always be defined.
 
 If your application supports multiple languages, make sure you also translate these announcements. The `<DndContext>` component only ships with announcements in English due to bundle size concerns.
-

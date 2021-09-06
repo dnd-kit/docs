@@ -11,7 +11,7 @@ interface UseDraggableArguments {
     role?: string;
     roleDescription?: string;
     tabIndex?: number;
-  },
+  };
   data?: Record<string, any>;
   disabled?: boolean;
 }
@@ -30,7 +30,7 @@ The `data` argument is for advanced use-cases where you may need access to addit
 For example, if you were building a sortable preset, you could use the `data` attribute to store the index of the draggable element within a sortable list to access it within a custom sensor.
 
 ```jsx
-const {setNodeRef} = useDraggable({
+const { setNodeRef } = useDraggable({
   id: props.id,
   data: {
     index: props.index,
@@ -41,10 +41,10 @@ const {setNodeRef} = useDraggable({
 Another more advanced example where the `data` argument can be useful is create relationships between draggable nodes and droppable areas, for example, to specify which types of droppable nodes your draggable node can be dropped on:
 
 ```jsx
-import {DndContext, useDraggable, useDroppable} from '@dnd-kit/core';
+import { DndContext, useDraggable, useDroppable } from '@dnd-kit/core';
 
 function Droppable() {
-  const {setNodeRef} = useDroppable({
+  const { setNodeRef } = useDroppable({
     id: 'droppable',
     data: {
       type: 'type1',
@@ -55,7 +55,7 @@ function Droppable() {
 }
 
 function Draggable() {
-  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: 'draggable',
     data: {
       supports: ['type1', 'type2'],
@@ -66,14 +66,10 @@ function Draggable() {
 }
 
 function App() {
-  return (
-    <DndContext onDragEnd={handleDragEnd}>
-      /* ... */
-    </DndContext>
-  );
-  
+  return <DndContext onDragEnd={handleDragEnd}>/* ... */</DndContext>;
+
   function handleDragEnd(event) {
-    const {active, over} = event;
+    const { active, over } = event;
 
     if (over && active.data.current.supports.includes(over.data.current.type)) {
       // do stuff
@@ -90,15 +86,15 @@ Since [hooks cannot be conditionally invoked](https://reactjs.org/docs/hooks-rul
 
 The default values for the `attributes` property are sensible defaults that should cover a wide range of use cases, but there is no one-size-fits-all solution.
 
-You know your application best, and we encourage you to manually attach only the attributes that you think make sense in the context of your application rather than using them all without considering whether it makes sense to do so. 
+You know your application best, and we encourage you to manually attach only the attributes that you think make sense in the context of your application rather than using them all without considering whether it makes sense to do so.
 
-For example, if the HTML element you are attaching the `useDraggable` `listeners` to is already a native HTML `button` element, although it's harmless to do so, there's no need to add the `role="button"` attribute, since that is already the default role of `button`. 
+For example, if the HTML element you are attaching the `useDraggable` `listeners` to is already a native HTML `button` element, although it's harmless to do so, there's no need to add the `role="button"` attribute, since that is already the default role of `button`.
 
 #### Role
 
 The ARIA `"role"` attribute lets you explicitly define the role for an element, which communicates its purpose to assistive technologies.
 
-The default value for the `"role"` attribute is `"button"`. 
+The default value for the `"role"` attribute is `"button"`.
 
 {% hint style="info" %}
 If it makes sense in the context of what you are building, we recommend that you leverage the native HTML `<button>` element for draggable elements.
@@ -112,8 +108,8 @@ The `roleDescription` argument can be used to tailor the screen reader experienc
 
 The `tabindex` attribute dictates the order in which focus moves throughout the document.
 
-* Natively interactive elements such as [buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button), [anchor tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) and[ form controls ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection)have a default `tabindex` value of `0`. 
-* Custom elements that are intended to be interactive and receive keyboard focus need to have an explicitly assigned `tabindex="0"`\(for example, `div` and `li` elements\)
+- Natively interactive elements such as [buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button), [anchor tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) and[ form controls ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection)have a default `tabindex` value of `0`.
+- Custom elements that are intended to be interactive and receive keyboard focus need to have an explicitly assigned `tabindex="0"`\(for example, `div` and `li` elements\)
 
 In other words, in order for your draggable elements to receive keyboard focus, they **need** to have the `tabindex` attribute set to `0` if they are not natively interactive elements \(such as the HTML `button` element\).
 
@@ -147,7 +143,7 @@ For this reason, the `useDraggable` hook sets the `tabindex="0"` attribute by de
 
 #### `active`
 
-If there is currently an active draggable element within the [`DndContext`](../context-provider/) provider where the `useDraggable` hook is used, the `active` property will be defined with the corresponding `id`, `node` and `rect` of that draggable element. 
+If there is currently an active draggable element within the [`DndContext`](../context-provider/) provider where the `useDraggable` hook is used, the `active` property will be defined with the corresponding `id`, `node` and `rect` of that draggable element.
 
 Otherwise, the `active` property will be set to `null`.
 
@@ -159,52 +155,56 @@ Internally, the `isActive` property just checks if the `active.id === id`.
 
 ### Listeners
 
-The `useDraggable` hook requires that you attach `listeners` to the DOM node that you would like to become the activator to start dragging. 
+The `useDraggable` hook requires that you attach `listeners` to the DOM node that you would like to become the activator to start dragging.
 
-While we could have attached these listeners manually to the node  provided to `setNodeRef`, there are actually a number of key advantages to forcing the consumer to manually attach the listeners.
+While we could have attached these listeners manually to the node provided to `setNodeRef`, there are actually a number of key advantages to forcing the consumer to manually attach the listeners.
 
 #### Flexibility
 
 While many drag and drop libraries need to expose the concept of "drag handles", creating a drag handle with the `useDraggable` hook is as simple as manually attaching the listeners to a different DOM element than the one that is set as the draggable source DOM node:
 
 ```jsx
-import {useDraggable} from '@dnd-kit/core';
-
+import { useDraggable } from '@dnd-kit/core';
 
 function Draggable() {
-  const {attributes, listeners, setNodeRef} = useDraggable({
+  const { attributes, listeners, setNodeRef } = useDraggable({
     id: 'unique-id',
   });
-  
+
   return (
     <div ref={setNodeRef}>
       /* Some other content that does not activate dragging */
-      <button {...listeners} {...attributes}>Drag handle</button>
+      <button {...listeners} {...attributes}>
+        Drag handle
+      </button>
     </div>
   );
 }
 ```
 
 {% hint style="info" %}
-When attaching the listeners to a different element than the node that is draggable, make sure you also attach the attributes to the same node that has the listeners attached so that it is still [accessible](../../guides/accessibility.md). 
+When attaching the listeners to a different element than the node that is draggable, make sure you also attach the attributes to the same node that has the listeners attached so that it is still [accessible](../../guides/accessibility.md).
 {% endhint %}
 
 You can even have multiple drag handles if that makes sense in the context of your application:
 
 ```jsx
-import {useDraggable} from '@dnd-kit/core';
-
+import { useDraggable } from '@dnd-kit/core';
 
 function Draggable() {
-  const {attributes, listeners, setNodeRef} = useDraggable({
+  const { attributes, listeners, setNodeRef } = useDraggable({
     id: 'unique-id',
   });
-  
+
   return (
     <div ref={setNodeRef}>
-      <button {...listeners} {...attributes}>Drag handle 1</button>
+      <button {...listeners} {...attributes}>
+        Drag handle 1
+      </button>
       /* Some other content that does not activate dragging */
-      <button {...listeners} {...attributes}>Drag handle 2</button>
+      <button {...listeners} {...attributes}>
+        Drag handle 2
+      </button>
     </div>
   );
 }
@@ -212,9 +212,9 @@ function Draggable() {
 
 #### Performance
 
-This strategy also means that we're able to use [React synthetic events](https://reactjs.org/docs/events.html), which ultimately leads to improved performance over manually attaching event listeners to each individual node.  
-  
-Why? Because rather than having to attach individual event listeners for each draggable DOM node, React attaches a single event listener for every type of event we listen to on the `document`. Once click on one of the draggable nodes happens, React's listener on the document dispatches a SyntheticEvent back to the original handler. 
+This strategy also means that we're able to use [React synthetic events](https://reactjs.org/docs/events.html), which ultimately leads to improved performance over manually attaching event listeners to each individual node.
+
+Why? Because rather than having to attach individual event listeners for each draggable DOM node, React attaches a single event listener for every type of event we listen to on the `document`. Once click on one of the draggable nodes happens, React's listener on the document dispatches a SyntheticEvent back to the original handler.
 
 ### Node
 
@@ -224,15 +224,11 @@ In order for the `useDraggable` hook to function properly, it needs the `setNode
 
 ```jsx
 function Draggable(props) {
-  const {setNodeRef} = useDraggable({
+  const { setNodeRef } = useDraggable({
     id: props.id,
   });
-  
-  return (
-    <button ref={setNodeRef}>
-      {/* ... */}
-    </button>
-  );
+
+  return <button ref={setNodeRef}>{/* ... */}</button>;
 }
 ```
 
@@ -246,7 +242,7 @@ A [ref](https://reactjs.org/docs/refs-and-the-dom.html) to the current node that
 
 #### **`over`**
 
-If you'd like to change the appearance of the draggable element in response to it being dragged over a different droppable container, check whether the `over` value is defined. 
+If you'd like to change the appearance of the draggable element in response to it being dragged over a different droppable container, check whether the `over` value is defined.
 
 If a draggable element is moved over a droppable area, the `over` property will be defined for all draggable elements, regardless of whether or not those draggable elements are active or not.
 
@@ -254,9 +250,9 @@ If you'd like to make changes to only the active draggable element in response t
 
 ### Transform
 
-After a draggable item is picked up, the `transform` property will be populated with the `translate` coordinates you'll need to move the item on the screen.  
+After a draggable item is picked up, the `transform` property will be populated with the `translate` coordinates you'll need to move the item on the screen.
 
-The `transform` object adheres to the following shape: 
+The `transform` object adheres to the following shape:
 
 ```typescript
 {
@@ -270,4 +266,3 @@ The `transform` object adheres to the following shape:
 The `x` and `y` coordinates represent the delta from the point of origin of your draggable element since it started being dragged.
 
 The `scaleX` and `scaleY` properties represent the difference in scale between the element that is currently being dragged and the droppable it is currently over, which can be useful if the draggable item needs to be dynamically resized to the size of the droppable it is over.
-

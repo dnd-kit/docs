@@ -29,7 +29,7 @@ The `data` argument is for advanced use-cases where you may need access to addit
 For example, if you were building a sortable preset, you could use the `data` attribute to store the index of the droppable element within a sortable list to access it within a custom sensor.
 
 ```jsx
-const {setNodeRef} = useDroppable({
+const { setNodeRef } = useDroppable({
   id: props.id,
   data: {
     index: props.index,
@@ -40,10 +40,10 @@ const {setNodeRef} = useDroppable({
 Another more advanced example where the `data` argument can be useful is create relationships between draggable nodes and droppable areas, for example, to specify which types of draggable nodes your droppable accepts:
 
 ```jsx
-import {DndContext, useDraggable, useDroppable} from '@dnd-kit/core';
+import { DndContext, useDraggable, useDroppable } from '@dnd-kit/core';
 
 function Droppable() {
-  const {setNodeRef} = useDroppable({
+  const { setNodeRef } = useDroppable({
     id: 'droppable',
     data: {
       accepts: ['type1', 'type2'],
@@ -54,7 +54,7 @@ function Droppable() {
 }
 
 function Draggable() {
-  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: 'draggable',
     data: {
       type: 'type1',
@@ -65,14 +65,10 @@ function Draggable() {
 }
 
 function App() {
-  return (
-    <DndContext onDragEnd={handleDragEnd}>
-      /* ... */
-    </DndContext>
-  );
-  
+  return <DndContext onDragEnd={handleDragEnd}>/* ... */</DndContext>;
+
   function handleDragEnd(event) {
-    const {active, over} = event;
+    const { active, over } = event;
 
     if (over && over.data.current.accepts.includes(active.data.current.type)) {
       // do stuff
@@ -101,15 +97,11 @@ In order for the `useDroppable` hook to function properly, it needs the `setNode
 
 ```jsx
 function Droppable(props) {
-  const {setNodeRef} = useDroppable({
+  const { setNodeRef } = useDroppable({
     id: props.id,
   });
-  
-  return (
-    <div ref={setNodeRef}>
-      {/* ... */}
-    </div>
-  );
+
+  return <div ref={setNodeRef}>{/* ... */}</div>;
 }
 ```
 
@@ -125,11 +117,10 @@ For advanced use cases, if you need the bounding rect measurement of the droppab
 
 #### `isOver`
 
-Use the `isOver` boolean returned by the `useDroppable` hook to change the appearance or content displayed when a `draggable` element is dragged over your droppable container. 
+Use the `isOver` boolean returned by the `useDroppable` hook to change the appearance or content displayed when a `draggable` element is dragged over your droppable container.
 
 #### `over`
 
 If you'd like to change the appearance of the droppable in response to a draggable being dragged over a different droppable container, check whether the `over` value is defined. Depending on your use-case, you can also read the `id` of the other droppable that the draggable item to make changes to the render output of your droppable component.
 
-#### 
-
+####

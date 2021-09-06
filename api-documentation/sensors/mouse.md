@@ -10,10 +10,10 @@ The mouse activator is the `onMouseDown` event handler. The Mouse sensor is init
 
 Like the [Pointer](pointer.md) sensor, the Mouse sensor has two activation constraints:
 
-* Distance constraint
-* Delay constraint
+- Distance constraint
+- Delay constraint
 
-These activation constraints are mutually exclusive and may not be used simultaneously. 
+These activation constraints are mutually exclusive and may not be used simultaneously.
 
 #### Distance
 
@@ -38,7 +38,6 @@ interface DelayConstraint {
 }
 ```
 
-The `delay` property represents the duration, in _milliseconds_, that a draggable item needs to be held by the mouse for before a drag start event is emitted. 
+The `delay` property represents the duration, in _milliseconds_, that a draggable item needs to be held by the mouse for before a drag start event is emitted.
 
 The `tolerance` property represents the distance, in _pixels_, of motion that is tolerated before the drag operation is aborted. If the mouse is moved during the delay duration and the tolerance is set to zero, the drag operation will be immediately aborted. If a higher tolerance is set, for example, a tolerance of `5` pixels, the operation will only be aborted if the mouse is moved by more than 5 pixels during the delay.
-

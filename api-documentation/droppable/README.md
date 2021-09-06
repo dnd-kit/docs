@@ -2,32 +2,27 @@
 
 ![](../../.gitbook/assets/droppable-large.svg)
 
-Use the `useDroppable` hook to set up DOM nodes as droppable areas that [draggable](../draggable/) elements can be dropped over. 
+Use the `useDroppable` hook to set up DOM nodes as droppable areas that [draggable](../draggable/) elements can be dropped over.
 
 ## Usage
 
-The `useDroppable` hook isn't opinionated about how you should structure your application. 
+The `useDroppable` hook isn't opinionated about how you should structure your application.
 
-At minimum though, you need to pass the `setNodeRef` function that is returned by the `useDroppable` hook to a DOM element so that it can register the underlying DOM node and keep track of it to detect collisions and intersections with other draggable elements. 
+At minimum though, you need to pass the `setNodeRef` function that is returned by the `useDroppable` hook to a DOM element so that it can register the underlying DOM node and keep track of it to detect collisions and intersections with other draggable elements.
 
 {% hint style="info" %}
- If the concept of `ref` is new to you, we recommend you first check out the [Refs and the DOM article](https://reactjs.org/docs/refs-and-the-dom.html#adding-a-ref-to-a-dom-element) on the React documentation website.
+If the concept of `ref` is new to you, we recommend you first check out the [Refs and the DOM article](https://reactjs.org/docs/refs-and-the-dom.html#adding-a-ref-to-a-dom-element) on the React documentation website.
 {% endhint %}
 
 ```jsx
-import {useDroppable} from '@dnd-kit/core';
-
+import { useDroppable } from '@dnd-kit/core';
 
 function Droppable() {
-  const {setNodeRef} = useDroppable({
+  const { setNodeRef } = useDroppable({
     id: 'unique-id',
   });
-  
-  return (
-    <div ref={setNodeRef}>
-      /* Render whatever you like within */
-    </div>
-  );
+
+  return <div ref={setNodeRef}>/* Render whatever you like within */</div>;
 }
 ```
 
@@ -37,13 +32,13 @@ To set up multiple droppable targets, simply use the `useDroppable` hook as many
 
 ```jsx
 function MultipleDroppables() {
-  const {setNodeRef: setFirstDroppableRef} = useDroppable({
+  const { setNodeRef: setFirstDroppableRef } = useDroppable({
     id: 'droppable-1',
   });
-  const {setNodeRef: setsecondDroppableRef} = useDroppable({
+  const { setNodeRef: setsecondDroppableRef } = useDroppable({
     id: 'droppable-2',
   });
-  
+
   return (
     <section>
       <div ref={setFirstDroppableRef}>
@@ -61,20 +56,16 @@ If you need to dynamically render a list of droppable containers, we recommend y
 
 ```jsx
 function Droppable(props) {
-  const {setNodeRef} = useDroppable({
+  const { setNodeRef } = useDroppable({
     id: props.id,
   });
-  
-  return (
-    <div ref={setNodeRef}>
-      {props.children}
-    </div>
-  );
+
+  return <div ref={setNodeRef}>{props.children}</div>;
 }
 
 function MultipleDroppables() {
   const droppables = ['1', '2', '3', '4'];
-  
+
   return (
     <section>
       {droppables.map((id) => (
@@ -90,4 +81,3 @@ function MultipleDroppables() {
 For more details usage of the `useDroppable` hook, refer to the API documentation section:
 
 {% page-ref page="usedroppable.md" %}
-

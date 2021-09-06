@@ -25,7 +25,7 @@ interface KeyboardCodes {
   start: KeyboardCode[];
   cancel: KeyboardCode[];
   end: KeyboardCode[];
-};
+}
 ```
 
 The default values are:
@@ -54,9 +54,9 @@ The `getNextCoordinates` option can be used to define a custom coordinate getter
 
 ```javascript
 function customCoordinatesGetter(event, args) {
-  const {currentCoordinates} = args;
+  const { currentCoordinates } = args;
   const delta = 50;
-  
+
   switch (event.code) {
     case 'Right':
       return {
@@ -81,14 +81,13 @@ function customCoordinatesGetter(event, args) {
   }
 
   return undefined;
-};
+}
 ```
 
 While the example above is fairly simple, you can build complex coordinate getters to support advanced use cases. The [Sortable](../../presets/sortable/) preset uses the `getNextCoordinates` option to build on top of the Keyboard sensor and move the active sortable item to its new index depending on the arrow key that is pressed.
 
 #### Scroll behavior
 
-This option represents the [scroll behavior ](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)that should be used when scrolling to new coordinates. The default value is `smooth`, which results in the scroll container being scrolled smoothly to the new coordinates. 
+This option represents the [scroll behavior ](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)that should be used when scrolling to new coordinates. The default value is `smooth`, which results in the scroll container being scrolled smoothly to the new coordinates.
 
 The other possible value is `auto`, which results in the scroll container being scrolled directly to the new coordinates without any animation.
-
