@@ -3,7 +3,7 @@
 The `useDndMonitor` hook can be used within components wrapped in a `DndContext` provider to monitor the different drag and drop events that happen for that `DndContext`.
 
 ```jsx
-import {DndContext, useDndMonitor} from '@dnd-kit/core';
+import { DndContext, useDndMonitor } from '@dnd-kit/core';
 
 function App() {
   return (
@@ -24,6 +24,3 @@ function Component() {
   });
 }
 ```
-
-
-

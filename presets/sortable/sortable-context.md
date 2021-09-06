@@ -9,18 +9,16 @@ The `SortableContext` provides information via context that is consumed by the [
 It requires that you pass it a sorted array of the unique identifiers associated with the elements that use the `useSortable` hook within it.
 
 ```jsx
-import React, {useState} from 'react';
-import {DndContext} from '@dnd-kit/core';
-import {SortableContext} from '@dnd-kit/sortable';
+import React, { useState } from 'react';
+import { DndContext } from '@dnd-kit/core';
+import { SortableContext } from '@dnd-kit/sortable';
 
 function App() {
   const [items] = useState(['1', '2', '3']);
 
   return (
     <DndContext>
-      <SortableContext items={items}>
-        {/* ... */}
-      </SortableContext>
+      <SortableContext items={items}>{/* ... */}</SortableContext>
     </DndContext>
   );
 }
@@ -34,12 +32,12 @@ It's important that the `items` prop passed to `SortableContext` be sorted in th
 
 The `SortableContext` component also accepts different [sorting strategies](./#sorting-strategies) to compute transforms for the `useSortable` hook. The built in strategies include:
 
-* `rectSortingStrategy`:  This is the default value, and is suitable for most use cases. This strategy does not support virtualized lists.
-* `verticalListSortingStrategy`: This strategy is optimized for vertical lists, and supports virtualized lists.
-* `horizontalListSortingStrategy`: This strategy is optimized for horizontal lists, and supports virtualized lists.
-* `rectSwappingStrategy`: Use this strategy to achieve swappable functionality.
+- `rectSortingStrategy`: This is the default value, and is suitable for most use cases. This strategy does not support virtualized lists.
+- `verticalListSortingStrategy`: This strategy is optimized for vertical lists, and supports virtualized lists.
+- `horizontalListSortingStrategy`: This strategy is optimized for horizontal lists, and supports virtualized lists.
+- `rectSwappingStrategy`: Use this strategy to achieve swappable functionality.
 
-Make sure to use the sorting strategy that is the most adapted to the use case you are building for. 
+Make sure to use the sorting strategy that is the most adapted to the use case you are building for.
 
 For advanced use cases, you may also build custom sorting strategies. To do so, make sure that the custom strategy you are building accepts the arguments that are passed to a sorting strategy and adheres to the return values that are expected. For more details on this, refer to the implementation of the built-in sorting strategies.
 
@@ -50,7 +48,7 @@ The `SortableContext` component also optionally accepts an `id` prop. If an `id`
 ## Usage
 
 {% hint style="info" %}
-In order for the `SortableContext` component to function properly, make sure it is a descendant of a `DndContext` provider. 
+In order for the `SortableContext` component to function properly, make sure it is a descendant of a `DndContext` provider.
 {% endhint %}
 
 You may nest multiple `SortableContext` providers within the same parent `DndContext` provider.
@@ -111,5 +109,4 @@ You may also nest `SortableContext` providers within other `SortableContext` pro
 
 ```
 
-## 
-
+##

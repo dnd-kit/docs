@@ -2,10 +2,10 @@
 
 Modifiers let you dynamically modify the movement coordinates that are detected by sensors. They can be used for a wide range of use cases, for example:
 
-* Restricting motion to a single axis
-* Restricting motion to the draggable node container's bounding rectangle 
-* Restricting motion to the draggable node's scroll container bounding rectangle
-* Applying resistance or clamping the motion
+- Restricting motion to a single axis
+- Restricting motion to the draggable node container's bounding rectangle
+- Restricting motion to the draggable node's scroll container bounding rectangle
+- Applying resistance or clamping the motion
 
 ## Installation
 
@@ -20,7 +20,7 @@ npm install @dnd-kit/modifiers
 The modifiers repository contains a number of useful modifiers that can be applied on [`DndContext`](context-provider/) as well as [`DragOverlay`](draggable/drag-overlay.md).
 
 ```jsx
-import {DndContext, DragOverlay} from '@dnd-kit';
+import { DndContext, DragOverlay } from '@dnd-kit';
 import {
   restrictToVerticalAxis,
   restrictToWindowEdges,
@@ -30,11 +30,9 @@ function App() {
   return (
     <DndContext modifiers={[restrictToVerticalAxis]}>
       {/* ... */}
-      <DragOverlay modifiers={[restrictToWindowEdges]}>
-        {/* ... */}
-      </DragOverlay>
+      <DragOverlay modifiers={[restrictToWindowEdges]}>{/* ... */}</DragOverlay>
     </DndContext>
-  )
+  );
 }
 ```
 
@@ -70,10 +68,10 @@ Restrict movement to the first scrollable ancestor of the draggable item that is
 
 #### `createSnapModifier`
 
-Function to create modifiers to snap to a given grid size. 
+Function to create modifiers to snap to a given grid size.
 
 ```javascript
-import {createSnapModifier} from '@dnd-kit/modifiers';
+import { createSnapModifier } from '@dnd-kit/modifiers';
 
 const gridSize = 20; // pixels
 const snapToGridModifier = createSnapModifier(gridSize);
@@ -89,15 +87,12 @@ For example, here is an implementation to create a modifier to snap to grid:
 const gridSize = 20;
 
 function snapToGrid(args) {
-  const {transform} = args;
-  
+  const { transform } = args;
+
   return {
     ...transform,
     x: Math.ceil(transform.x / gridSize) * gridSize,
     y: Math.ceil(transform.y / gridSize) * gridSize,
   };
- }
+}
 ```
-
-
-

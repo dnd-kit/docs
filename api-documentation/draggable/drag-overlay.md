@@ -8,15 +8,15 @@ The `<DragOverlay>` component provides a way to render a draggable overlay that 
 
 Depending on your use-case, you may want to use a drag overlay rather than transforming the original draggable source element that is connected to the [`useDraggable`](usedraggable.md) hook:
 
-* If you'd like to **show a preview** of where the draggable source will be when dropped, you can update the position of the draggable source while dragging without affecting the drag overlay.
-* If your item needs to **move from one container to another while dragging**, we highly recommend you use the `<DragOverlay>` component so the draggable item can unmount from its original container while dragging and mount back into a different container without affecting the drag overlay.
-* If your draggable item is within a **scrollable container,** we also recommend you use a `<DragOverlay>`, otherwise you'll need to set the draggable element to `position: fixed` yourself so the item isn't restricted to the overflow and stacking context of its scroll container, and can move without being affected by the scroll position of its container.
-* If your `useDraggable` items are within a **virtualized list**, you will absolutely want to use a drag overlay, since the original drag source can unmount while dragging as the virtualized container is scrolled.
-* If you want **smooth drop animations** without the effort of building them yourself.
+- If you'd like to **show a preview** of where the draggable source will be when dropped, you can update the position of the draggable source while dragging without affecting the drag overlay.
+- If your item needs to **move from one container to another while dragging**, we highly recommend you use the `<DragOverlay>` component so the draggable item can unmount from its original container while dragging and mount back into a different container without affecting the drag overlay.
+- If your draggable item is within a **scrollable container,** we also recommend you use a `<DragOverlay>`, otherwise you'll need to set the draggable element to `position: fixed` yourself so the item isn't restricted to the overflow and stacking context of its scroll container, and can move without being affected by the scroll position of its container.
+- If your `useDraggable` items are within a **virtualized list**, you will absolutely want to use a drag overlay, since the original drag source can unmount while dragging as the virtualized container is scrolled.
+- If you want **smooth drop animations** without the effort of building them yourself.
 
 ## Usage
 
-You may render any valid JSX within the children of the `<DragOverlay>`. However, **make sure that the components rendered within the drag overlay do not use the `useDraggable` hook**.  
+You may render any valid JSX within the children of the `<DragOverlay>`. However, **make sure that the components rendered within the drag overlay do not use the `useDraggable` hook**.
 
 The `<DragOverlay>` component should **remain mounted at all times** so that it can perform the drop animation. If you conditionally render the `<DragOverlay>` component, drop animations will not work.
 
@@ -26,11 +26,12 @@ Instead, you should conditionally render the children passed to the `<DragOverla
 
 {% tabs %}
 {% tab title="App.jsx" %}
-```jsx
-import React, {useState} from 'react';
-import {DndContext, DragOverlay} from '@dnd-kit/core';
 
-import {Draggable} from './Draggable';
+```jsx
+import React, { useState } from 'react';
+import { DndContext, DragOverlay } from '@dnd-kit/core';
+
+import { Draggable } from './Draggable';
 
 /* The implementation details of <Item> and <ScrollableList> are not
  * relevant for this example and are therefore omitted. */
@@ -38,46 +39,46 @@ import {Draggable} from './Draggable';
 function App() {
   const [items] = useState(['1', '2', '3', '4', '5']);
   const [activeId, setActiveId] = useState(null);
-  
+
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <ScrollableList>
-        {items.map(id =>
+        {items.map((id) => (
           <Draggable key={id} id={id}>
             <Item value={`Item ${id}`} />
           </Draggable>
-        )}
+        ))}
       </ScrollableList>
-      
+
       <DragOverlay>
-        {activeId ? (
-          <Item value={`Item ${activeId}`} /> 
-        ): null}
+        {activeId ? <Item value={`Item ${activeId}`} /> : null}
       </DragOverlay>
     </DndContext>
   );
-  
+
   function handleDragStart(event) {
     setActiveId(event.active.id);
   }
-  
+
   function handleDragEnd() {
     setActiveId(null);
   }
 }
 ```
+
 {% endtab %}
 
 {% tab title="Draggable.jsx" %}
+
 ```jsx
 import React from 'react';
-import {useDraggable} from '@dnd-kit/core';
+import { useDraggable } from '@dnd-kit/core';
 
 function Draggable(props) {
-  const {attributes, listeners, setNodeRef} = useDraggable({
+  const { attributes, listeners, setNodeRef } = useDraggable({
     id: props.id,
   });
-  
+
   return (
     <li ref={setNodeRef} {...listeners} {...attributes}>
       {props.children}
@@ -85,6 +86,7 @@ function Draggable(props) {
   );
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -104,16 +106,17 @@ As you may have noticed from the example above, we can create small abstract com
 
 {% tabs %}
 {% tab title="Draggable.jsx" %}
+
 ```jsx
 import React from 'react';
-import {useDraggable} from '@dnd-kit/core';
+import { useDraggable } from '@dnd-kit/core';
 
 function Draggable(props) {
   const Element = props.element || 'div';
-  const {attributes, listeners, setNodeRef} = useDraggable({
+  const { attributes, listeners, setNodeRef } = useDraggable({
     id: props.id,
   });
-  
+
   return (
     <Element ref={setNodeRef} {...listeners} {...attributes}>
       {props.children}
@@ -121,6 +124,7 @@ function Draggable(props) {
   );
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -128,41 +132,39 @@ Using this pattern, we can then render our presentational components within `<Dr
 
 {% tabs %}
 {% tab title="App.jsx" %}
-```jsx
-import React, {useState} from 'react';
-import {DndContext, DragOverlay} from '@dnd-kit/core';
 
-import {Draggable} from './Draggable';
+```jsx
+import React, { useState } from 'react';
+import { DndContext, DragOverlay } from '@dnd-kit/core';
+
+import { Draggable } from './Draggable';
 
 /* The implementation details of <Item> is not
  * relevant for this example and therefore omitted. */
 
 function App() {
   const [isDragging, setIsDragging] = useState(false);
-  
+
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <Draggable id="my-draggable-element">
         <Item />
       </Draggable>
-      
-      <DragOverlay>
-        {isDragging ? (
-          <Item />
-        ): null}
-      </DragOverlay>
+
+      <DragOverlay>{isDragging ? <Item /> : null}</DragOverlay>
     </DndContext>
   );
-  
+
   function handleDragStart() {
     setIsDragging(true);
   }
-  
+
   function handleDragEnd() {
     setIsDragging(false);
   }
 }
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -171,12 +173,14 @@ function App() {
 Use the[ ref forwarding pattern](https://reactjs.org/docs/forwarding-refs.html) to connect your presentational components to the `useDraggable` hook:
 
 ```jsx
-import React, {forwardRef} from 'react';
+import React, { forwardRef } from 'react';
 
-const Item = forwardRef(({children, ...props}, ref) => {
+const Item = forwardRef(({ children, ...props }, ref) => {
   return (
-    <li {...props} ref={ref}>{children}</li>
-  )
+    <li {...props} ref={ref}>
+      {children}
+    </li>
+  );
 });
 ```
 
@@ -190,7 +194,7 @@ function DraggableItem(props) {
   const {attributes, listeners, setNodeRef} = useDraggable({
     id: props.id,
   });
-  
+
   return (
     <Item ref={setNodeRef} {...attributes} {...listeners}>
       {value}
@@ -201,22 +205,19 @@ function DraggableItem(props) {
 
 ### Portals
 
-The drag overlay is not rendered in a portal by default. Rather, it is rendered in the container where it is rendered. 
+The drag overlay is not rendered in a portal by default. Rather, it is rendered in the container where it is rendered.
 
 If you would like to render the `<DragOverlay>` in a different container than where it is rendered, import the [`createPortal`](https://reactjs.org/docs/portals.html) helper from `react-dom`:
 
 ```jsx
-import React, {useState} from 'react';
-import {createPortal} from 'react-dom';
-import {DndContext, DragOverlay} from '@dnd-kit/core';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { DndContext, DragOverlay } from '@dnd-kit/core';
 
 function App() {
   return (
     <DndContext>
-      {createPortal(
-        <DragOverlay>{/* ... */}</DragOverlay>,
-        document.body,
-      )}
+      {createPortal(<DragOverlay>{/* ... */}</DragOverlay>, document.body)}
     </DndContext>
   );
 }
@@ -273,10 +274,12 @@ interface DropAnimation {
 The `duration` option should be a number, in `milliseconds`. The default value is `250` milliseconds. The `easing` option should be a string that represents a valid [CSS easing function](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function). The default easing is `ease`.
 
 ```jsx
-<DragOverlay dropAnimation={{
-  duration: 500,
-  easing: 'cubic-bezier(0.18, 0.67, 0.6, 1.22)',
-}}>
+<DragOverlay
+  dropAnimation={{
+    duration: 500,
+    easing: 'cubic-bezier(0.18, 0.67, 0.6, 1.22)',
+  }}
+>
   {/* ... */}
 </DragOverlay>
 ```
@@ -284,9 +287,7 @@ The `duration` option should be a number, in `milliseconds`. The default value i
 To disable drop animations, set the `dropAnimation` prop to `null`.
 
 ```jsx
-<DragOverlay dropAnimation={null}>
-  {/* ... */}
-</DragOverlay>
+<DragOverlay dropAnimation={null}>{/* ... */}</DragOverlay>
 ```
 
 {% hint style="warning" %}
@@ -300,20 +301,16 @@ Modifiers let you dynamically modify the movement coordinates that are detected 
 For example, you can use modifiers to restrict the movement of the `<DragOverlay>` to the bounds of the window:
 
 ```jsx
-import {DndContext, DragOverlay} from '@dnd-kit';
-import {
-  restrictToWindowEdges,
-} from '@dnd-kit/modifiers';
+import { DndContext, DragOverlay } from '@dnd-kit';
+import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
 function App() {
   return (
     <DndContext>
       {/* ... */}
-      <DragOverlay modifiers={[restrictToWindowEdges]}>
-        {/* ... */}
-      </DragOverlay>
+      <DragOverlay modifiers={[restrictToWindowEdges]}>{/* ... */}</DragOverlay>
     </DndContext>
-  )
+  );
 }
 ```
 
@@ -326,7 +323,7 @@ function defaultTransition(activatorEvent) {
   const isKeyboardActivator = activatorEvent instanceof KeyboardEvent;
 
   return isKeyboardActivator ? 'transform 250ms ease' : undefined;
-};
+}
 ```
 
 ### Wrapper element
@@ -334,12 +331,9 @@ function defaultTransition(activatorEvent) {
 By default, the `<DragOverlay>` component renders your elements within a `div` element. If your draggable elements are list items, you'll want to update the `<DragOverlay>` component to render a `ul` wrapper instead, since wrapping a `li` item without a parent `ul` is invalid HTML:
 
 ```jsx
-<DragOverlay wrapperElement="ul">
-  {/* ... */}
-</DragOverlay>
+<DragOverlay wrapperElement="ul">{/* ... */}</DragOverlay>
 ```
 
 ### `z-index`
 
-The `zIndex` prop sets the [z-order](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index) of the drag overlay. The default value is `999` for compatibility reasons, but we highly recommend you use a lower value. 
-
+The `zIndex` prop sets the [z-order](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index) of the drag overlay. The default value is `999` for compatibility reasons, but we highly recommend you use a lower value.

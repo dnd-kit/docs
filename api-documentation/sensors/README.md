@@ -2,11 +2,11 @@
 
 ## Concepts
 
-Sensors are an abstraction to detect different input methods in order to initiate drag operations, respond to movement and end or cancel the operation. 
+Sensors are an abstraction to detect different input methods in order to initiate drag operations, respond to movement and end or cancel the operation.
 
 ### Activators
 
-Sensors may define one or multiple **activator events**. Activator events use React  [SyntheticEvent listeners](https://reactjs.org/docs/events.html), which leads to improved performance over manually adding event listeners to each individual draggable node.
+Sensors may define one or multiple **activator events**. Activator events use React [SyntheticEvent listeners](https://reactjs.org/docs/events.html), which leads to improved performance over manually adding event listeners to each individual draggable node.
 
 Sensors are initialized once one of the activator events is detected.
 
@@ -14,10 +14,10 @@ Sensors are initialized once one of the activator events is detected.
 
 The built-in sensors are:
 
-* [Pointer](pointer.md)
-* [Mouse](mouse.md)
-* [Touch](touch.md)
-* [Keyboard](keyboard.md)
+- [Pointer](pointer.md)
+- [Mouse](mouse.md)
+- [Touch](touch.md)
+- [Keyboard](keyboard.md)
 
 ### Custom sensors
 
@@ -27,16 +27,16 @@ If necessary, you may also implement custom sensors to respond to other inputs o
 
 The lifecycle of a sensor is as follows:
 
-* Activator event detected, if the event is qualified, sensor class is initialized. 
-* Sensor manually attaches new listeners to input methods upon initialization.
-* Sensor dispatches drag start event once constraints are met.
-* Sensor dispatches drag move events in response to input.
-* Sensor dispatches drag end or drag cancel event.
-* Sensor is torn down and cleans up manually attached event listeners.
+- Activator event detected, if the event is qualified, sensor class is initialized.
+- Sensor manually attaches new listeners to input methods upon initialization.
+- Sensor dispatches drag start event once constraints are met.
+- Sensor dispatches drag move events in response to input.
+- Sensor dispatches drag end or drag cancel event.
+- Sensor is torn down and cleans up manually attached event listeners.
 
-From an implementation perspective, Sensors are [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes). 
+From an implementation perspective, Sensors are [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes).
 
-They are class-based rather than hooks because they need to be instantiated synchronously to respond to user interactions immediately, and it must be possible for them to be  conditionally invoked.
+They are class-based rather than hooks because they need to be instantiated synchronously to respond to user interactions immediately, and it must be possible for them to be conditionally invoked.
 
 ## Hooks
 
@@ -47,7 +47,7 @@ By default, `DndContext` uses the [Pointer](pointer.md) and [Keyboard](keyboard.
 If you'd like to use other sensors, such as the Mouse and Touch sensors instead, initialize those sensors separately with the options you'd like to use using the `useSensor` hook
 
 ```jsx
-import {MouseSensor, TouchSensor, useSensor} from '@dnd-kit/core';
+import { MouseSensor, TouchSensor, useSensor } from '@dnd-kit/core';
 
 function App() {
   const mouseSensor = useSensor(MouseSensor, {
@@ -84,18 +84,10 @@ function App() {
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
   const keyboardSensor = useSensor(KeyboardSensor);
-  
-  const sensors = useSensors(
-    mouseSensor,
-    touchSensor,
-    keyboardSensor,
-  );
-  
-  return (
-    <DndContext sensors={sensors}>
-      {/* ... */}
-    </DndContext>
-  )
+
+  const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
+
+  return <DndContext sensors={sensors}>{/* ... */}</DndContext>;
 }
 ```
 
@@ -115,14 +107,9 @@ function App() {
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor),
-    useSensor(KeyboardSensor),
+    useSensor(KeyboardSensor)
   );
-  
-  return (
-    <DndContext sensors={sensors}>
-      {/* ... */}
-    </DndContext>
-  )
+
+  return <DndContext sensors={sensors}>{/* ... */}</DndContext>;
 }
 ```
-
