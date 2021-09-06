@@ -48,13 +48,11 @@ This property is particularly useful for touch input, where some tolerance shoul
 
 #### `touch-action`
 
-We highly recommend you specify the `touch-action` CSS property for all of your draggable elements.
+You must set the `touch-action` CSS property to `none` on all draggable elements for dragging to work properly on touch devices. Otherwise, attempting to drag the element will cause scrolling to occur instead.
 
 > The **`touch-action`** CSS property sets how an element's region can be manipulated by a touchscreen user \(for example, by zooming features built into the browser\).  
 >   
 > Source: [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action)
-
-In general, we recommend you set the `touch-action` property to `none` for draggable elements in order to prevent scrolling on mobile devices. 
 
 {% hint style="info" %}
 For [Pointer Events,](pointer.md) there is no way to prevent the default behaviour of the browser on touch devices when interacting with a draggable element from the pointer event listeners. Using `touch-action: none;` is the only way to reliably prevent scrolling for pointer events.

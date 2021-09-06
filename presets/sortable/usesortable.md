@@ -31,6 +31,7 @@ function SortableItem(props) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    touchAction: 'none'
   };
   
   return (
@@ -168,6 +169,7 @@ function SortableItem(props) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    touchAction: 'none'
   };
   
   return (
@@ -195,6 +197,7 @@ function SortableItem(props) {
     '--translate-x': transform ? transform.x : 0,
     '--translate-y': transform ? transform.y : 0,
     '--transition': transition,
+    touchAction: 'none'
   };
   
   return (
