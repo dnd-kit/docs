@@ -20,7 +20,7 @@ You may render any valid JSX within the children of the `<DragOverlay>`. However
 
 The `<DragOverlay>` component should **remain mounted at all times** so that it can perform the drop animation. If you conditionally render the `<DragOverlay>` component, drop animations will not work.
 
-As a rule of thumb, try to render the `<DragOverlay>` outside fo your draggable components, and follow the [presentational component pattern ](drag-overlay.md#presentational-components)to maintain a good separation of concerns.
+As a rule of thumb, try to render the `<DragOverlay>` outside of your draggable components, and follow the [presentational component pattern ](drag-overlay.md#presentational-components)to maintain a good separation of concerns.
 
 Instead, you should conditionally render the children passed to the `<DragOverlay>`:
 
@@ -221,6 +221,10 @@ function App() {
   );
 }
 ```
+
+### Click events
+
+With default settings, a `DragOverlay` will prevent `click` events from firing on your draggable element because the `DragOverlay` is displayed over top of the draggable. To fix this, add a delay or distance-based [activation constraint](../sensors/pointer.md#activation-constraints) or use a drag handle.
 
 ## Props
 
