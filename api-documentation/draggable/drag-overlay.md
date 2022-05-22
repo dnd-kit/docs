@@ -9,18 +9,18 @@ The `<DragOverlay>` component provides a way to render a draggable overlay that 
 Depending on your use-case, you may want to use a drag overlay rather than transforming the original draggable source element that is connected to the [`useDraggable`](usedraggable.md) hook:
 
 * If you'd like to **show a preview** of where the draggable source will be when dropped, you can update the position of the draggable source while dragging without affecting the drag overlay.
-* If your item needs to **move from one container to another while dragging**, we highly recommend you use the `<DragOverlay>` component so the draggable item can unmount from its original container while dragging and mount back into a different container without affecting the drag overlay.
+* If your item needs to **move from one container to another while dragging**, we strongly recommend you use the `<DragOverlay>` component so the draggable item can unmount from its original container while dragging and mount back into a different container without affecting the drag overlay.
 * If your draggable item is within a **scrollable container,** we also recommend you use a `<DragOverlay>`, otherwise you'll need to set the draggable element to `position: fixed` yourself so the item isn't restricted to the overflow and stacking context of its scroll container, and can move without being affected by the scroll position of its container.
 * If your `useDraggable` items are within a **virtualized list**, you will absolutely want to use a drag overlay, since the original drag source can unmount while dragging as the virtualized container is scrolled.
 * If you want **smooth drop animations** without the effort of building them yourself.
 
 ## Usage
 
-You may render any valid JSX within the children of the `<DragOverlay>`. However, **make sure that the components rendered within the drag overlay do not use the `useDraggable` hook**.  
+You may render any valid JSX within the children of the `<DragOverlay>`.&#x20;
 
 The `<DragOverlay>` component should **remain mounted at all times** so that it can perform the drop animation. If you conditionally render the `<DragOverlay>` component, drop animations will not work.
 
-As a rule of thumb, try to render the `<DragOverlay>` outside fo your draggable components, and follow the [presentational component pattern ](drag-overlay.md#presentational-components)to maintain a good separation of concerns.
+As a rule of thumb, try to render the `<DragOverlay>` outside of your draggable components, and follow the [presentational component pattern ](drag-overlay.md#presentational-components)to maintain a good separation of concerns.
 
 Instead, you should conditionally render the children passed to the `<DragOverlay>`:
 
@@ -92,11 +92,9 @@ function Draggable(props) {
 
 ### Presentational components
 
-We **highly** recommend that all the components you intend to make draggable be [presentational components ](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)that are decoupled from `@dnd-kit` entirely.
+While this is an optional pattern, we recommend that the components you intend to make draggable be [presentational components ](https://medium.com/@dan\_abramov/smart-and-dumb-components-7ca2f9a7c7d0)that are decoupled from `@dnd-kit`.
 
-A **common pitfall** when using the `DragOverlay` component is rendering the same component that calls `useDraggable` inside the `DragOverlay`. This will lead to unexpected results, since there will be an `id` collision between the two components both calling `useDraggable` with the same `id`.
-
-Instead, create a presentational version of your component that you intend on rendering in the drag overlay, and another version that is draggable and renders the presentational component.
+Using this pattern, create a presentational version of your component that you intend on rendering within the drag overlay, and another version that is draggable and renders the presentational component.
 
 #### Wrapper nodes
 
@@ -201,7 +199,7 @@ function DraggableItem(props) {
 
 ### Portals
 
-The drag overlay is not rendered in a portal by default. Rather, it is rendered in the container where it is rendered. 
+The drag overlay is not rendered in a portal by default. Rather, it is rendered in the container where it is rendered.&#x20;
 
 If you would like to render the `<DragOverlay>` in a different container than where it is rendered, import the [`createPortal`](https://reactjs.org/docs/portals.html) helper from `react-dom`:
 
@@ -341,5 +339,4 @@ By default, the `<DragOverlay>` component renders your elements within a `div` e
 
 ### `z-index`
 
-The `zIndex` prop sets the [z-order](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index) of the drag overlay. The default value is `999` for compatibility reasons, but we highly recommend you use a lower value. 
-
+The `zIndex` prop sets the [z-order](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index) of the drag overlay. The default value is `999` for compatibility reasons, but we highly recommend you use a lower value.&#x20;

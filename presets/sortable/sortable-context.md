@@ -14,7 +14,7 @@ import {DndContext} from '@dnd-kit/core';
 import {SortableContext} from '@dnd-kit/sortable';
 
 function App() {
-  const [items] = useState(['1', '2', '3']);
+  const [items] = useState([1, 2, 3]);
 
   return (
     <DndContext>
@@ -39,7 +39,7 @@ The `SortableContext` component also accepts different [sorting strategies](./#s
 * `horizontalListSortingStrategy`: This strategy is optimized for horizontal lists, and supports virtualized lists.
 * `rectSwappingStrategy`: Use this strategy to achieve swappable functionality.
 
-Make sure to use the sorting strategy that is the most adapted to the use case you are building for. 
+Make sure to use the sorting strategy that is the most adapted to the use case you are building for.&#x20;
 
 For advanced use cases, you may also build custom sorting strategies. To do so, make sure that the custom strategy you are building accepts the arguments that are passed to a sorting strategy and adheres to the return values that are expected. For more details on this, refer to the implementation of the built-in sorting strategies.
 
@@ -50,7 +50,7 @@ The `SortableContext` component also optionally accepts an `id` prop. If an `id`
 ## Usage
 
 {% hint style="info" %}
-In order for the `SortableContext` component to function properly, make sure it is a descendant of a `DndContext` provider. 
+In order for the `SortableContext` component to function properly, make sure it is a descendant of a `DndContext` provider.&#x20;
 {% endhint %}
 
 You may nest multiple `SortableContext` providers within the same parent `DndContext` provider.
@@ -103,7 +103,7 @@ You may also nest `SortableContext` providers within other `SortableContext` pro
 // Good, nested Sortable contexts with unique `id`s
 <DndContext>
   <SortableContext items={["A, "B", "C"]}>
-    <SortableContext items={["1, "2", "3"]}>
+    <SortableContext items={[1, 2, 3]}>
       {/* ... */}
     </SortableContext>
   </SortableContext>
@@ -111,5 +111,4 @@ You may also nest `SortableContext` providers within other `SortableContext` pro
 
 ```
 
-## 
-
+##

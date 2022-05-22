@@ -1,6 +1,6 @@
 # useSortable
 
-The `useSortable` hook is an abstraction that composes the [`useDroppable`](../../api-documentation/droppable/) and [`useDraggable`](../../api-documentation/draggable/) hooks. 
+The `useSortable` hook is an abstraction that composes the [`useDroppable`](../../api-documentation/droppable/) and [`useDraggable`](../../api-documentation/draggable/) hooks.&#x20;
 
 ![](../../.gitbook/assets/usesortable-3-.png)
 
@@ -10,7 +10,7 @@ To function properly, the `useSortable` hook needs to be used within a descendan
 
 ## Usage
 
-If you're already familiar with the [`useDraggable`](../../api-documentation/draggable/) hook, the `useSortable` hook should look very familiar, since, it is an abstraction on top of it. 
+If you're already familiar with the [`useDraggable`](../../api-documentation/draggable/) hook, the `useSortable` hook should look very familiar, since, it is an abstraction on top of it.&#x20;
 
 In addition to the `attributes`, `listeners`,`transform`  and `setNodeRef` arguments, which you should already be familiar with if you've used the `useDraggable` hook before, you'll notice that the `useSortable` hook also provides a [`transition`](usesortable.md#transform) argument.
 
@@ -45,15 +45,15 @@ function SortableItem(props) {
 
 ### Listeners
 
-The `listeners` property contains the a[ctivator event handlers](../../api-documentation/sensors/#activators) for each [Sensor](../../api-documentation/sensors/) that is defined on the parent [`DndContext`](../../api-documentation/context-provider/#props) provider. 
+The `listeners` property contains the a[ctivator event handlers](../../api-documentation/sensors/#activators) for each [Sensor](../../api-documentation/sensors/) that is defined on the parent [`DndContext`](../../api-documentation/context-provider/#props) provider.&#x20;
 
-It should be attached to the node\(s\) that you wish to use as the activator to begin a sort event. In most cases, that will be the same node as the one passed to `setNodeRef`, though not necessarily. For instance, when implementing a sortable element with a "drag handle", the ref should be attached to the parent node that should be sortable, but the listeners can be attached to the handle node instead.
+It should be attached to the node(s) that you wish to use as the activator to begin a sort event. In most cases, that will be the same node as the one passed to `setNodeRef`, though not necessarily. For instance, when implementing a sortable element with a "drag handle", the ref should be attached to the parent node that should be sortable, but the listeners can be attached to the handle node instead.
 
 For additional details on the [`listeners`](../../api-documentation/draggable/#listeners) property, refer to the [`useDraggable`](../../api-documentation/draggable/) documentation.
 
 ### Attributes
 
-The `useSortable` hook provides a set of sensible default attributes for draggable items. We recommend you attach these to your draggable elements, though nothing will break if you don't. 
+The `useSortable` hook provides a set of sensible default attributes for draggable items. We recommend you attach these to your draggable elements, though nothing will break if you don't.&#x20;
 
 For additional details on the [`attributes`](../../api-documentation/draggable/#attributes) property, refer to the [`useDraggable`](../../api-documentation/draggable/) documentation.
 
@@ -115,6 +115,56 @@ function SortableItem(props) {
 }
 ```
 
+
+
+### Activator
+
+**`setActivatorNodeRef`**
+
+It's possible for the listeners to be attached to a different node than the one that `setNodeRef` is attached to.
+
+A common example of this is when implementing a drag handle and attaching the listeners to the drag handle:
+
+```jsx
+function SortableItem(props) {
+  const {listeners, setNodeRef} = useSortable({
+    id: props.id,
+  });
+  
+  return (
+    <li ref={setNodeRef}>
+      {/* ... */}
+      <button {...listeners}>Drag handle</button>
+    </li>
+  );
+}
+```
+
+When the activator node differs from the draggable node, we recommend setting the activator node ref on the activator node:
+
+```jsx
+function SortableItem(props) {
+  const {listeners, setNodeRef, setActivatorNodeRef} = useSortable({
+    id: props.id,
+  });
+  
+  return (
+    <li ref={setNodeRef}>
+      {/* ... */}
+      <button ref={setActivatorNodeRef} {...listeners}>Drag handle</button>
+    </li>
+  );
+}
+```
+
+This helps @dnd-kit more accurately handle automatic focus management and can also be accessed by sensors for enhanced activation constraints.
+
+{% hint style="info" %}
+Focus management is automatically handled by [@dnd-kit](https://github.com/dnd-kit). When the activator event is a Keyboard event, focus will automatically be restored back to the first focusable node of the activator node.
+
+If no activator node is set via `setActivatorNodeRef`, focus will automatically be restored on the first focusable node of the draggable node registered via `setNodeRef.`
+{% endhint %}
+
 ### Transition
 
 Refer to the [`transition` argument](usesortable.md#transition-1) documentation below.
@@ -123,7 +173,7 @@ Refer to the [`transition` argument](usesortable.md#transition-1) documentation 
 
 ### Identifier
 
-The `id` argument is a string that should be a unique identifier.
+The `id` argument is a string or number that should be a unique identifier.
 
 Since the `useSortable` is an abstraction on top of the `useDroppable` and `useDraggable` hooks, which both require a unique identifier, the `useSortable` hook also requires a unique identifier.
 
@@ -135,7 +185,7 @@ If you'd like to temporarily disable a sortable item from being interactive, set
 
 ### Transition
 
-The transition argument controls the value of the `transition` property for you. It conveniently disables transform transitions while not dragging, but ensures that items transition back to their final positions when the drag operation is ended or cancelled. 
+The transition argument controls the value of the `transition` property for you. It conveniently disables transform transitions while not dragging, but ensures that items transition back to their final positions when the drag operation is ended or cancelled.&#x20;
 
 It also disables transitions for the active sortable element that is being dragged, unless there is a [`DragOverlay`](../../api-documentation/draggable/drag-overlay.md) being used.
 
@@ -220,4 +270,3 @@ If you prefer to manage transitions yourself, you may also choose to do so, but 
 ### Sorting strategy
 
 Optionally, you can pass a local sorting strategy that differs from the [global sorting strategy](sortable-context.md#strategy) passed to the parent `SortableContext` provider.
-

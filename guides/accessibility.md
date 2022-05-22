@@ -2,24 +2,24 @@
 
 ## Introduction
 
-If you're new to accessibility for the web, the _Web Almanac by HTTP Archive_ has an excellent primer on the subject and the state of web accessibility that you should read before diving into this guide: [https://almanac.httparchive.org/en/2020/accessibility](https://almanac.httparchive.org/en/2020/accessibility)
+If you're new to accessibility for the web, the _Web Almanac by HTTP Archive_ has an excellent primer on the subject and the state of web accessibility that you should read before diving into this guide: [https://almanac.httparchive.org/en/2021/accessibility](https://almanac.httparchive.org/en/2021/accessibility)
 
-> Web accessibility is about achieving feature and information parity and giving complete access to all aspects of an interface to disabled people. 
+> Web accessibility is about achieving feature and information parity and giving complete access to all aspects of an interface to disabled people.&#x20;
 >
 > A digital product or website is simply not complete if it is not usable by everyone. If it excludes certain disabled populations, this is discrimination and potentially grounds for fines and/or lawsuits.
 >
 > – Source: [Web Almanac by HTTP Archive](https://almanac.httparchive.org/en/2020/accessibility#screen-reader-only-text)
 
-People with varying disabilities use different assistive technologies to help them experience the web. 
+People with varying disabilities use different assistive technologies to help them experience the web.&#x20;
 
-The [Tools and Techniques](https://www.w3.org/WAI/people-use-web/tools-techniques/) article from the Web Accessibility Initiative \(WAI\) of the W3C covers how users can perceive, understand and interact with the web using different assistive technologies.
+The [Tools and Techniques](https://www.w3.org/WAI/people-use-web/tools-techniques/) article from the Web Accessibility Initiative (WAI) of the W3C covers how users can perceive, understand and interact with the web using different assistive technologies.
 
 Some assistive technologies for the web include:
 
 * Screen readers
 * Voice control
 * Screen magnifiers
-* Input devices \(such as the keyboard, pointers and switch devices\)
+* Input devices (such as the keyboard, pointers and switch devices)
 
 When building accessible interfaces for the web, it's important to keep the three  following questions in mind:
 
@@ -54,7 +54,7 @@ When creating widgets that a user can click or tap, drag, and drop, a user must 
 For drag and drop interfaces, this means that the activator element that initiates the drag action must:
 
 * Be able to receive focus
-* A user must be able to activate the action associated with the element using **both** the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` key.
+* A user must be able to activate the action associated with the element using **both** the `enter` (on Windows) or `return` (on macOS) and the `space` key.
 
 Both these guidelines should be respected to comply with the [third rule of ARIA](https://www.w3.org/TR/using-aria/#3rdrule).
 
@@ -66,20 +66,20 @@ In order for the Keyboard sensor to function properly, the activator element tha
 
 The `tabindex` attribute dictates the order in which focus moves throughout the document.
 
-* Natively interactive elements such as [buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button), [anchor tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) and[ form controls ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection)have a default `tabindex` value of `0`. 
-* Custom elements that are intended to be interactive and receive keyboard focus need to have an explicitly assigned `tabindex="0"`\(for example, `div` and `li` elements\)
+* Natively interactive elements such as [buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button), [anchor tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) and[ form controls ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection)have a default `tabindex` value of `0`.&#x20;
+* Custom elements that are intended to be interactive and receive keyboard focus need to have an explicitly assigned `tabindex="0"`(for example, `div` and `li` elements)
 
-In other words, in order for your draggable activator elements to be able to receive keyboard focus, they _need_ to have the `tabindex` attribute set to `0` **if** they are not natively interactive elements \(such as the HTML `button` element\).
+In other words, in order for your draggable activator elements to be able to receive keyboard focus, they _need_ to have the `tabindex` attribute set to `0` **if** they are not natively interactive elements (such as the HTML `button` element).
 
 For this reason, the `useDraggable` hook sets the `tabindex="0"` attribute by default.
 
 #### Keyboard shortcuts
 
-Once a draggable activator element receives focus, the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` keys can be used to initiate a drag operation and pick up the draggable item.
+Once a draggable activator element receives focus, the `enter` (on Windows) or `return` (on macOS) and the `space` keys can be used to initiate a drag operation and pick up the draggable item.
 
 The arrow keys are used to move the draggable item in any given direction.
 
-After an item is picked up, it can be dropped using the `enter` \(on Windows\) or `return` \(on macOS\) and the `space` keys.
+After an item is picked up, it can be dropped using the `enter` (on Windows) or `return` (on macOS) and the `space` keys.
 
 A drag operation can be cancelled using the `escape` key. It is recommended to allow users to cancel the drag operation using the `escape` key for all sensors, not just the Keyboard sensor.
 
@@ -99,60 +99,13 @@ In order to users know how to interact with draggable items using only the keybo
 
 #### Role
 
-To let users know that their focus is currently on a draggable item, the [`useDraggable`](../api-documentation/draggable/usedraggable.md) hook provides the [`role`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) and [`aria-roledescription`](https://www.digitala11y.com/aria-roledescriptionproperties/), and [`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) attributes by default:
+To let users know that their focus is currently on a draggable item, the [`useDraggable`](../api-documentation/draggable/usedraggable.md) hook provides the [`role`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) and [`aria-roledescription`](https://www.digitala11y.com/aria-roledescriptionproperties/), and [`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA\_Techniques/Using\_the\_aria-describedby\_attribute) attributes by default:
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Attribute</th>
-      <th style="text-align:left">Default value</th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>role</code>
-      </td>
-      <td style="text-align:left"><code>&quot;button&quot;</code>
-      </td>
-      <td style="text-align:left">
-        <p>The ARIA <code>&quot;role&quot;</code> attribute lets you explicitly define
-          the role for an element, which communicates its purpose to assistive technologies.
-          <br
-          />
-        </p>
-        <p>If possible, we recommend you use a semantic <code>&lt;button&gt;</code> element
-          for the DOM element you plan on attaching draggable listeners to.
-          <br />
-          <br />In case that&apos;s not possible, make sure you include the <code>role=&quot;button&quot;</code>attribute,
-          which is the default value.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>aria-roledescription</code>
-      </td>
-      <td style="text-align:left"><code>&quot;draggable&quot;</code>
-      </td>
-      <td style="text-align:left">
-        <p>Defines a human-readable, localized description for the role of an element
-          that is read by screen readers.
-          <br />
-        </p>
-        <p>While <code>draggable</code> is a sensible default, we recommend you customize
-          this value to something that is tailored to your use-case.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>aria-describedby</code>
-      </td>
-      <td style="text-align:left"><code>&quot;DndContext-[uniqueId]&quot;</code>
-      </td>
-      <td style="text-align:left">Each draggable item is provided a unique <code>aria-describedby</code> ID
-        that points to the voiceover instructions to be read out when a draggable
-        item receives focus</td>
-    </tr>
-  </tbody>
-</table>
+| Attribute              | Default value             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ---------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `role`                 | `"button"`                | <p>The ARIA <code>"role"</code> attribute lets you explicitly define the role for an element, which communicates its purpose to assistive technologies.<br></p><p>If possible, we recommend you use a semantic <code>&#x3C;button></code> element for the DOM element you plan on attaching draggable listeners to. <br><br>In case that's not possible, make sure you include the <code>role="button"</code>attribute, which is the default value.</p> |
+| `aria-roledescription` | `"draggable"`             | <p>Defines a human-readable, localized description for the role of an element that is read by screen readers.<br></p><p>While <code>draggable</code> is a sensible default, we recommend you customize this value to something that is tailored to your use-case.</p>                                                                                                                                                                                   |
+| `aria-describedby`     | `"DndContext-[uniqueId]"` | Each draggable item is provided a unique `aria-describedby` ID that points to the voiceover instructions to be read out when a draggable item receives focus                                                                                                                                                                                                                                                                                            |
 
 The `role` and `aria-roledescription` attributes can be customized via the [options passed to the `useDraggable` hook](../api-documentation/draggable/usedraggable.md#arguments).
 
@@ -160,27 +113,27 @@ To customize the `aria-describedby` instructions, refer to the section below.
 
 #### Instructions
 
-By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used to provide these instructions to screen readers. 
+By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used to provide these instructions to screen readers.&#x20;
 
 The default instructions are:
 
-> To pick up a draggable item, press space or enter.   
-> While dragging, use the arrow keys to move the item in any given direction.  
+> To pick up a draggable item, press space or enter. \
+> While dragging, use the arrow keys to move the item in any given direction.\
 > Press space or enter again to drop the item in its new position, or press escape to cancel.
 
-We recommend you customize and localize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](../api-documentation/context-provider/).  
+We recommend you customize and localize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](../api-documentation/context-provider/). &#x20;
 
 For example, if you were building a sortable grocery shopping list, you may want to tailor the instructions like so:
 
-> To pick up a grocery list item, press space or enter.   
-> Use the up and down arrow keys to update the position of the item in the grocery list.  
+> To pick up a grocery list item, press space or enter. \
+> Use the up and down arrow keys to update the position of the item in the grocery list.\
 > Press space or enter again to drop the item in its new position, or press escape to cancel.
 
 If your application supports multiple languages, make sure you also translate these instructions. The `<DndContext>` component only ships with instructions in English due to bundle size concerns.
 
 ### Screen reader announcements using live regions
 
-[Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) are used to notify screen readers of content changes. 
+[Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA\_Live\_Regions) are used to notify screen readers of content changes.&#x20;
 
 When building accessible drag and drop interfaces, live regions should be used to provide screen reader announcements in real-time of time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus .
 
@@ -192,25 +145,25 @@ The default announcements are:
 
 ```javascript
 const defaultAnnouncements = {
-  onDragStart(id) {
-    return `Picked up draggable item ${id}.`;
+  onDragStart({active}) {
+    return `Picked up draggable item ${active.id}.`;
   },
-  onDragOver(id, overId) {
-    if (overId) {
-      return `Draggable item ${id} was moved over droppable area ${overId}.`;
+  onDragOver({active, over}) {
+    if (over) {
+      return `Draggable item ${active.id} was moved over droppable area ${over.id}.`;
     }
 
-    return `Draggable item ${id} is no longer over a droppable area.`;
+    return `Draggable item ${active.id} is no longer over a droppable area.`;
   },
-  onDragEnd(id, overId) {
-    if (overId) {
-      return `Draggable item ${id} was dropped over droppable area ${overId}`;
+  onDragEnd({active, over}) {
+    if (over) {
+      return `Draggable item ${active.id} was dropped over droppable area ${over.id}`;
     }
 
-    return `Draggable item ${id} was dropped.`;
+    return `Draggable item ${active.id} was dropped.`;
   },
-  onDragCancel(id) {
-    return `Dragging was cancelled. Draggable item ${id} was dropped.`;
+  onDragCancel({active}) {
+    return `Dragging was cancelled. Draggable item ${active.id} was dropped.`;
   },
 }
 ```
@@ -218,7 +171,7 @@ const defaultAnnouncements = {
 While these default announcements are sensible defaults that should cover most simple use cases, you know your application best, and we highly recommend that you customize these to provide a screen reader experience that is more tailored to the use case you are building.
 
 {% hint style="info" %}
-When writing screen reader announcements that rely on an element's position \(index\) in a list, use positions rather than indices to describe the element's current position.
+When authoring screen reader announcements that rely on an element's position (index) in a list, use positions rather than indices to describe the element's current position.
 
 Here's an example of index based announcements and why you should avoid them:
 
@@ -233,31 +186,37 @@ For example, when building a sortable list, you could write custom announcements
 
 ```javascript
 function App() {
-const items = useState(['Apple', 'Orange', 'Strawberries', 'Raspberries']);
-const getPosition = (id) => items.indexOf(id) + 1; // prefer position over index
-const itemCount = items.length;
-
-const announcements = {
-  onDragStart(id) {
-    return `Picked up sortable item ${id}. Sortable item ${id} is in position ${getPosition(id)} of ${itemCount}`;
-  },
-  onDragOver(id, overId) {
-    if (overId) {
-      return `Sortable item ${id} was moved into position ${getPosition(overId)} of ${itemCount}`;
-    }
-  },
-  onDragEnd(id, overId) {
-    if (overId) {
-      return `Sortable item ${id} was dropped at position ${getPosition(overId)} of ${itemCount}`;
-    }
-  },
-  onDragCancel(id) {
-    return `Dragging was cancelled. Sortable item ${id} was dropped.`;
-  },
-};
+  const items = useState(['Apple', 'Orange', 'Strawberries', 'Raspberries']);
+  const getPosition = (id) => items.indexOf(id) + 1; // prefer position over index
+  const itemCount = items.length;
+  
+  const announcements = {
+    onDragStart({active}) {
+      return `Picked up sortable item ${active.id}. Sortable item ${active.id} is in position ${getPosition(id)} of ${itemCount}`;
+    },
+    onDragOver({active, over}) {
+      if (over) {
+        return `Sortable item ${active.id} was moved into position ${getPosition(over.id)} of ${itemCount}`;
+      }
+    },
+    onDragEnd({active, over}) {
+      if (over) {
+        return `Sortable item ${active.id} was dropped at position ${getPosition(over.id)} of ${itemCount}`;
+      }
+    },
+    onDragCancel({active}) {
+      return `Dragging was cancelled. Sortable item ${active.id} was dropped.`;
+    },
+  };
+  
+  return (
+    <DndContext
+      accessibility={
+        announcements,
+      }
+    >
 ```
 
-The example above assumes that the [`closestCenter` collision detection strategy](../api-documentation/context-provider/collision-detection-algorithms.md#closest-center) is used, so the `overId` should always be defined.
+The example above assumes that the [`closestCenter` collision detection strategy](../api-documentation/context-provider/collision-detection-algorithms.md#closest-center) is used, so the `over` property should always be defined.
 
 If your application supports multiple languages, make sure you also translate these announcements. The `<DndContext>` component only ships with announcements in English due to bundle size concerns.
-

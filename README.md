@@ -6,8 +6,8 @@ description: >-
 
 # Overview
 
-* **Built for React:** exposes hooks such as [`useDraggable`](api-documentation/draggable/usedraggable.md) and [`useDroppable`](api-documentation/droppable/usedroppable.md), and  won't require you to re-architect your app or create additional wrapper DOM nodes.
 * **Feature packed:** customizable collision detection algorithms, multiple activators, draggable overlay, drag handles, auto-scrolling, constraints, and so much more.
+* **Built for React:** exposes hooks such as [`useDraggable`](api-documentation/draggable/usedraggable.md) and [`useDroppable`](api-documentation/droppable/usedroppable.md), and  won't require you to re-architect your app or create additional wrapper DOM nodes.
 * **Supports a wide range of use cases:** lists, grids, multiple containers, nested contexts, variable sized items, virtualized lists, 2D Games, and more.
 * **Zero dependencies and modular:** the core of the library weighs around 10kb minified and has no external dependencies. It's built around built-in React state management and context, which keeps the library lean.
 * **Built-in support for multiple input methods:** Pointer, mouse, touch and keyboard sensors.
@@ -17,7 +17,7 @@ description: >-
 * **Presets:** Need to build a sortable interface? Check out [`@dnd-kit/sortable`](presets/sortable/), which is a thin layer built on top of `@dnd-kit/core`. More presets coming in the future.
 
 {% hint style="info" %}
-**dnd kit** is currently in beta. Issues and bugs should be expected for early releases. The core concepts are stable, but some of the APIs may change in the future.
+**@dnd-kit** is currently in beta. The core concepts are stable and production-ready, but some APIs may change in the future.&#x20;
 {% endhint %}
 
 ![](.gitbook/assets/concepts-illustration.svg)
@@ -35,7 +35,9 @@ Use the [`<DragOverlay>`](api-documentation/draggable/drag-overlay.md) component
 
 Check out our quick start guide to learn how get started:
 
-{% page-ref page="introduction/getting-started.md" %}
+{% content-ref url="introduction/getting-started.md" %}
+[getting-started.md](introduction/getting-started.md)
+{% endcontent-ref %}
 
 ### Extensibility
 
@@ -62,13 +64,15 @@ The `@dnd-kit/core` library provides a number of starting points to help you mak
 
 Check out our Accessibility guide to learn more about how you can help make your drag and drop interface accessible for everyone:
 
-{% page-ref page="guides/accessibility.md" %}
+{% content-ref url="guides/accessibility.md" %}
+[accessibility.md](guides/accessibility.md)
+{% endcontent-ref %}
 
 ### Architecture
 
-Unlike many drag and drop libraries, **dnd kit** is ****intentionally **not** built on top of the [HTML5 Drag and drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API). This was a deliberate architectural decision, that does come with tradeoffs that you should be aware of before deciding to use it. For most web applications, we believe the benefits outweigh the tradeoffs. 
+Unlike many drag and drop libraries, **dnd kit** is **** intentionally **not** built on top of the [HTML5 Drag and drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML\_Drag\_and\_Drop\_API). This was a deliberate architectural decision, that does come with tradeoffs that you should be aware of before deciding to use it. For most web applications, we believe the benefits outweigh the tradeoffs.&#x20;
 
-The HTML5 Drag and drop API has some severe **limitations**. It does not support touch devices, which means that the libraries that are built on top of it need to expose an entirely different implementation to support touch devices. This typically increases the complexity of the codebase and the overall bundle size of the library. Further, it requires workarounds to implement common use cases such as customizing the drag preview, locking dragging to a specific axis or to the bounds of a container, or animating the dragged item as it is picked up. 
+The HTML5 Drag and drop API has some severe **limitations**. It does not support touch devices, which means that the libraries that are built on top of it need to expose an entirely different implementation to support touch devices. This typically increases the complexity of the codebase and the overall bundle size of the library. Further, it requires workarounds to implement common use cases such as customizing the drag preview, locking dragging to a specific axis or to the bounds of a container, or animating the dragged item as it is picked up.&#x20;
 
 The main **tradeoff** with not using the HTML5 Drag and drop API is that you won't be able to drag from the desktop or between windows. If the drag and drop use-case you have in mind involves this kind of functionality, you'll definitely want to use a library that's built on top of the HTML 5 Drag and drop API. We highly recommend you check out [react-dnd](https://github.com/react-dnd/react-dnd/) for a React library that's has a native HTML 5 Drag and drop backend.
 
@@ -76,7 +80,7 @@ The main **tradeoff** with not using the HTML5 Drag and drop API is that you won
 
 #### **Minimizing DOM mutations**
 
-**dnd kit** lets you build drag and drop interfaces without having to mutate the DOM every time an item needs to shift position. 
+**dnd kit** lets you build drag and drop interfaces without having to mutate the DOM every time an item needs to shift position.&#x20;
 
 This is possible because **dnd kit** lazily calculates and stores the initial positions and client rects of your droppable containers when a drag operation is initiated. These positions are passed down to your components that use `useDraggable` and `useDroppable` so that you can compute the new positions of your items while a drag operation is underway, and move them to their new positions using performant CSS properties that do not trigger a repaint such as `translate3d` and `scale`. For an example of how this can be achieved, check out the implementation of the sorting strategies that are exposed by the [`@dnd-kit/sortable`](presets/sortable/) library.
 
@@ -85,4 +89,3 @@ This isn't to say that you can't shift the position of the items in the DOM whil
 #### Synthetic events
 
 Sensors use [SyntheticEvent listeners](https://reactjs.org/docs/events.html) for the activator events of all sensors, which leads to improved performance over manually adding event listeners to each individual draggable node.
-
