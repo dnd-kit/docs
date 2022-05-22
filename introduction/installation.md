@@ -15,7 +15,7 @@ npm install react react-dom
 ## Packages
 
 {% hint style="info" %}
-&#x20;**dnd kit** is a [monorepo](https://en.wikipedia.org/wiki/Monorepo). Depending on your needs, you may also want to install other  sub-packages that are available under the `@dnd-kit` namespace.
+&#x20;**@dnd-kit** is a [monorepo](https://en.wikipedia.org/wiki/Monorepo). Depending on your needs, you may also want to install other  sub-packages that are available under the `@dnd-kit` namespace.
 {% endhint %}
 
 ### Core library

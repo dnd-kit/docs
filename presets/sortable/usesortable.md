@@ -173,11 +173,11 @@ Refer to the [`transition` argument](usesortable.md#transition-1) documentation 
 
 ### Identifier
 
-The `id` argument is a string or number that should be a unique identifier.
+The `id` argument is a `string` or `number` that should be unique.
 
 Since the `useSortable` is an abstraction on top of the `useDroppable` and `useDraggable` hooks, which both require a unique identifier, the `useSortable` hook also requires a unique identifier.
 
-The argument passed to the `id` argument of `useSortable` should match the `id` passed in the `items` array of the [`SortableContext`](sortable-context.md) provider.
+The argument passed to the `id` argument of `useSortable` should match the `id` passed in the `items` array of the parent [`SortableContext`](sortable-context.md) provider.
 
 ### Disabled
 

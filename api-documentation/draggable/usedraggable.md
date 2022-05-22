@@ -19,7 +19,7 @@ interface UseDraggableArguments {
 
 ### Identifier
 
-The `id` argument is a string or number that should be a unique identifier, meaning there should be no other **draggable** elements that share that same identifier within a given [`DndContext`](../context-provider/) provider.
+The `id` argument is a `string` or `number` that should be a unique identifier, meaning there should be no other **draggable** elements that share that same identifier within a given [`DndContext`](../context-provider/) provider.
 
 If you're building a component that uses both the `useDraggable` and `useDroppable` hooks, they can both share the same identifier since draggable elements are stored in a different key-value store than droppable elements.
 

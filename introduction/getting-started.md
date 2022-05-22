@@ -12,7 +12,7 @@ Before getting started, make sure you have followed the installation steps outli
 
 ### Context provider
 
-First, we'll set up the general structure of the app. In order for the [`useDraggable`]() and [`useDroppable`]() hooks to function correctly, you'll need to ensure that the components where they are used are wrapped within a [`<DndContext />`](../api-documentation/context-provider/) component:
+First, we'll set up the general structure of the app. In order for the [`useDraggable`](broken-reference) and [`useDroppable`](broken-reference) hooks to function correctly, you'll need to ensure that the components where they are used are wrapped within a [`<DndContext />`](../api-documentation/context-provider/) component:
 
 {% tabs %}
 {% tab title="App.jsx" %}
@@ -39,9 +39,9 @@ function App() {
 
 ![](../.gitbook/assets/droppable-large.svg)
 
-Next, let's set up your first **Droppable** component.  To do so, we'll be using the `useDroppable` hook.  
-  
-The `useDroppable` hook isn't opinionated about how your app should be structured. At minimum though, it requires you pass a [ref](https://reactjs.org/docs/refs-and-the-dom.html) to the DOM element that you would like to become droppable. You'll also need to provide a unique `id` attribute to all your droppable components. 
+Next, let's set up your first **Droppable** component.  To do so, we'll be using the `useDroppable` hook.\
+\
+The `useDroppable` hook isn't opinionated about how your app should be structured. At minimum though, it requires you pass a [ref](https://reactjs.org/docs/refs-and-the-dom.html) to the DOM element that you would like to become droppable. You'll also need to provide a unique `id` attribute to all your droppable components.&#x20;
 
 When a **draggable** element is moved over your droppable element, the `isOver` property will become true.
 
@@ -76,9 +76,9 @@ function Droppable(props) {
 
 Next, let's take a look at implementing our first **Draggable** component. To do so, we'll be using the `useDraggable` hook.
 
-The `useDraggable` ****hook isn't opinionated about how your app should be structured. It does however require you to be able to attach listeners and a ref to the DOM element that you would like to become draggable. You'll also need to provide a unique `id` attribute to all your draggable components. 
+The `useDraggable` **** hook isn't opinionated about how your app should be structured. It does however require you to be able to attach listeners and a ref to the DOM element that you would like to become draggable. You'll also need to provide a unique `id` attribute to all your draggable components.&#x20;
 
-After a draggable item is picked up, the `transform` property will be populated with the `translate` coordinates you'll need to move the item on the screen.  
+After a draggable item is picked up, the `transform` property will be populated with the `translate` coordinates you'll need to move the item on the screen. &#x20;
 
 The `transform` object adheres to the following shape: `{x: number, y: number, scaleX: number, scaleY: number}`
 
@@ -110,14 +110,14 @@ function Draggable(props) {
 As you can see from the example above, it really only takes just a few lines to transform your existing components into draggable components.
 
 {% hint style="success" %}
-**Tips:** 
+**Tips:**&#x20;
 
-* For performance reasons, we recommend you use **`transform`** over other positional CSS properties to move the dragged element. 
+* For performance reasons, we recommend you use **`transform`** over other positional CSS properties to move the dragged element.&#x20;
 * You'll likely want to alter the **`z-index`** of your Draggable component to ensure it appears on top of other elements.
-* If your item needs to move from one container to another, we recommend you use the [`<DragOverlay>`](../api-documentation/draggable/drag-overlay.md) component so the item isn't constrained to its parent's stacking context and overflow constraints.
+* If your item needs to move from one container to another, we recommend you use the [`<DragOverlay>`](../api-documentation/draggable/drag-overlay.md) component.
 {% endhint %}
 
-Converting the `transform` object to a string can feel tedious. Fear not, you can avoid having to do this by hand by importing the `CSS` utility from the `@dnd-kit/utilities` package: 
+Converting the `transform` object to a string can feel tedious. Fear not, you can avoid having to do this by hand by importing the `CSS` utility from the `@dnd-kit/utilities` package:&#x20;
 
 ```jsx
 import {CSS} from '@dnd-kit/utilities';
@@ -218,11 +218,11 @@ export function Draggable(props) {
 {% endtab %}
 {% endtabs %}
 
-That's it! You've set up your first [**Droppable**](../api-documentation/droppable/) ****and [**Draggable**](../api-documentation/draggable/) components.
+That's it! You've set up your first [**Droppable**](../api-documentation/droppable/) **** and [**Draggable**](../api-documentation/draggable/) components.
 
 ### Pushing things a bit further
 
-The example we've set up above is a bit simplistic. In the real world, you may have multiple droppable containers, and you may also want to be able to drag your items back out of the droppable containers once they've been dragged within them. 
+The example we've set up above is a bit simplistic. In a real world example, you may have multiple droppable containers, and you may also want to be able to drag your items back out of the droppable containers once they've been dragged within them.&#x20;
 
 Here's a slightly more complex example that contains multiple **Droppable** containers:
 
@@ -314,5 +314,4 @@ export function Draggable(props) {
 {% endtab %}
 {% endtabs %}
 
-We hope this quick start guide has given you a glimpse of the simplicity and power of **dnd kit**. There's much more to learn, and we encourage you to keep reading about all of the different options you can pass to `<DndContext>` , `useDroppable` and `useDraggable` by reading their respective API documentation.
-
+We hope this quick start guide has given you a glimpse of the simplicity and power of @dnd-kit. There's much more to learn, and we encourage you to keep reading about all of the different options you can pass to `<DndContext>` , `useDroppable` and `useDraggable` by reading their respective API documentation.
