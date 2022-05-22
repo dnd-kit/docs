@@ -6,7 +6,7 @@
 
 ```typescript
 interface UseDroppableArguments {
-  id: string;
+  id: string | number;
   disabled?: boolean;
   data?: Record<string, any>;
 }
@@ -14,7 +14,7 @@ interface UseDroppableArguments {
 
 ### Identifier
 
-The `id` argument is a string that should be a unique identifier, meaning there should be no other **droppable** elements that share that same identifier within a given [`DndContext`](../context-provider/) provider.
+The `id` argument is a `string` or `number` that should be a unique identifier, meaning there should be no other **droppable** elements that share that same identifier within a given [`DndContext`](../context-provider/) provider.
 
 If you're building a component that uses both the `useDroppable` and `useDraggable` hooks, they can both share the same identifier since droppable elements are stored in a different key-value store than draggable elements.
 
@@ -125,11 +125,10 @@ For advanced use cases, if you need the bounding rect measurement of the droppab
 
 #### `isOver`
 
-Use the `isOver` boolean returned by the `useDroppable` hook to change the appearance or content displayed when a `draggable` element is dragged over your droppable container. 
+Use the `isOver` boolean returned by the `useDroppable` hook to change the appearance or content displayed when a `draggable` element is dragged over your droppable container.&#x20;
 
 #### `over`
 
 If you'd like to change the appearance of the droppable in response to a draggable being dragged over a different droppable container, check whether the `over` value is defined. Depending on your use-case, you can also read the `id` of the other droppable that the draggable item to make changes to the render output of your droppable component.
 
-#### 
-
+####
