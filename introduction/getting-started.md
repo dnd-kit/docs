@@ -141,7 +141,7 @@ To do so, you'll want to listen to the `onDragEnd` event of  the `<DndContext>` 
 {% tabs %}
 {% tab title="App.jsx" %}
 ```jsx
-import React from 'react';
+import React, {useState} from 'react';
 import {DndContext} from '@dnd-kit/core';
 
 import {Droppable} from './Droppable';
@@ -229,7 +229,7 @@ Here's a slightly more complex example that contains multiple **Droppable** cont
 {% tabs %}
 {% tab title="App.jsx" %}
 ```jsx
-import React from 'react';
+import React, {useState} from 'react';
 import {DndContext} from '@dnd-kit/core';
 
 import {Droppable} from './Droppable';
