@@ -16,11 +16,7 @@ description: >-
 * **Performance:** It was built with performance in mind in order to support silky smooth animations.
 * **Presets:** Need to build a sortable interface? Check out [`@dnd-kit/sortable`](presets/sortable/), which is a thin layer built on top of `@dnd-kit/core`. More presets coming in the future.
 
-{% hint style="info" %}
-**@dnd-kit** is currently in beta. The core concepts are stable and production-ready, but some APIs may change in the future.&#x20;
-{% endhint %}
-
-![](.gitbook/assets/concepts-illustration.svg)
+![](.gitbook/assets/concepts-illustration-large.svg)
 
 The core library of **dnd kit** exposes two main concepts:
 

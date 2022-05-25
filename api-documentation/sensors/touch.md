@@ -1,6 +1,6 @@
 # Touch
 
-The Touch sensor responds to [Touch events](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events). Touch events offer the ability to interpret finger or stylus activity on touch screens or trackpads.
+The Touch sensor responds to [Touch events](https://developer.mozilla.org/en-US/docs/Web/API/Touch\_events). Touch events offer the ability to interpret finger or stylus activity on touch screens or trackpads.
 
 ### Activator
 
@@ -13,7 +13,7 @@ Like the [Pointer](pointer.md) sensor, the Touch sensor has two activation const
 * Distance constraint
 * Delay constraint
 
-These activation constraints are mutually exclusive and may not be used simultaneously. 
+These activation constraints are mutually exclusive and may not be used simultaneously.&#x20;
 
 #### Distance
 
@@ -38,7 +38,7 @@ interface DelayConstraint {
 }
 ```
 
-The `delay` property represents the duration, in _milliseconds_, that a draggable item needs to be held by the touch input before a drag start event is emitted. 
+The `delay` property represents the duration, in _milliseconds_, that a draggable item needs to be held by the touch input before a drag start event is emitted.&#x20;
 
 The `tolerance` property represents the distance, in _pixels_, of motion that is tolerated before the drag operation is aborted. If the finger or stylus is moved during the delay duration and the tolerance is set to zero, the drag operation will be immediately aborted. If a higher tolerance is set, for example, a tolerance of `5` pixels, the operation will only be aborted if the finger is moved by more than 5 pixels during the delay.
 
@@ -50,13 +50,12 @@ This property is particularly useful for touch input, where some tolerance shoul
 
 We highly recommend you specify the `touch-action` CSS property for all of your draggable elements.
 
-> The **`touch-action`** CSS property sets how an element's region can be manipulated by a touchscreen user \(for example, by zooming features built into the browser\).  
->   
+> The **`touch-action`** CSS property sets how an element's region can be manipulated by a touchscreen user (for example, by zooming features built into the browser).\
+> \
 > Source: [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action)
 
-In general, we recommend you set the `touch-action` property to `manipulation` for draggable elements when using the Touch sensor. 
+In general, we recommend you set the `touch-action` property to `manipulation` for draggable elements when using the Touch sensor.&#x20;
 
 {% hint style="info" %}
 Touch events do not suffer the same limitations as Pointer events, and it is possible to prevent the page from scrolling in `touchmove` events.
 {% endhint %}
-
