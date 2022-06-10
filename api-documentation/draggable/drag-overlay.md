@@ -220,6 +220,10 @@ function App() {
 }
 ```
 
+### Click events
+
+With default settings, a `DragOverlay` will prevent `click` events from firing on your draggable element because the `DragOverlay` is displayed over top of the draggable. To fix this, add a delay or distance-based [activation constraint](../sensors/pointer.md#activation-constraints) or use a drag handle.
+
 ## Props
 
 ```typescript
