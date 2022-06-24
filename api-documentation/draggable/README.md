@@ -119,7 +119,7 @@ The `CSS` helper is entirely optional; it's a convenient helper for generating [
 
 ```javascript
 CSS.Translate.toString(transform) ===
-`translate3d(${translate.x}, ${translate.y}, 0)`
+`translate3d(${transform.x}px, ${transform.y}px, 0)`
 ```
 
 ### Attributes
