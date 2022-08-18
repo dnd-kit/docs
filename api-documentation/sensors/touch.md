@@ -4,7 +4,7 @@ The Touch sensor responds to [Touch events](https://developer.mozilla.org/en-US/
 
 ### Activator
 
-The touch activator is the `onTouchStart` event handler. The Touch sensor is initialized if the there is no more than a single touch on the [`event.touches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches) property.
+The touch activator is the `onTouchStart` event handler. The Touch sensor is initialized if there is no more than a single touch on the [`event.touches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches) property.
 
 ### Activation constraints
 
