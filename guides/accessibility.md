@@ -95,7 +95,7 @@ In order to let users learn how to interact with draggable elements using these 
 
 ### Screen reader instructions
 
-In order to users know how to interact with draggable items using only the keyboard, it's important to provide information to the user that their focus is currently on a draggable item, along with clear instruction  on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
+In order to let users know how to interact with draggable items using only the keyboard, it's important to provide information to the user that their focus is currently on a draggable item, along with clear instruction  on how to pick up a a draggable item, how to move it, how to drop it and how to cancel the operation.
 
 #### Role
 
@@ -135,11 +135,11 @@ If your application supports multiple languages, make sure you also translate th
 
 [Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA\_Live\_Regions) are used to notify screen readers of content changes.&#x20;
 
-When building accessible drag and drop interfaces, live regions should be used to provide screen reader announcements in real-time of time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus .
+When building accessible drag and drop interfaces, live regions should be used to provide screen reader announcements in real-time with time-sensitive information of what is currently happening with draggable and droppable elements without having to move focus.
 
 By default, each  [`<DndContext>`](../api-documentation/context-provider/) component renders a unique HTML element that is rendered off-screen to be used for live screen-reader announcements of events like when a drag operation has started, when a draggable item has been dragged over a droppable container, when a drag operation has ended, and when a drag operation has been cancelled.
 
-These instructions can be customized using the `announcements` prop of `DndContext`.
+These instructions can be customized using the `announcements` prop of [`<DndContext>`](../api-documentation/context-provider/).
 
 The default announcements are:
 
