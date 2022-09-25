@@ -122,7 +122,7 @@ For more details and best practices around accessibility of draggable and droppa
 
 #### Announcements
 
-Use the `announcements` prop to customize the screen reader announcements that are announced in the live region when draggable items are picked up, moved over droppable regions, and dropped.
+Use the `accessibility.announcements` prop to customize the screen reader announcements that are announced in the live region when draggable items are picked up, moved over droppable regions, and dropped.
 
 The default announcements are:
 
@@ -155,7 +155,7 @@ While these default announcements are sensible defaults that should cover most s
 
 #### Screen reader instructions
 
-Use the `screenReaderInstructions` prop to customize the instructions that are read to screen readers when the focus is moved
+Use the `accessibility.screenReaderInstructions` prop to customize the instructions that are read to screen readers when the focus is moved
 
 ### Autoscroll
 
