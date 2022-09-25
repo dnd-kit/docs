@@ -129,6 +129,26 @@ For example, if you were building a sortable grocery shopping list, you may want
 > Use the up and down arrow keys to update the position of the item in the grocery list.\
 > Press space or enter again to drop the item in its new position, or press escape to cancel.
 
+```javascript
+function App() {
+  /* ... */
+
+  const instructions = `
+  To pick up a grocery list item, press space or enter.
+  Use the up and down arrow keys to update the position of the item in the grocery list.
+  Press space or enter again to drop the item in its new position, or press escape to cancel.
+  `
+
+  return (
+    <DndContext
+      accessibility={{
+        screenReaderInstructions: {
+          draggable: instructions,
+        },
+      }}
+    >
+```
+
 If your application supports multiple languages, make sure you also translate these instructions. The `<DndContext>` component only ships with instructions in English due to bundle size concerns.
 
 ### Screen reader announcements using live regions
