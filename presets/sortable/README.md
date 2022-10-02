@@ -743,9 +743,13 @@ export function SortableItem(props) {
   };
   
   return (
-    <Item ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {value}
-    </Item>
+    <Item
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      {...props}
+    />
   );
 }
 ```
