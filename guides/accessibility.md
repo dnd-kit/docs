@@ -211,9 +211,9 @@ function App() {
   
   return (
     <DndContext
-      accessibility={
+      accessibility={{
         announcements,
-      }
+      }}
     >
 ```
 
