@@ -14,6 +14,10 @@ To get started, install the sortable preset via `npm` or `yarn`: &#x20;
 npm install @dnd-kit/sortable
 ```
 
+{% hint style="info" %}
+&#x20;You also need to make sure that you have the `@dnd-kit/core` package installed.
+{% endhint %}
+
 ## Overview
 
 If you're eager to get started right away, here's the code you'll need:
