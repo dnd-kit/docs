@@ -57,7 +57,7 @@ If multiple `DndContext` providers are listening for the same event, events will
 ```typescript
 interface Props {
   announcements?: Announcements;
-  autoScroll?: boolean;
+  autoScroll?: boolean | AutoScrollOptions;
   cancelDrop?: CancelDrop;
   children?: React.ReactNode;
   collisionDetection?: CollisionDetection;
@@ -70,6 +70,20 @@ interface Props {
   onDragOver?(event: DragOverEvent): void;
   onDragEnd?(event: DragEndEvent): void;
   onDragCancel?(): void;
+}
+
+interface AutoScrollOptions {
+  acceleration?: number;
+  activator?: AutoScrollActivator;
+  canScroll?: CanScroll;
+  enabled?: boolean;
+  interval?: number;
+  layoutShiftCompensation?: boolean | {x: boolean, y: boolean};
+  order?: TraversalOrder;
+  threshold?: {
+    x: number;
+    y: number;
+  };
 }
 ```
 
@@ -156,7 +170,7 @@ Use the `screenReaderInstructions` prop to customize the instructions that are r
 
 ### Autoscroll
 
-Use the optional `autoScroll` boolean prop to temporarily or permanently disable auto-scrolling for all sensors used within this `DndContext`.
+Use the optional `autoScroll` prop to temporarily or permanently disable auto-scrolling for all sensors used within this `DndContext`.
 
 Auto-scrolling may also be disabled on an individual sensor basis using the static property `autoScrollEnabled` of the sensor. For example, the [Keyboard sensor](../sensors/keyboard.md) manages scrolling internally, and therefore has the static property `autoScrollEnabled` set to `false`.
 
