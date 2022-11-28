@@ -40,7 +40,7 @@ function MultipleDroppables() {
   const {setNodeRef: setFirstDroppableRef} = useDroppable({
     id: 'droppable-1',
   });
-  const {setNodeRef: setsecondDroppableRef} = useDroppable({
+  const {setNodeRef: setSecondDroppableRef} = useDroppable({
     id: 'droppable-2',
   });
   
@@ -49,7 +49,7 @@ function MultipleDroppables() {
       <div ref={setFirstDroppableRef}>
         /* Render whatever you like within */
       </div>
-      <div ref={setsecondDroppableRef}>
+      <div ref={setSecondDroppableRef}>
         /* Render whatever you like within */
       </div>
     </section>
