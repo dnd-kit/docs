@@ -131,7 +131,7 @@ For this reason, the `useDraggable` hook sets the `tabindex="0"` attribute by de
   attributes: {
     role: string;
     tabIndex: number;
-    'aria-diabled': boolean;
+    'aria-disabled': boolean;
     'aria-roledescription': string;
     'aria-describedby': string;
   },
