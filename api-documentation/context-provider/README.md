@@ -4,7 +4,7 @@
 
 ### Context provider
 
-In order for your your [Droppable](../droppable/) and [Draggable](../draggable/) components to interact with each other, you'll need to make sure that the part of your React tree that uses them is nested within  a parent `<DndContext>` component. The `<DndContext>` provider makes use of the [React Context API](https://reactjs.org/docs/context.html) to share data between draggable and droppable components and hooks.
+In order for your [Droppable](../droppable/) and [Draggable](../draggable/) components to interact with each other, you'll need to make sure that the part of your React tree that uses them is nested within  a parent `<DndContext>` component. The `<DndContext>` provider makes use of the [React Context API](https://reactjs.org/docs/context.html) to share data between draggable and droppable components and hooks.
 
 > React context provides a way to pass data through the component tree without having to pass props down manually at every level.
 
