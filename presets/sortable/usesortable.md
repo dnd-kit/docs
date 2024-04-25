@@ -85,14 +85,14 @@ Keep in mind that the `ref` should be assigned to the outer container that you w
 
 ```jsx
 function SortableItem(props) {
-  const {arguments, listeners, setNodeRef} = useDraggable({
+  const {attributes, listeners, setNodeRef} = useDraggable({
     id: props.id,
   });
   
   return (
     <li ref={setNodeRef}>
       {/* ... */}
-      <button {...listeners} {...arguments}>Drag handle</button>
+      <button {...listeners} {...attributes}>Drag handle</button>
     </li>
   );
 }
