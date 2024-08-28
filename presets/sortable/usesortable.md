@@ -69,7 +69,7 @@ In order for the `useSortable` hook to function properly, it needs the `setNodeR
 
 ```jsx
 function SortableItem(props) {
-  const {setNodeRef} = useDraggable({
+  const {setNodeRef} = useSortable({
     id: props.id,
   });
   
@@ -85,7 +85,7 @@ Keep in mind that the `ref` should be assigned to the outer container that you w
 
 ```jsx
 function SortableItem(props) {
-  const {arguments, listeners, setNodeRef} = useDraggable({
+  const {arguments, listeners, setNodeRef} = useSortable({
     id: props.id,
   });
   
