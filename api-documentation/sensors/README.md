@@ -6,7 +6,7 @@ Sensors are an abstraction to detect different input methods in order to initiat
 
 ### Activators
 
-Sensors may define one or multiple **activator events**. Activator events use React  [SyntheticEvent listeners](https://reactjs.org/docs/events.html), which leads to improved performance over manually adding event listeners to each individual draggable node.
+Sensors may define one or multiple **activator events**. Activator events use React  [SyntheticEvent listeners](https://react.dev/reference/react-dom/components/common#react-event-object), which leads to improved performance over manually adding event listeners to each individual draggable node.
 
 Sensors are initialized once one of the activator events is detected.
 
