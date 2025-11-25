@@ -31,6 +31,7 @@ function SortableItem(props) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    touchAction: "none", // fix for tailwindcss
   };
   
   return (
