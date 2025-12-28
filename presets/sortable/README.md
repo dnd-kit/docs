@@ -3,6 +3,7 @@ description: >-
   The sortable preset provides the building blocks to build  sortable
   interfaces.
 ---
+!!!This readme is old and there is no SortableItem in the project anymore!!!
 
 # Sortable
 
