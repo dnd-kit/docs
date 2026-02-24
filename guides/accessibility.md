@@ -121,7 +121,7 @@ The default instructions are:
 > While dragging, use the arrow keys to move the item in any given direction.\
 > Press space or enter again to drop the item in its new position, or press escape to cancel.
 
-We recommend you customize and localize these instructions to your application and use-case using the `screenReaderInstructions` prop of [`<DndContext>`](../api-documentation/context-provider/). &#x20;
+We recommend you customize and localize these instructions to your application and use-case using the `accessibility` (nested: `screenReaderInstructions`) prop of [`<DndContext>`](../api-documentation/context-provider/). &#x20;
 
 For example, if you were building a sortable grocery shopping list, you may want to tailor the instructions like so:
 
