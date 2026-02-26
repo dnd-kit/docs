@@ -763,3 +763,15 @@ export const Item = forwardRef(({id, ...props}, ref) => {
 ```
 {% endtab %}
 {% endtabs %}
+
+## Usage with Next.js
+
+We need to define an unique ID to `DndContext`:
+
+```jsx
+import {useId} from 'react';
+
+function YourComponent() {
+  const id = useId()
+  return <DndContext id={id} />
+}
