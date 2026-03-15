@@ -58,22 +58,22 @@ function customCoordinatesGetter(event, args) {
   const delta = 50;
   
   switch (event.code) {
-    case 'Right':
+    case 'ArrowRight':
       return {
         ...currentCoordinates,
         x: currentCoordinates.x + delta,
       };
-    case 'Left':
+    case 'ArrowLeft':
       return {
         ...currentCoordinates,
         x: currentCoordinates.x - delta,
       };
-    case 'Down':
+    case 'ArrowDown':
       return {
         ...currentCoordinates,
         y: currentCoordinates.y + delta,
       };
-    case 'Up':
+    case 'ArrowUp':
       return {
         ...currentCoordinates,
         y: currentCoordinates.y - delta,
