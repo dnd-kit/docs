@@ -66,6 +66,12 @@ Restrict movement to the parent element of the draggable item that is picked up.
 
 Restrict movement to the first scrollable ancestor of the draggable item that is picked up.
 
+### Dragging
+
+#### `snapCenterToCursor`
+
+Center dragged elements under the mouse, instead of keeping the initial offset
+
 ### Snap to grid
 
 #### `createSnapModifier`
