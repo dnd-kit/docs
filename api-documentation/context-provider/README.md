@@ -61,7 +61,7 @@ interface Props {
   cancelDrop?: CancelDrop;
   children?: React.ReactNode;
   collisionDetection?: CollisionDetection;
-  layoutMeasuring?: Partial<LayoutMeasuring>;
+  measuring?: MeasuringConfiguration;
   modifiers?: Modifiers;
   screenReaderInstructions?: ScreenReaderInstructions;
   sensors?: SensorDescriptor<any>[];
@@ -203,23 +203,23 @@ To learn more about how to use Modifiers, read the Modifiers guide:
 
 ### Layout measuring
 
-You can configure when and how often `DndContext`  should measure its droppable elements by using the `layoutMeasuring` prop. 
+You can configure when and how often `DndContext`  should measure its droppable elements by using the `measuring` prop. 
 
 The `frequency` argument controls how frequently layouts should be measured. By default, layout measuring is set to `optimized`, which only measures layouts based on the `strategy`.
 
 Specify one of the following strategies:
 
-* `LayoutMeasuringStrategy.WhileDragging`: Default behavior, only measure droppable elements right after dragging has begun.
+* `MeasuringStrategy.WhileDragging`: Default behavior, only measure droppable elements right after dragging has begun.
 
-  `LayoutMeasuringStrategy.BeforeDragging`:  Measure droppable elements before dragging begins and right after it ends. 
+  `MeasuringStrategy.BeforeDragging`:  Measure droppable elements before dragging begins and right after it ends. 
 
-* `LayoutMeasuringStrategy.Always`: Measure droppable elements before dragging begins, right after dragging has begun, and after it ends.
+* `MeasuringStrategy.Always`: Measure droppable elements before dragging begins, right after dragging has begun, and after it ends.
 
 Example usage:
 
 ```jsx
-import {DndContext, LayoutMeasuringStrategy} from '@dnd-kit/core';
+import {DndContext, MeasuringStrategy} from '@dnd-kit/core';
 
-<DndContext layoutMeasuring={{strategy: LayoutMeasuringStrategy.Always}} />
+<DndContext measuring={{strategy: MeasuringStrategy.Always}} />
 ```
 
